@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>NuFeed Support</title>
+  <style>
+    :root {
+      color-scheme: light dark;
+      --bg: #f7f7f4;
+      --fg: #171717;
+      --muted: #66645f;
+      --card: #ffffff;
+      --line: #dedbd3;
+      --accent: #1f6feb;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #111110;
+        --fg: #f4f2ec;
+        --muted: #aaa59a;
+        --card: #1a1917;
+        --line: #34312c;
+        --accent: #7aa7ff;
+      }
+    }
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: var(--bg);
+      color: var(--fg);
+      line-height: 1.7;
+    }
+    main {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 64px 24px;
+    }
+    h1 {
+      font-size: 40px;
+      line-height: 1.15;
+      margin: 0 0 12px;
+      letter-spacing: -0.03em;
+    }
+    h2 {
+      margin: 34px 0 10px;
+      font-size: 22px;
+    }
+    p, li {
+      color: var(--muted);
+    }
+    a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+    .card {
+      margin-top: 28px;
+      padding: 22px;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: var(--card);
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>NuFeed Support</h1>
+    <p>Need help with NuFeed? This page covers common support topics for the iPhone, iPad, and Mac versions.</p>
+
+    <section class="card">
+      <h2>Common questions</h2>
+      <ul>
+        <li>RSS reading works without a Pro purchase.</li>
+        <li>Web subscriptions, full article extraction, bilingual translation, and full-article summaries require NuFeed Pro.</li>
+        <li>AI features require your own AI provider API key. NuFeed does not include built-in AI service credits.</li>
+        <li>iCloud sync uses your own iCloud Drive and does not rely on a NuFeed-operated server.</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>Contact</h2>
+      <p>If you need help, please contact the developer through the support channel listed on the App Store product page.</p>
+      <p>When reporting an issue, please include your device model, system version, NuFeed version, and a short description of what happened.</p>
+    </section>
+
+    <p><a href="./privacy.html">Privacy Policy</a></p>
+  </main>
+</body>
+</html>
