@@ -1,0 +1,98 @@
+
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>NuFeed</title>
+  <style>
+    :root {
+      color-scheme: light dark;
+      --bg: #f7f7f4;
+      --fg: #171717;
+      --muted: #66645f;
+      --card: #ffffff;
+      --line: #dedbd3;
+      --accent: #1f6feb;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #111110;
+        --fg: #f4f2ec;
+        --muted: #aaa59a;
+        --card: #1a1917;
+        --line: #34312c;
+        --accent: #7aa7ff;
+      }
+    }
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: var(--bg);
+      color: var(--fg);
+      line-height: 1.6;
+    }
+    main {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 72px 24px;
+    }
+    h1 {
+      font-size: 44px;
+      line-height: 1.12;
+      margin: 0 0 12px;
+      letter-spacing: -0.04em;
+    }
+    p {
+      margin: 0 0 20px;
+      color: var(--muted);
+    }
+    .card {
+      margin-top: 32px;
+      padding: 24px;
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      background: var(--card);
+    }
+    ul {
+      margin: 12px 0 0;
+      padding-left: 20px;
+    }
+    a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+    .links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin-top: 24px;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>NuFeed</h1>
+    <p>NuFeed is an RSS and web subscription reader for iPhone, iPad, and Mac. It helps you read feeds, extract full articles, translate bilingual content, summarize long reads, and sync reading progress with iCloud.</p>
+
+    <section class="card">
+      <strong>Key features</strong>
+      <ul>
+        <li>RSS subscriptions, folders, unread state, and favorites.</li>
+        <li>Web subscriptions for sites without RSS feeds.</li>
+        <li>Full article extraction for sources that only publish summaries.</li>
+        <li>Bilingual translation and full-article summaries using your own AI API configuration.</li>
+        <li>iCloud sync for subscriptions, reading state, and favorites.</li>
+      </ul>
+    </section>
+
+    <div class="links">
+      <a href="./privacy.html">Privacy Policy</a>
+      <a href="./support.html">Support</a>
+    </div>
+  </main>
+</body>
+</html>
