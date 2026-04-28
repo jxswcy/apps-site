@@ -180,7 +180,18 @@
     .product-stage {
       position: relative;
       min-height: 630px;
-      perspective: 1200px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .device-showcase {
+      width: min(880px, 128%);
+      max-width: none;
+      height: auto;
+      display: block;
+      filter: drop-shadow(0 34px 72px rgba(0, 0, 0, 0.12));
+      transform: translateX(-4%);
     }
 
     .aura {
@@ -285,9 +296,9 @@
 
     .ipad {
       position: absolute;
-      right: -3%;
+      right: -2%;
       bottom: 96px;
-      width: 392px;
+      width: 350px;
       padding: 8px;
       border-radius: 24px;
       background: linear-gradient(145deg, #232428, #09090b 54%, #2c2e34);
@@ -303,9 +314,9 @@
 
     .iphone {
       position: absolute;
-      left: 36%;
-      bottom: 38px;
-      width: 150px;
+      left: 20%;
+      bottom: 34px;
+      width: 142px;
       padding: 6px;
       border-radius: 34px;
       background: linear-gradient(145deg, #24252a, #08080a 54%, #2f3137);
@@ -430,7 +441,12 @@
       }
 
       .product-stage {
-        min-height: 610px;
+        min-height: 560px;
+      }
+
+      .device-showcase {
+        width: min(840px, 108vw);
+        transform: translateX(-2%);
       }
 
       .macbook {
@@ -440,11 +456,11 @@
 
       .ipad {
         right: 0;
-        width: 370px;
+        width: 340px;
       }
 
       .iphone {
-        left: 31%;
+        left: 19%;
       }
 
       .feature-rail {
@@ -495,8 +511,13 @@
       }
 
       .product-stage {
-        min-height: 492px;
+        min-height: 384px;
         overflow: hidden;
+      }
+
+      .device-showcase {
+        width: 112%;
+        transform: translateX(-6%);
       }
 
       .macbook {
@@ -512,9 +533,9 @@
       }
 
       .ipad {
-        width: 245px;
+        width: 224px;
         right: 0;
-        bottom: 60px;
+        bottom: 62px;
         left: auto;
         padding: 6px;
         border-radius: 19px;
@@ -529,10 +550,10 @@
       }
 
       .iphone {
-        width: 92px;
-        left: 28%;
+        width: 86px;
+        left: 8%;
         right: auto;
-        bottom: 30px;
+        bottom: 32px;
         padding: 5px;
         border-radius: 22px;
       }
@@ -606,30 +627,7 @@
       </div>
 
       <div class="product-stage" aria-label="NuFeed app preview">
-        <div class="aura" aria-hidden="true"></div>
-        <div class="stage-reflection" aria-hidden="true"></div>
-        <div class="macbook">
-          <div class="screen">
-            <img class="device-shot" src="./assets/nufeed-mac.png" alt="NuFeed Mac app screenshot">
-            <span class="device-sheen" aria-hidden="true"></span>
-          </div>
-          <div class="base" aria-hidden="true"></div>
-        </div>
-
-        <div class="ipad" aria-hidden="true">
-          <div class="device-screen">
-            <img class="device-shot" src="./assets/nufeed-mac.png" alt="">
-            <span class="device-sheen" aria-hidden="true"></span>
-          </div>
-        </div>
-
-        <div class="iphone" aria-hidden="true">
-          <div class="device-screen">
-            <img class="device-shot" src="./assets/nufeed-iphone.png" alt="">
-            <span class="device-sheen" aria-hidden="true"></span>
-          </div>
-        </div>
-
+        <img class="device-showcase" src="./assets/nufeed-device-showcase.png" alt="NuFeed running on Mac, iPhone, and iPad">
       </div>
     </section>
 
