@@ -129,6 +129,17 @@
       transform: translateY(-1px);
     }
 
+    .app-store-link {
+      background: var(--blue);
+      color: #ffffff;
+      box-shadow: 0 12px 26px rgba(0, 113, 227, 0.22);
+    }
+
+    .app-store-link:hover {
+      background: var(--blue-dark);
+      color: #ffffff;
+    }
+
     main {
       position: relative;
     }
@@ -611,6 +622,7 @@
         <span data-i18n="brand">NuFeed</span>
       </a>
       <div class="nav-links">
+        <a class="nav-link app-store-link" href="https://apps.apple.com/app/id6762549046" target="_blank" rel="noopener" data-i18n="navAppStore">App Store</a>
         <a class="nav-link" href="./privacy.html" data-i18n="navPrivacy">Privacy Policy</a>
         <a class="nav-link" href="./support.html" data-i18n="navSupport">Support</a>
         <button class="language-toggle" type="button" data-language-toggle data-i18n="languageToggle" aria-label="Switch language">CN</button>
@@ -669,6 +681,7 @@
     const copy = {
       en: {
         brand: "NuFeed",
+        navAppStore: "App Store",
         navPrivacy: "Privacy Policy",
         navSupport: "Support",
         languageToggle: "CN",
@@ -709,6 +722,7 @@
       },
       zh: {
         brand: "NuFeed",
+        navAppStore: "App Store",
         navPrivacy: "隐私政策",
         navSupport: "支持",
         languageToggle: "EN",
