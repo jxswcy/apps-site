@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>NuFeed</title>
-  <meta name="description" content="NuFeed is a focused RSS and web subscription reader for iPhone, iPad, and Mac.">
+  <title>Nu Apps</title>
+  <meta name="description" content="Nu Apps is a collection of focused apps for reading, focus, and everyday workflows.">
   <style>
     :root {
       color-scheme: light;
@@ -13,8 +13,10 @@
       --text: #1d1d1f;
       --muted: #6e6e73;
       --line: rgba(0, 0, 0, 0.09);
+      --panel: rgba(255, 255, 255, 0.88);
       --blue: #0071e3;
-      --shadow: 0 30px 90px rgba(0, 0, 0, 0.13);
+      --orange: #f46b2f;
+      --shadow: 0 30px 90px rgba(0, 0, 0, 0.12);
     }
 
     * {
@@ -31,7 +33,7 @@
       overflow-x: hidden;
       color: var(--text);
       background:
-        radial-gradient(circle at 50% -10%, rgba(255, 255, 255, 0.95), rgba(245, 245, 247, 0.72) 34%, transparent 62%),
+        radial-gradient(circle at 50% -12%, rgba(255, 255, 255, 0.96), rgba(245, 245, 247, 0.72) 34%, transparent 62%),
         linear-gradient(180deg, #fbfbfd 0%, var(--bg) 54%, #ffffff 100%);
       font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Segoe UI", sans-serif;
       line-height: 1.5;
@@ -62,23 +64,11 @@
     }
 
     .brand {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
       color: var(--ink);
       font-size: 17px;
-      font-weight: 700;
+      font-weight: 750;
       letter-spacing: 0;
       white-space: nowrap;
-    }
-
-    .brand-mark {
-      width: 30px;
-      height: 30px;
-      display: block;
-      border-radius: 8px;
-      object-fit: cover;
-      box-shadow: 0 10px 22px rgba(255, 94, 20, 0.24);
     }
 
     .nav-links {
@@ -118,74 +108,51 @@
       transform: translateY(-1px);
     }
 
-    .hero {
+    main {
       width: min(1180px, calc(100% - 40px));
-      min-height: calc(100vh - 64px);
       margin: 0 auto;
-      padding: 72px 0 54px;
-      display: grid;
-      grid-template-columns: minmax(0, 0.86fr) minmax(430px, 1.14fr);
-      align-items: center;
-      gap: 68px;
+      padding: 88px 0 96px;
+    }
+
+    .hero {
+      max-width: 920px;
+      padding: 44px 0 58px;
     }
 
     h1 {
       margin: 0;
       color: var(--ink);
-      font-size: clamp(62px, 8vw, 118px);
-      line-height: 0.95;
-      font-weight: 750;
+      font-size: clamp(66px, 10vw, 132px);
+      line-height: 0.92;
+      font-weight: 760;
       letter-spacing: 0;
     }
 
     .lead {
-      max-width: 580px;
+      max-width: 780px;
       margin: 26px 0 0;
       color: #303035;
-      font-size: clamp(20px, 2.2vw, 30px);
-      line-height: 1.18;
-      font-weight: 600;
+      font-size: clamp(22px, 3vw, 36px);
+      line-height: 1.14;
+      font-weight: 650;
       letter-spacing: 0;
     }
 
     .sublead {
-      max-width: 560px;
+      max-width: 650px;
       margin: 18px 0 0;
       color: var(--muted);
       font-size: 18px;
-      line-height: 1.55;
-      font-weight: 450;
+      line-height: 1.58;
+      font-weight: 460;
     }
 
-    .product-stage {
-      min-height: 630px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .device-showcase {
-      width: min(820px, 118%);
-      max-width: none;
-      height: auto;
-      display: block;
-      filter: drop-shadow(0 34px 72px rgba(0, 0, 0, 0.12));
-      transform: translateX(6%);
-    }
-
-    .features {
-      padding: 38px 0 84px;
-      background: #ffffff;
-    }
-
-    .feature-wrap {
-      width: min(1180px, calc(100% - 40px));
-      margin: 0 auto;
+    .apps-section {
+      padding-top: 12px;
     }
 
     .section-heading {
-      max-width: 760px;
-      margin: 0 0 24px;
+      margin: 0 0 22px;
       color: var(--ink);
       font-size: clamp(34px, 5vw, 64px);
       line-height: 1.02;
@@ -193,24 +160,73 @@
       letter-spacing: 0;
     }
 
-    .feature-rail {
+    .app-grid {
       display: grid;
-      grid-template-columns: repeat(5, minmax(0, 1fr));
-      gap: 12px;
+      grid-template-columns: 1.35fr 0.65fr;
+      gap: 16px;
+      align-items: stretch;
     }
 
-    .feature {
-      min-height: 174px;
-      padding: 22px;
-      border: 1px solid rgba(0, 0, 0, 0.05);
-      border-radius: 24px;
-      background: #f5f5f7;
+    .app-card {
+      position: relative;
+      min-height: 420px;
+      overflow: hidden;
+      border: 1px solid rgba(0, 0, 0, 0.06);
+      border-radius: 32px;
+      background: var(--panel);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(24px);
     }
 
-    .feature svg {
-      width: 30px;
-      height: 30px;
-      color: var(--blue);
+    .app-card.primary {
+      display: grid;
+      grid-template-columns: minmax(0, 0.9fr) minmax(360px, 1.1fr);
+      gap: 8px;
+    }
+
+    .app-copy {
+      position: relative;
+      z-index: 2;
+      padding: 34px;
+      display: flex;
+      min-width: 0;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 28px;
+    }
+
+    .app-title-row {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .app-icon {
+      width: 58px;
+      height: 58px;
+      flex: 0 0 auto;
+      display: block;
+      border-radius: 15px;
+      object-fit: cover;
+      box-shadow: 0 16px 34px rgba(255, 94, 20, 0.25);
+    }
+
+    .placeholder-icon {
+      width: 58px;
+      height: 58px;
+      flex: 0 0 auto;
+      display: grid;
+      place-items: center;
+      border-radius: 15px;
+      background: linear-gradient(145deg, #151517, #3b3c42);
+      color: #ffffff;
+      box-shadow: 0 16px 34px rgba(0, 0, 0, 0.18);
+    }
+
+    .placeholder-icon svg {
+      width: 31px;
+      height: 31px;
       fill: none;
       stroke: currentColor;
       stroke-width: 2;
@@ -218,52 +234,192 @@
       stroke-linejoin: round;
     }
 
-    .feature h2 {
-      margin: 16px 0 8px;
-      color: var(--ink);
-      font-size: 18px;
-      line-height: 1.2;
-      font-weight: 730;
+    .status {
+      margin: 0 0 10px;
+      color: var(--blue);
+      font-size: 13px;
+      font-weight: 720;
       letter-spacing: 0;
     }
 
-    .feature p {
+    .soon .status {
+      color: #a64719;
+    }
+
+    .app-card h3 {
       margin: 0;
+      color: var(--ink);
+      font-size: clamp(34px, 4vw, 52px);
+      line-height: 0.98;
+      font-weight: 750;
+      letter-spacing: 0;
+    }
+
+    .soon h3 {
+      font-size: clamp(32px, 4vw, 44px);
+    }
+
+    .app-card p {
+      max-width: 470px;
+      margin: 18px 0 0;
       color: var(--muted);
-      font-size: 14px;
-      line-height: 1.45;
+      font-size: 17px;
+      line-height: 1.58;
       font-weight: 460;
     }
 
+    .app-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .action {
+      min-height: 42px;
+      padding: 0 16px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 999px;
+      background: rgba(0, 113, 227, 0.1);
+      color: var(--blue);
+      font-size: 14px;
+      font-weight: 700;
+      transition: transform 180ms ease, background 180ms ease;
+    }
+
+    .action.primary-action {
+      background: var(--blue);
+      color: #ffffff;
+      box-shadow: 0 14px 30px rgba(0, 113, 227, 0.25);
+    }
+
+    .action:hover {
+      transform: translateY(-1px);
+      background: rgba(0, 113, 227, 0.15);
+    }
+
+    .primary-action:hover {
+      background: #0066cc;
+    }
+
+    .app-visual {
+      position: relative;
+      min-height: 420px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .app-visual::before {
+      content: "";
+      position: absolute;
+      inset: 22% 0 4% -12%;
+      border-radius: 50%;
+      background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.04) 44%, transparent 72%);
+      filter: blur(12px);
+      opacity: 0.7;
+    }
+
+    .device-showcase {
+      position: relative;
+      width: min(660px, 132%);
+      max-width: none;
+      height: auto;
+      display: block;
+      filter: drop-shadow(0 26px 58px rgba(0, 0, 0, 0.12));
+      transform: translateX(7%);
+    }
+
+    .side-stack {
+      display: grid;
+      gap: 16px;
+    }
+
+    .soon {
+      min-height: 202px;
+      padding: 28px;
+    }
+
+    .soon p {
+      margin-top: 14px;
+      font-size: 16px;
+    }
+
+    .soon-top {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .family-card {
+      min-height: 202px;
+      padding: 28px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 22px;
+    }
+
+    .family-card h3 {
+      font-size: clamp(30px, 4vw, 44px);
+    }
+
+    .dot-row {
+      display: flex;
+      gap: 8px;
+    }
+
+    .dot {
+      width: 13px;
+      height: 13px;
+      border-radius: 999px;
+      background: var(--orange);
+      box-shadow: 0 0 0 6px rgba(244, 107, 47, 0.12);
+    }
+
+    .dot:nth-child(2) {
+      background: var(--blue);
+      box-shadow: 0 0 0 6px rgba(0, 113, 227, 0.12);
+    }
+
+    .dot:nth-child(3) {
+      background: #28c840;
+      box-shadow: 0 0 0 6px rgba(40, 200, 64, 0.12);
+    }
+
     @media (max-width: 980px) {
-      .hero {
-        min-height: auto;
+      main {
         padding-top: 58px;
-        grid-template-columns: 1fr;
-        gap: 34px;
       }
 
-      .product-stage {
-        min-height: 560px;
+      .app-grid,
+      .app-card.primary {
+        grid-template-columns: 1fr;
+      }
+
+      .app-visual {
+        min-height: 360px;
+        order: -1;
       }
 
       .device-showcase {
-        width: min(840px, 108vw);
-        transform: translateX(-2%);
+        width: min(760px, 104vw);
+        transform: translateX(0);
       }
 
-      .feature-rail {
+      .side-stack {
         grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
-
-      .feature:last-child {
-        grid-column: span 2;
       }
     }
 
     @media (max-width: 720px) {
-      .nav {
+      .nav,
+      main {
         width: min(100% - 28px, 1180px);
+      }
+
+      .nav {
         min-height: 58px;
       }
 
@@ -282,13 +438,8 @@
         font-size: 12px;
       }
 
-      .hero,
-      .feature-wrap {
-        width: min(100% - 28px, 1180px);
-      }
-
       .hero {
-        padding: 42px 0 36px;
+        padding: 34px 0 40px;
       }
 
       .lead {
@@ -299,26 +450,27 @@
         font-size: 16px;
       }
 
-      .product-stage {
-        min-height: 384px;
+      .app-card {
+        border-radius: 26px;
+      }
+
+      .app-copy,
+      .soon,
+      .family-card {
+        padding: 24px;
+      }
+
+      .app-visual {
+        min-height: 270px;
         overflow: hidden;
       }
 
       .device-showcase {
         width: 112%;
-        transform: translateX(-6%);
       }
 
-      .features {
-        padding-top: 32px;
-      }
-
-      .feature-rail {
+      .side-stack {
         grid-template-columns: 1fr;
-      }
-
-      .feature:last-child {
-        grid-column: auto;
       }
     }
 
@@ -340,25 +492,26 @@
       }
 
       h1 {
-        font-size: 60px;
+        font-size: 62px;
       }
 
-      .lead {
-        font-size: 22px;
+      .app-actions {
+        width: 100%;
+      }
+
+      .action {
+        flex: 1 1 auto;
       }
     }
   </style>
 </head>
 <body>
   <header class="site-header">
-    <nav class="nav" aria-label="NuFeed">
-      <a class="brand" href="./" aria-label="NuFeed home">
-        <img class="brand-mark" src="./nufeed/assets/nufeed-icon.png" alt="" aria-hidden="true">
-        <span data-i18n="brand">NuFeed</span>
-      </a>
+    <nav class="nav" aria-label="Nu Apps">
+      <a class="brand" href="./" aria-label="Nu Apps home" data-i18n="brand">Nu Apps</a>
       <div class="nav-links">
-        <a class="nav-link" href="./nufeed/privacy.html" data-i18n="navPrivacy">Privacy Policy</a>
-        <a class="nav-link" href="./nufeed/support.html" data-i18n="navSupport">Support</a>
+        <a class="nav-link" href="#apps" data-i18n="navApps">Apps</a>
+        <a class="nav-link" href="./nufeed/" data-i18n="navNuFeed">NuFeed</a>
         <button class="language-toggle" type="button" data-language-toggle data-i18n="languageToggle" aria-label="Switch language">CN</button>
       </div>
     </nav>
@@ -366,46 +519,62 @@
 
   <main>
     <section class="hero" aria-labelledby="title">
-      <div class="hero-copy">
-        <h1 id="title">NuFeed</h1>
-        <p class="lead" data-i18n="lead">A focused RSS and web subscription reader for iPhone, iPad, and Mac.</p>
-        <p class="sublead" data-i18n="sublead">Read feeds, follow sites without RSS, extract full articles, translate bilingual content, summarize long reads, and keep your progress in sync with iCloud.</p>
-      </div>
-
-      <div class="product-stage" aria-label="NuFeed app preview">
-        <img class="device-showcase" src="./nufeed/assets/nufeed-device-showcase.png" alt="NuFeed running on Mac, iPhone, and iPad">
-      </div>
+      <h1 id="title" data-i18n="title">Nu Apps</h1>
+      <p class="lead" data-i18n="lead">Focused apps for reading, focus, and everyday workflows.</p>
+      <p class="sublead" data-i18n="sublead">NuFeed is available now. More apps, including NuRead, are planned for the same clean and quiet product family.</p>
     </section>
 
-    <section class="features" aria-labelledby="features-title">
-      <div class="feature-wrap">
-        <h2 class="section-heading" id="features-title" data-i18n="featuresTitle">Everything you need to read the web with less noise.</h2>
-        <div class="feature-rail">
-          <section class="feature">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 5v14"></path><path d="M9 5v14"></path><path d="M14 7h5"></path><path d="M14 12h5"></path><path d="M14 17h5"></path></svg>
-            <h2 data-i18n="featureRssTitle">RSS subscriptions</h2>
-            <p data-i18n="featureRssBody">Folders, unread state, favorites, and a calm daily queue.</p>
-          </section>
-          <section class="feature">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18Z"></path><path d="M3.6 9h16.8"></path><path d="M3.6 15h16.8"></path><path d="M12 3c2.2 2.4 3.2 5.4 3.2 9s-1 6.6-3.2 9"></path><path d="M12 3c-2.2 2.4-3.2 5.4-3.2 9s1 6.6 3.2 9"></path></svg>
-            <h2 data-i18n="featureWebTitle">Web subscriptions</h2>
-            <p data-i18n="featureWebBody">Follow useful sites even when they do not publish RSS feeds.</p>
-          </section>
-          <section class="feature">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 4h9l3 3v13H6z"></path><path d="M15 4v4h4"></path><path d="M9 12h6"></path><path d="M9 16h6"></path></svg>
-            <h2 data-i18n="featureFullTitle">Full articles</h2>
-            <p data-i18n="featureFullBody">Extract complete stories from sources that only publish snippets.</p>
-          </section>
-          <section class="feature">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 7h8"></path><path d="M9 4v3"></path><path d="M7 7c.8 2.7 2.8 5 5.5 6.3"></path><path d="M12 7c-.8 2.4-2.2 4.2-4.3 5.6"></path><path d="M14 20l4-9 4 9"></path><path d="M15.4 17h5.2"></path></svg>
-            <h2 data-i18n="featureAiTitle">AI translation</h2>
-            <p data-i18n="featureAiBody">Use your own API configuration for bilingual reads and summaries.</p>
-          </section>
-          <section class="feature">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17.5a4.5 4.5 0 0 1 .4-9A5.6 5.6 0 0 1 18 10.2a3.7 3.7 0 0 1-.7 7.3Z"></path><path d="m9.5 14 2.5-2.5 2.5 2.5"></path><path d="M12 11.5V20"></path></svg>
-            <h2 data-i18n="featureSyncTitle">iCloud sync</h2>
-            <p data-i18n="featureSyncBody">Subscriptions, reading progress, and favorites stay with you.</p>
-          </section>
+    <section class="apps-section" id="apps" aria-labelledby="apps-title">
+      <h2 class="section-heading" id="apps-title" data-i18n="appsTitle">Available and upcoming apps.</h2>
+      <div class="app-grid">
+        <article class="app-card primary">
+          <div class="app-copy">
+            <div>
+              <div class="app-title-row">
+                <img class="app-icon" src="./nufeed/assets/nufeed-icon.png" alt="" aria-hidden="true">
+                <div>
+                  <p class="status" data-i18n="nufeedStatus">Available now</p>
+                  <h3>NuFeed</h3>
+                </div>
+              </div>
+              <p data-i18n="nufeedBody">A focused RSS and web subscription reader for iPhone, iPad, and Mac. Read feeds, follow sites without RSS, extract full articles, translate bilingual content, and keep progress in sync with iCloud.</p>
+            </div>
+            <div class="app-actions" aria-label="NuFeed links">
+              <a class="action primary-action" href="./nufeed/" data-i18n="overviewAction">Overview</a>
+              <a class="action" href="./nufeed/support.html" data-i18n="supportAction">Support</a>
+              <a class="action" href="./nufeed/privacy.html" data-i18n="privacyAction">Privacy Policy</a>
+            </div>
+          </div>
+          <div class="app-visual" aria-hidden="true">
+            <img class="device-showcase" src="./nufeed/assets/nufeed-device-showcase.png" alt="">
+          </div>
+        </article>
+
+        <div class="side-stack">
+          <article class="app-card soon">
+            <div class="soon-top">
+              <div class="placeholder-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><path d="M5 4.5h9a4 4 0 0 1 4 4v11H9a4 4 0 0 0-4 0z"></path><path d="M5 4.5v15"></path><path d="M9 8h5"></path><path d="M9 12h4"></path></svg>
+              </div>
+              <div>
+                <p class="status" data-i18n="nureadStatus">Coming soon</p>
+                <h3>NuRead</h3>
+              </div>
+            </div>
+            <p data-i18n="nureadBody">A new reading app is planned for long-form reading and saved articles.</p>
+          </article>
+
+          <article class="app-card family-card">
+            <div class="dot-row" aria-hidden="true">
+              <span class="dot"></span>
+              <span class="dot"></span>
+              <span class="dot"></span>
+            </div>
+            <div>
+              <h3 data-i18n="familyTitle">More apps are coming.</h3>
+              <p data-i18n="familyBody">This page will grow into the home for the Nu app family as new products are released.</p>
+            </div>
+          </article>
         </div>
       </div>
     </section>
@@ -414,42 +583,42 @@
   <script>
     const copy = {
       en: {
-        brand: "NuFeed",
-        navPrivacy: "Privacy Policy",
-        navSupport: "Support",
+        brand: "Nu Apps",
+        navApps: "Apps",
+        navNuFeed: "NuFeed",
         languageToggle: "CN",
-        lead: "A focused RSS and web subscription reader for iPhone, iPad, and Mac.",
-        sublead: "Read feeds, follow sites without RSS, extract full articles, translate bilingual content, summarize long reads, and keep your progress in sync with iCloud.",
-        featuresTitle: "Everything you need to read the web with less noise.",
-        featureRssTitle: "RSS subscriptions",
-        featureRssBody: "Folders, unread state, favorites, and a calm daily queue.",
-        featureWebTitle: "Web subscriptions",
-        featureWebBody: "Follow useful sites even when they do not publish RSS feeds.",
-        featureFullTitle: "Full articles",
-        featureFullBody: "Extract complete stories from sources that only publish snippets.",
-        featureAiTitle: "AI translation",
-        featureAiBody: "Use your own API configuration for bilingual reads and summaries.",
-        featureSyncTitle: "iCloud sync",
-        featureSyncBody: "Subscriptions, reading progress, and favorites stay with you."
+        title: "Nu Apps",
+        lead: "Focused apps for reading, focus, and everyday workflows.",
+        sublead: "NuFeed is available now. More apps, including NuRead, are planned for the same clean and quiet product family.",
+        appsTitle: "Available and upcoming apps.",
+        nufeedStatus: "Available now",
+        nufeedBody: "A focused RSS and web subscription reader for iPhone, iPad, and Mac. Read feeds, follow sites without RSS, extract full articles, translate bilingual content, and keep progress in sync with iCloud.",
+        overviewAction: "Overview",
+        supportAction: "Support",
+        privacyAction: "Privacy Policy",
+        nureadStatus: "Coming soon",
+        nureadBody: "A new reading app is planned for long-form reading and saved articles.",
+        familyTitle: "More apps are coming.",
+        familyBody: "This page will grow into the home for the Nu app family as new products are released."
       },
       zh: {
-        brand: "NuFeed",
-        navPrivacy: "隐私政策",
-        navSupport: "支持",
+        brand: "Nu Apps",
+        navApps: "应用",
+        navNuFeed: "NuFeed",
         languageToggle: "EN",
-        lead: "专注、安静的 RSS 与网页订阅阅读器，适用于 iPhone、iPad 和 Mac。",
-        sublead: "阅读订阅源，关注没有 RSS 的网站，提取全文，生成双语翻译与长文摘要，并通过 iCloud 同步阅读进度。",
-        featuresTitle: "用更少噪音，阅读整个网页。",
-        featureRssTitle: "RSS 订阅",
-        featureRssBody: "文件夹、未读状态、收藏，以及安静清晰的每日阅读队列。",
-        featureWebTitle: "网页订阅",
-        featureWebBody: "即使网站没有 RSS，也能持续关注有价值的内容。",
-        featureFullTitle: "全文提取",
-        featureFullBody: "从只提供摘要的来源中提取完整文章。",
-        featureAiTitle: "AI 翻译",
-        featureAiBody: "使用你自己的 API 配置，生成双语阅读和长文摘要。",
-        featureSyncTitle: "iCloud 同步",
-        featureSyncBody: "订阅、阅读进度和收藏会跟随你的设备。"
+        title: "Nu Apps",
+        lead: "为阅读、专注和日常工作流打造的一组轻量应用。",
+        sublead: "NuFeed 现在已经上线。包括 NuRead 在内的更多应用，会陆续加入同一套清爽安静的产品家族。",
+        appsTitle: "已上线与即将推出的应用。",
+        nufeedStatus: "现已上线",
+        nufeedBody: "NuFeed 是适用于 iPhone、iPad 和 Mac 的 RSS 与网页订阅阅读器。你可以阅读订阅源，关注没有 RSS 的网站，提取全文，生成双语内容，并通过 iCloud 同步进度。",
+        overviewAction: "查看介绍",
+        supportAction: "支持",
+        privacyAction: "隐私政策",
+        nureadStatus: "即将推出",
+        nureadBody: "NuRead 计划面向长文阅读和稍后读场景，提供新的阅读体验。",
+        familyTitle: "更多应用正在路上。",
+        familyBody: "随着新产品发布，这里会逐渐成为 Nu 应用家族的主页。"
       }
     };
 
