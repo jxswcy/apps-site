@@ -252,7 +252,7 @@
 
     .product-stage {
       position: relative;
-      min-height: 610px;
+      min-height: 620px;
       perspective: 1200px;
     }
 
@@ -281,181 +281,58 @@
 
     .macbook {
       position: absolute;
-      top: 42px;
-      left: 4%;
-      width: min(650px, 91%);
-      padding: 15px 15px 28px;
-      border-radius: 28px 28px 20px 20px;
-      background: linear-gradient(145deg, #d9d9de, #fdfdff 48%, #b9bbc2);
-      box-shadow: 0 34px 92px rgba(0, 0, 0, 0.18);
+      top: 44px;
+      left: 5%;
+      width: min(650px, 92%);
+      padding: 16px 16px 30px;
+      border-radius: 28px 28px 18px 18px;
+      background: linear-gradient(145deg, #171719 0%, #2a2b2f 48%, #111113 100%);
+      box-shadow: 0 34px 92px rgba(0, 0, 0, 0.22);
       z-index: 1;
     }
 
-    .screen {
+    .macbook::before {
+      content: "";
+      position: absolute;
+      top: 9px;
+      left: 50%;
+      width: 86px;
+      height: 15px;
+      border-radius: 0 0 12px 12px;
+      background: #0b0b0d;
+      transform: translateX(-50%);
+      z-index: 3;
+    }
+
+    .screen,
+    .device-screen {
       overflow: hidden;
-      border: 1px solid rgba(0, 0, 0, 0.08);
-      border-radius: 24px;
-      background: #f8f8fb;
-      box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.8);
-    }
-
-    .screen-top {
-      height: 42px;
-      display: flex;
-      align-items: center;
-      gap: 7px;
-      padding: 0 16px;
-      background: rgba(255, 255, 255, 0.78);
-      border-bottom: 1px solid rgba(0, 0, 0, 0.06);
-    }
-
-    .dot {
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
-      background: #ff5f57;
-    }
-
-    .dot:nth-child(2) {
-      background: #ffbd2e;
-    }
-
-    .dot:nth-child(3) {
-      background: var(--green);
-    }
-
-    .screen-grid {
-      height: 374px;
-      display: grid;
-      grid-template-columns: 160px 1fr 188px;
       background: #ffffff;
     }
 
-    .sidebar {
-      padding: 18px 14px;
-      border-right: 1px solid rgba(0, 0, 0, 0.07);
-      background: #f5f5f7;
-    }
-
-    .side-title,
-    .pane-title,
-    .summary-title {
-      color: #1d1d1f;
-      font-size: 12px;
-      font-weight: 760;
-    }
-
-    .feed-row {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      height: 32px;
-      margin-top: 9px;
-      padding: 0 10px;
-      border-radius: 10px;
-      color: #5c5c62;
-      font-size: 12px;
-      font-weight: 650;
-    }
-
-    .feed-row.active {
-      color: #ffffff;
-      background: #1d1d1f;
-    }
-
-    .feed-icon {
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: currentColor;
-      opacity: 0.55;
-      flex: 0 0 auto;
-    }
-
-    .article-pane {
-      padding: 18px 18px 20px;
-      border-right: 1px solid rgba(0, 0, 0, 0.07);
-    }
-
-    .article-list {
-      display: grid;
-      gap: 11px;
-      margin-top: 14px;
-    }
-
-    .article {
-      padding: 13px;
-      border-radius: 15px;
-      background: #f7f7fa;
-      border: 1px solid rgba(0, 0, 0, 0.04);
-    }
-
-    .article.selected {
-      background: #eef5ff;
-      border-color: rgba(0, 113, 227, 0.22);
-    }
-
-    .article strong {
-      display: block;
-      color: #1d1d1f;
-      font-size: 13px;
-      line-height: 1.3;
-    }
-
-    .article span {
-      display: block;
-      margin-top: 5px;
-      color: #85858b;
-      font-size: 11px;
-      line-height: 1.35;
-    }
-
-    .summary-pane {
-      padding: 18px 16px;
-      background: linear-gradient(180deg, #fbfbfd, #f1f6ff);
-    }
-
-    .summary-card {
-      margin-top: 14px;
-      padding: 14px;
+    .screen {
+      aspect-ratio: 16 / 10;
       border-radius: 18px;
-      color: #2f3338;
-      background: rgba(255, 255, 255, 0.86);
-      box-shadow: 0 16px 28px rgba(0, 0, 0, 0.07);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.12);
     }
 
-    .summary-card p {
-      margin: 0;
-      color: #5f6369;
-      font-size: 11px;
-      line-height: 1.55;
-    }
-
-    .meter {
-      height: 8px;
-      margin-top: 14px;
-      border-radius: 999px;
-      background: rgba(0, 113, 227, 0.12);
-      overflow: hidden;
-    }
-
-    .meter span {
+    .device-shot {
       display: block;
-      width: 72%;
+      width: 100%;
       height: 100%;
-      border-radius: inherit;
-      background: linear-gradient(90deg, var(--blue), #54a6ff);
+      object-fit: cover;
     }
 
     .base {
       position: absolute;
-      left: 6%;
-      right: 6%;
-      bottom: -17px;
-      height: 28px;
-      border-radius: 0 0 28px 28px;
-      background: linear-gradient(180deg, #d7d8dd 0%, #9b9da5 100%);
-      box-shadow: 0 22px 38px rgba(0, 0, 0, 0.18);
+      left: -8%;
+      right: -8%;
+      bottom: -24px;
+      height: 34px;
+      border-radius: 0 0 42px 42px;
+      background: linear-gradient(180deg, #e8e8ed 0%, #b5b7bf 52%, #8d9098 100%);
+      box-shadow: 0 24px 38px rgba(0, 0, 0, 0.2);
     }
 
     .base::before {
@@ -471,150 +348,51 @@
 
     .ipad {
       position: absolute;
-      right: -1%;
-      bottom: 82px;
-      width: 415px;
-      padding: 10px;
+      right: -4%;
+      bottom: 98px;
+      width: 450px;
+      padding: 12px;
       border-radius: 30px;
-      background: #171719;
-      box-shadow: 0 28px 70px rgba(0, 0, 0, 0.22);
+      background: linear-gradient(145deg, #0d0d0f, #2a2b2f 52%, #08080a);
+      box-shadow: 0 34px 80px rgba(0, 0, 0, 0.28);
       z-index: 3;
     }
 
     .ipad .device-screen {
-      min-height: 286px;
-      border-radius: 22px;
-      padding: 15px;
-      background: #fbfbfd;
+      aspect-ratio: 16 / 10;
+      border-radius: 20px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
     }
 
     .iphone {
       position: absolute;
-      left: 39%;
-      bottom: 44px;
-      width: 154px;
-      padding: 8px;
-      border-radius: 32px;
-      background: #111113;
-      box-shadow: 0 28px 70px rgba(0, 0, 0, 0.24);
+      left: 42%;
+      bottom: 42px;
+      width: 168px;
+      padding: 9px;
+      border-radius: 40px;
+      background: linear-gradient(145deg, #0c0c0e, #242428 52%, #050506);
+      box-shadow: 0 32px 76px rgba(0, 0, 0, 0.28);
       z-index: 4;
     }
 
+    .iphone::before {
+      content: "";
+      position: absolute;
+      top: 15px;
+      left: 50%;
+      width: 54px;
+      height: 15px;
+      border-radius: 0 0 11px 11px;
+      background: #050506;
+      transform: translateX(-50%);
+      z-index: 2;
+    }
+
     .iphone .device-screen {
-      min-height: 274px;
-      border-radius: 25px;
-      padding: 16px 12px;
-      background: linear-gradient(180deg, #ffffff, #f6f6f9);
-    }
-
-    .ipad-layout {
-      height: 256px;
-      display: grid;
-      grid-template-columns: 42% 58%;
-      gap: 14px;
-    }
-
-    .tablet-list {
-      display: grid;
-      gap: 8px;
-      overflow: hidden;
-    }
-
-    .tablet-row {
-      min-height: 42px;
-      padding: 9px;
-      border-radius: 12px;
-      background: rgba(0, 0, 0, 0.045);
-    }
-
-    .tablet-row strong,
-    .tablet-row span,
-    .translation-panel strong,
-    .translation-panel span {
-      display: block;
-      height: 7px;
-      border-radius: 999px;
-      background: rgba(0, 0, 0, 0.72);
-    }
-
-    .tablet-row span,
-    .translation-panel span {
-      width: 72%;
-      margin-top: 8px;
-      background: rgba(0, 0, 0, 0.18);
-    }
-
-    .translation-panel {
-      display: grid;
-      grid-template-rows: 36px 1fr 70px;
-      gap: 10px;
-    }
-
-    .translation-tabs {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      padding: 4px;
-      border-radius: 12px;
-      background: #eef0f4;
-    }
-
-    .translation-tabs span {
-      height: auto;
-      margin: 0;
-      display: grid;
-      place-items: center;
-      border-radius: 9px;
-      background: transparent;
-      color: #606067;
-      font-size: 10px;
-      font-weight: 700;
-    }
-
-    .translation-tabs span:first-child {
-      background: #ffffff;
-      color: #1d1d1f;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-    }
-
-    .translation-card {
-      padding: 14px;
-      border-radius: 16px;
-      background: #ffffff;
-      box-shadow: 0 8px 22px rgba(0, 0, 0, 0.06);
-    }
-
-    .device-title {
-      color: #111113;
-      font-size: 15px;
-      line-height: 1.15;
-      font-weight: 760;
-    }
-
-    .mini-list {
-      display: grid;
-      gap: 10px;
-      margin-top: 16px;
-    }
-
-    .mini-item {
-      min-height: 48px;
-      border-radius: 15px;
-      background: rgba(0, 0, 0, 0.045);
-      padding: 10px;
-    }
-
-    .mini-item strong,
-    .mini-item span {
-      display: block;
-      height: 7px;
-      border-radius: 999px;
-      background: rgba(0, 0, 0, 0.72);
-    }
-
-    .mini-item span {
-      width: 70%;
-      margin-top: 8px;
-      background: rgba(0, 0, 0, 0.18);
+      aspect-ratio: 370 / 800;
+      border-radius: 31px;
+      border: 1px solid rgba(255, 255, 255, 0.16);
     }
 
     .features {
@@ -780,11 +558,11 @@
 
       .ipad {
         right: 0;
-        width: 390px;
+        width: 420px;
       }
 
       .iphone {
-        left: 34%;
+        left: 32%;
       }
 
       .feature-rail {
@@ -854,47 +632,21 @@
         top: 16px;
         left: 0;
         width: 100%;
-        padding: 9px 9px 18px;
+        padding: 9px 9px 19px;
         border-radius: 24px;
       }
 
       .screen {
-        border-radius: 18px;
-      }
-
-      .screen-top {
-        height: 34px;
-      }
-
-      .screen-grid {
-        height: 285px;
-        grid-template-columns: 112px 1fr;
-      }
-
-      .summary-pane {
-        display: none;
-      }
-
-      .sidebar,
-      .article-pane {
-        padding: 13px 10px;
-      }
-
-      .feed-row {
-        padding: 0 7px;
-        font-size: 10px;
-      }
-
-      .article strong {
-        font-size: 11px;
+        border-radius: 16px;
       }
 
       .ipad {
-        width: 260px;
-        right: 0;
-        bottom: 40px;
+        width: 270px;
+        right: -2px;
+        bottom: 54px;
         left: auto;
-        border-radius: 24px;
+        padding: 8px;
+        border-radius: 22px;
       }
 
       .aura {
@@ -902,47 +654,20 @@
       }
 
       .ipad .device-screen {
-        min-height: 178px;
-        border-radius: 18px;
-        padding: 10px;
-      }
-
-      .ipad-layout {
-        height: 158px;
-        gap: 8px;
-      }
-
-      .tablet-list {
-        gap: 6px;
-      }
-
-      .tablet-row {
-        min-height: 31px;
-        padding: 7px;
-        border-radius: 9px;
-      }
-
-      .translation-panel {
-        grid-template-rows: 26px 1fr 42px;
-        gap: 7px;
-      }
-
-      .translation-card {
-        padding: 9px;
-        border-radius: 12px;
+        border-radius: 15px;
       }
 
       .iphone {
-        width: 104px;
-        left: 34%;
+        width: 102px;
+        left: 30%;
         right: auto;
-        bottom: 18px;
+        bottom: 26px;
+        padding: 6px;
         border-radius: 25px;
       }
 
       .iphone .device-screen {
-        min-height: 188px;
-        border-radius: 20px;
+        border-radius: 19px;
       }
 
       .features {
@@ -1008,7 +733,7 @@
         <a class="nav-link" href="./privacy.html" data-i18n="navPrivacy">Privacy Policy</a>
         <a class="nav-link" href="./support.html" data-i18n="navSupport">Support</a>
         <a class="nav-button" href="./support.html" data-i18n="navGetSupport">Get Support</a>
-        <button class="language-toggle" type="button" data-language-toggle data-i18n="languageToggle" aria-label="Switch language">中文</button>
+        <button class="language-toggle" type="button" data-language-toggle data-i18n="languageToggle" aria-label="Switch language">CN</button>
       </div>
     </nav>
   </header>
@@ -1036,89 +761,20 @@
         <div class="stage-reflection" aria-hidden="true"></div>
         <div class="macbook">
           <div class="screen">
-            <div class="screen-top" aria-hidden="true">
-              <span class="dot"></span>
-              <span class="dot"></span>
-              <span class="dot"></span>
-            </div>
-            <div class="screen-grid">
-              <aside class="sidebar">
-                <div class="side-title" data-i18n="mockFeeds">Feeds</div>
-                <div class="feed-row active"><span class="feed-icon"></span><span data-i18n="mockToday">Today</span></div>
-                <div class="feed-row"><span class="feed-icon"></span><span data-i18n="mockFavorites">Favorites</span></div>
-                <div class="feed-row"><span class="feed-icon"></span><span data-i18n="mockTech">Tech</span></div>
-                <div class="feed-row"><span class="feed-icon"></span><span data-i18n="mockDesign">Design</span></div>
-                <div class="feed-row"><span class="feed-icon"></span>Web</div>
-              </aside>
-              <section class="article-pane">
-                <div class="pane-title" data-i18n="mockQueue">Reading Queue</div>
-                <div class="article-list">
-                  <article class="article selected">
-                    <strong data-i18n="mockArticle1">How thoughtful feeds make reading calmer</strong>
-                    <span data-i18n="mockArticle1Meta">Full article extracted · bilingual view ready</span>
-                  </article>
-                  <article class="article">
-                    <strong data-i18n="mockArticle2">Building a better personal web inbox</strong>
-                    <span data-i18n="mockArticle2Meta">Summarized in 6 key points</span>
-                  </article>
-                  <article class="article">
-                    <strong data-i18n="mockArticle3">Independent publishing and RSS again</strong>
-                    <span data-i18n="mockArticle3Meta">Synced across iCloud devices</span>
-                  </article>
-                </div>
-              </section>
-              <aside class="summary-pane">
-                <div class="summary-title" data-i18n="mockSummaryTitle">AI Summary</div>
-                <div class="summary-card">
-                  <p data-i18n="mockSummary">NuFeed keeps the original article beside a concise bilingual summary, so long reads stay easy to scan without losing context.</p>
-                  <div class="meter" aria-hidden="true"><span></span></div>
-                </div>
-              </aside>
-            </div>
+            <img class="device-shot" src="./assets/nufeed-mac.png" alt="NuFeed Mac app screenshot">
           </div>
           <div class="base" aria-hidden="true"></div>
         </div>
 
         <div class="ipad" aria-hidden="true">
           <div class="device-screen">
-            <div class="ipad-layout">
-              <div>
-                <div class="device-title" data-i18n="mockUnread">Unread</div>
-                <div class="tablet-list">
-                  <div class="tablet-row"><strong></strong><span></span></div>
-                  <div class="tablet-row"><strong></strong><span></span></div>
-                  <div class="tablet-row"><strong></strong><span></span></div>
-                  <div class="tablet-row"><strong></strong><span></span></div>
-                </div>
-              </div>
-              <div class="translation-panel">
-                <div class="translation-tabs">
-                  <span data-i18n="mockTranslation">Translation</span>
-                  <span data-i18n="mockSummaryShort">Summary</span>
-                </div>
-                <div class="translation-card">
-                  <strong></strong>
-                  <span></span>
-                  <span></span>
-                  <span></span>
-                </div>
-                <div class="translation-card">
-                  <strong></strong>
-                  <span></span>
-                </div>
-              </div>
-            </div>
+            <img class="device-shot" src="./assets/nufeed-mac.png" alt="">
           </div>
         </div>
 
         <div class="iphone" aria-hidden="true">
           <div class="device-screen">
-            <div class="device-title" data-i18n="mockUnread">Unread</div>
-            <div class="mini-list">
-              <div class="mini-item"><strong></strong><span></span></div>
-              <div class="mini-item"><strong></strong><span></span></div>
-              <div class="mini-item"><strong></strong><span></span></div>
-            </div>
+            <img class="device-shot" src="./assets/nufeed-iphone.png" alt="">
           </div>
         </div>
 
