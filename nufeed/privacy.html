@@ -1,107 +1,464 @@
 <!doctype html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>NuFeed Privacy Policy</title>
+  <meta name="description" content="Privacy policy for NuFeed on iPhone, iPad, and Mac.">
   <style>
     :root {
-      color-scheme: light dark;
-      --bg: #f7f7f4;
-      --fg: #171717;
-      --muted: #66645f;
-      --card: #ffffff;
-      --line: #dedbd3;
-      --accent: #1f6feb;
+      color-scheme: light;
+      --bg: #f5f5f7;
+      --ink: #050505;
+      --text: #1d1d1f;
+      --muted: #6e6e73;
+      --line: rgba(0, 0, 0, 0.09);
+      --panel: rgba(255, 255, 255, 0.86);
+      --blue: #0071e3;
+      --green: #28c840;
+      --shadow: 0 24px 70px rgba(0, 0, 0, 0.1);
     }
-    @media (prefers-color-scheme: dark) {
-      :root {
-        --bg: #111110;
-        --fg: #f4f2ec;
-        --muted: #aaa59a;
-        --card: #1a1917;
-        --line: #34312c;
-        --accent: #7aa7ff;
-      }
+
+    * {
+      box-sizing: border-box;
     }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
     body {
       margin: 0;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      background: var(--bg);
-      color: var(--fg);
-      line-height: 1.7;
+      min-height: 100vh;
+      overflow-x: hidden;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 48% -12%, rgba(255, 255, 255, 0.95), rgba(245, 245, 247, 0.76) 36%, transparent 64%),
+        linear-gradient(180deg, #fbfbfd 0%, var(--bg) 58%, #ffffff 100%);
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Segoe UI", sans-serif;
+      line-height: 1.5;
     }
-    main {
-      max-width: 820px;
-      margin: 0 auto;
-      padding: 64px 24px;
-    }
-    h1 {
-      font-size: 40px;
-      line-height: 1.15;
-      margin: 0 0 8px;
-      letter-spacing: -0.03em;
-    }
-    h2 {
-      margin: 34px 0 10px;
-      font-size: 22px;
-    }
-    p, li {
-      color: var(--muted);
-    }
+
     a {
-      color: var(--accent);
+      color: inherit;
       text-decoration: none;
     }
-    a:hover {
-      text-decoration: underline;
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+      background: rgba(251, 251, 253, 0.74);
+      backdrop-filter: saturate(180%) blur(24px);
     }
+
+    .nav {
+      width: min(1180px, calc(100% - 40px));
+      min-height: 64px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 22px;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--ink);
+      font-size: 17px;
+      font-weight: 700;
+      letter-spacing: 0;
+      white-space: nowrap;
+    }
+
+    .brand-mark {
+      width: 30px;
+      height: 30px;
+      display: block;
+      border-radius: 8px;
+      object-fit: cover;
+      box-shadow: 0 10px 22px rgba(255, 94, 20, 0.24);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .nav-link,
+    .language-toggle {
+      min-height: 40px;
+      padding: 0 14px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 999px;
+      color: #38383d;
+      font-family: inherit;
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 0;
+      white-space: nowrap;
+      transition: transform 180ms ease, background 180ms ease;
+    }
+
+    .language-toggle {
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      background: rgba(255, 255, 255, 0.62);
+      cursor: pointer;
+    }
+
+    .nav-link:hover,
+    .language-toggle:hover {
+      background: rgba(0, 0, 0, 0.05);
+      transform: translateY(-1px);
+    }
+
+    main {
+      width: min(980px, calc(100% - 40px));
+      margin: 0 auto;
+      padding: 82px 0 92px;
+    }
+
+    .doc-hero {
+      max-width: 790px;
+      margin-bottom: 34px;
+    }
+
+    h1 {
+      margin: 0;
+      color: var(--ink);
+      font-size: clamp(48px, 7vw, 86px);
+      line-height: 0.98;
+      font-weight: 750;
+      letter-spacing: 0;
+    }
+
     .updated {
-      margin-bottom: 28px;
+      margin: 18px 0 0;
       color: var(--muted);
+      font-size: 15px;
+      font-weight: 650;
     }
-    .card {
-      margin-top: 28px;
+
+    .doc-lead {
+      max-width: 720px;
+      margin: 22px 0 0;
+      color: #303035;
+      font-size: clamp(20px, 2.4vw, 28px);
+      line-height: 1.2;
+      font-weight: 600;
+      letter-spacing: 0;
+    }
+
+    .doc-layout {
+      display: grid;
+      grid-template-columns: 280px minmax(0, 1fr);
+      align-items: start;
+      gap: 18px;
+    }
+
+    .side-panel,
+    .doc-card {
+      border: 1px solid rgba(0, 0, 0, 0.06);
+      background: var(--panel);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(24px);
+    }
+
+    .side-panel {
+      position: sticky;
+      top: 88px;
       padding: 22px;
-      border: 1px solid var(--line);
-      border-radius: 18px;
-      background: var(--card);
+      border-radius: 28px;
+    }
+
+    .side-panel h2,
+    .doc-card h2 {
+      margin: 0;
+      color: var(--ink);
+      font-size: 22px;
+      line-height: 1.18;
+      font-weight: 730;
+      letter-spacing: 0;
+    }
+
+    .side-panel p,
+    .side-panel li {
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.55;
+      font-weight: 460;
+    }
+
+    .side-panel p {
+      margin: 12px 0 0;
+    }
+
+    .side-panel ul {
+      margin: 18px 0 0;
+      padding: 0;
+      display: grid;
+      gap: 10px;
+      list-style: none;
+    }
+
+    .side-panel li {
+      position: relative;
+      padding-left: 20px;
+    }
+
+    .side-panel li::before {
+      content: "";
+      position: absolute;
+      top: 0.7em;
+      left: 2px;
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: var(--green);
+      box-shadow: 0 0 0 4px rgba(40, 200, 64, 0.12);
+    }
+
+    .doc-stack {
+      display: grid;
+      gap: 18px;
+    }
+
+    .doc-card {
+      padding: 28px;
+      border-radius: 30px;
+    }
+
+    .doc-card p {
+      margin: 12px 0 0;
+      color: var(--muted);
+      font-size: 17px;
+      line-height: 1.65;
+      font-weight: 450;
+    }
+
+    @media (max-width: 820px) {
+      main {
+        padding-top: 58px;
+      }
+
+      .doc-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .side-panel {
+        position: static;
+      }
+    }
+
+    @media (max-width: 720px) {
+      .nav,
+      main {
+        width: min(100% - 28px, 1180px);
+      }
+
+      .nav {
+        min-height: 58px;
+      }
+
+      .brand {
+        font-size: 16px;
+      }
+
+      .nav-links {
+        gap: 4px;
+      }
+
+      .nav-link,
+      .language-toggle {
+        min-height: 34px;
+        padding: 0 9px;
+        font-size: 12px;
+      }
+
+      .doc-card {
+        padding: 22px;
+        border-radius: 24px;
+      }
+    }
+
+    @media (max-width: 430px) {
+      .nav {
+        align-items: flex-start;
+        flex-direction: column;
+        padding: 12px 0;
+      }
+
+      .nav-links {
+        width: 100%;
+        justify-content: space-between;
+      }
+
+      .nav-link,
+      .language-toggle {
+        flex: 1 1 auto;
+      }
     }
   </style>
 </head>
 <body>
+  <header class="site-header">
+    <nav class="nav" aria-label="NuFeed">
+      <a class="brand" href="./" aria-label="NuFeed home">
+        <img class="brand-mark" src="./assets/nufeed-icon.png" alt="" aria-hidden="true">
+        <span data-i18n="brand">NuFeed</span>
+      </a>
+      <div class="nav-links">
+        <a class="nav-link" href="./privacy.html" data-i18n="navPrivacy">Privacy Policy</a>
+        <a class="nav-link" href="./support.html" data-i18n="navSupport">Support</a>
+        <button class="language-toggle" type="button" data-language-toggle data-i18n="languageToggle" aria-label="Switch language">CN</button>
+      </div>
+    </nav>
+  </header>
+
   <main>
-    <h1>NuFeed Privacy Policy</h1>
-    <p class="updated">Last updated: April 24, 2026</p>
+    <section class="doc-hero" aria-labelledby="privacy-title">
+      <h1 id="privacy-title" data-i18n="title">NuFeed Privacy Policy</h1>
+      <p class="updated" data-i18n="updated">Last updated: April 24, 2026</p>
+      <p class="doc-lead" data-i18n="lead">NuFeed is designed as a local-first reader. This policy explains what the app stores, when data syncs, and how optional AI features work.</p>
+    </section>
 
-    <p>NuFeed is designed as a local-first RSS and web subscription reader. This policy explains what information NuFeed handles and how it is used.</p>
+    <div class="doc-layout">
+      <aside class="side-panel" aria-label="Privacy summary">
+        <h2 data-i18n="sideTitle">Privacy at a glance</h2>
+        <p data-i18n="sideBody">NuFeed keeps the core reading experience on your devices and uses user-controlled services for sync and AI features.</p>
+        <ul>
+          <li data-i18n="side1">No NuFeed-operated sync server.</li>
+          <li data-i18n="side2">No third-party advertising SDKs.</li>
+          <li data-i18n="side3">AI requests use the provider you configure.</li>
+        </ul>
+      </aside>
 
-    <h2>Information stored by NuFeed</h2>
-    <p>NuFeed stores your subscriptions, folders, articles, reading state, favorite state, extraction settings, and app preferences on your device. If you enable iCloud sync, NuFeed stores sync data in your own iCloud Drive so your devices can share subscriptions and reading progress.</p>
+      <div class="doc-stack">
+        <section class="doc-card">
+          <h2 data-i18n="storedTitle">Information stored by NuFeed</h2>
+          <p data-i18n="storedBody">NuFeed stores your subscriptions, folders, articles, reading state, favorite state, extraction settings, and app preferences on your device. If you enable iCloud sync, NuFeed stores sync data in your own iCloud Drive so your devices can share subscriptions and reading progress.</p>
+        </section>
 
-    <h2>AI API keys and AI requests</h2>
-    <p>NuFeed does not provide a built-in AI service account. If you use bilingual translation or full-article summaries, you configure your own third-party AI API provider and API key. API keys are stored locally on your device using the system keychain when available.</p>
-    <p>When you use AI features, the relevant article text may be sent to the AI provider you configured so that provider can return a translation or summary. Your use of that provider is subject to the provider's own privacy policy and terms.</p>
+        <section class="doc-card">
+          <h2 data-i18n="aiTitle">AI API keys and AI requests</h2>
+          <p data-i18n="aiBody1">NuFeed does not provide a built-in AI service account. If you use bilingual translation or full-article summaries, you configure your own third-party AI API provider and API key. API keys are stored locally on your device using the system keychain when available.</p>
+          <p data-i18n="aiBody2">When you use AI features, the relevant article text may be sent to the AI provider you configured so that provider can return a translation or summary. Your use of that provider is subject to the provider's own privacy policy and terms.</p>
+        </section>
 
-    <h2>iCloud sync</h2>
-    <p>If enabled, NuFeed uses the user's iCloud Drive to sync app data such as subscriptions, article state, read/unread state, favorites, and related metadata. NuFeed does not operate a separate sync server.</p>
+        <section class="doc-card">
+          <h2 data-i18n="icloudTitle">iCloud sync</h2>
+          <p data-i18n="icloudBody">If enabled, NuFeed uses the user's iCloud Drive to sync app data such as subscriptions, article state, read/unread state, favorites, and related metadata. NuFeed does not operate a separate sync server.</p>
+        </section>
 
-    <h2>Purchases</h2>
-    <p>NuFeed Pro purchases are processed by Apple through the App Store. NuFeed receives purchase entitlement information from StoreKit so it can unlock paid features. Payment information is handled by Apple.</p>
+        <section class="doc-card">
+          <h2 data-i18n="purchaseTitle">Purchases</h2>
+          <p data-i18n="purchaseBody">NuFeed Pro purchases are processed by Apple through the App Store. NuFeed receives purchase entitlement information from StoreKit so it can unlock paid features. Payment information is handled by Apple.</p>
+        </section>
 
-    <h2>Analytics, advertising, and tracking</h2>
-    <p>NuFeed does not include third-party advertising SDKs and does not track you across apps or websites. NuFeed does not sell personal data.</p>
+        <section class="doc-card">
+          <h2 data-i18n="trackingTitle">Analytics, advertising, and tracking</h2>
+          <p data-i18n="trackingBody">NuFeed does not include third-party advertising SDKs and does not track you across apps or websites. NuFeed does not sell personal data.</p>
+        </section>
 
-    <h2>Support</h2>
-    <p>If you contact support, any information you choose to provide will be used only to respond to your request and improve the app.</p>
+        <section class="doc-card">
+          <h2 data-i18n="supportTitle">Support</h2>
+          <p data-i18n="supportBody">If you contact support, any information you choose to provide will be used only to respond to your request and improve the app.</p>
+        </section>
 
-    <h2>Changes to this policy</h2>
-    <p>This policy may be updated when NuFeed changes. The latest version will be published on this page.</p>
-
-    <div class="card">
-      <strong>Contact</strong>
-      <p>For support and privacy questions, please visit <a href="./support.html">NuFeed Support</a>.</p>
+        <section class="doc-card">
+          <h2 data-i18n="changesTitle">Changes to this policy</h2>
+          <p data-i18n="changesBody">This policy may be updated when NuFeed changes. The latest version will be published on this page.</p>
+        </section>
+      </div>
     </div>
   </main>
+
+  <script>
+    const copy = {
+      en: {
+        brand: "NuFeed",
+        navPrivacy: "Privacy Policy",
+        navSupport: "Support",
+        languageToggle: "CN",
+        title: "NuFeed Privacy Policy",
+        updated: "Last updated: April 24, 2026",
+        lead: "NuFeed is designed as a local-first reader. This policy explains what the app stores, when data syncs, and how optional AI features work.",
+        sideTitle: "Privacy at a glance",
+        sideBody: "NuFeed keeps the core reading experience on your devices and uses user-controlled services for sync and AI features.",
+        side1: "No NuFeed-operated sync server.",
+        side2: "No third-party advertising SDKs.",
+        side3: "AI requests use the provider you configure.",
+        storedTitle: "Information stored by NuFeed",
+        storedBody: "NuFeed stores your subscriptions, folders, articles, reading state, favorite state, extraction settings, and app preferences on your device. If you enable iCloud sync, NuFeed stores sync data in your own iCloud Drive so your devices can share subscriptions and reading progress.",
+        aiTitle: "AI API keys and AI requests",
+        aiBody1: "NuFeed does not provide a built-in AI service account. If you use bilingual translation or full-article summaries, you configure your own third-party AI API provider and API key. API keys are stored locally on your device using the system keychain when available.",
+        aiBody2: "When you use AI features, the relevant article text may be sent to the AI provider you configured so that provider can return a translation or summary. Your use of that provider is subject to the provider's own privacy policy and terms.",
+        icloudTitle: "iCloud sync",
+        icloudBody: "If enabled, NuFeed uses the user's iCloud Drive to sync app data such as subscriptions, article state, read/unread state, favorites, and related metadata. NuFeed does not operate a separate sync server.",
+        purchaseTitle: "Purchases",
+        purchaseBody: "NuFeed Pro purchases are processed by Apple through the App Store. NuFeed receives purchase entitlement information from StoreKit so it can unlock paid features. Payment information is handled by Apple.",
+        trackingTitle: "Analytics, advertising, and tracking",
+        trackingBody: "NuFeed does not include third-party advertising SDKs and does not track you across apps or websites. NuFeed does not sell personal data.",
+        supportTitle: "Support",
+        supportBody: "If you contact support, any information you choose to provide will be used only to respond to your request and improve the app.",
+        changesTitle: "Changes to this policy",
+        changesBody: "This policy may be updated when NuFeed changes. The latest version will be published on this page."
+      },
+      zh: {
+        brand: "NuFeed",
+        navPrivacy: "隐私政策",
+        navSupport: "支持",
+        languageToggle: "EN",
+        title: "NuFeed 隐私政策",
+        updated: "最后更新：2026 年 4 月 24 日",
+        lead: "NuFeed 被设计为本地优先的阅读器。本政策说明应用会存储什么、数据何时同步，以及可选 AI 功能如何工作。",
+        sideTitle: "隐私概览",
+        sideBody: "NuFeed 将核心阅读体验保留在你的设备上，并使用由你控制的服务完成同步和 AI 功能。",
+        side1: "NuFeed 不运营单独的同步服务器。",
+        side2: "不包含第三方广告 SDK。",
+        side3: "AI 请求会发送到你配置的服务商。",
+        storedTitle: "NuFeed 存储的信息",
+        storedBody: "NuFeed 会在你的设备上存储订阅、文件夹、文章、阅读状态、收藏状态、全文提取设置和应用偏好。如果你开启 iCloud 同步，NuFeed 会将同步数据存储在你自己的 iCloud Drive 中，让你的设备共享订阅和阅读进度。",
+        aiTitle: "AI API Key 与 AI 请求",
+        aiBody1: "NuFeed 不提供内置 AI 服务账号。如果你使用双语翻译或全文摘要，你需要配置自己的第三方 AI API 服务商和 API Key。API Key 会在可用时使用系统钥匙串存储在本机。",
+        aiBody2: "当你使用 AI 功能时，相关的文章文本可能会发送到你配置的 AI 服务商，以便返回翻译或摘要。你使用该服务商时，需遵守该服务商自己的隐私政策和条款。",
+        icloudTitle: "iCloud 同步",
+        icloudBody: "如果启用，NuFeed 会使用用户自己的 iCloud Drive 同步订阅、文章状态、已读/未读、收藏和相关元数据。NuFeed 不运营单独的同步服务器。",
+        purchaseTitle: "购买",
+        purchaseBody: "NuFeed Pro 购买由 Apple 通过 App Store 处理。NuFeed 会从 StoreKit 接收购买权益信息，以解锁付费功能。付款信息由 Apple 处理。",
+        trackingTitle: "分析、广告和追踪",
+        trackingBody: "NuFeed 不包含第三方广告 SDK，不会跨应用或网站追踪你，也不会出售个人数据。",
+        supportTitle: "支持",
+        supportBody: "如果你联系支持，你选择提供的信息只会用于回复你的请求并改进应用。",
+        changesTitle: "政策变更",
+        changesBody: "当 NuFeed 发生变化时，本政策可能会更新。最新版本会发布在本页面。"
+      }
+    };
+
+    const setLanguage = (language) => {
+      document.documentElement.lang = language === "zh" ? "zh-CN" : "en";
+      document.querySelectorAll("[data-i18n]").forEach((element) => {
+        const key = element.dataset.i18n;
+        element.textContent = copy[language][key] || copy.en[key] || "";
+      });
+      localStorage.setItem("nufeed-language", language);
+    };
+
+    const toggle = document.querySelector("[data-language-toggle]");
+    const savedLanguage = localStorage.getItem("nufeed-language") || "en";
+    setLanguage(savedLanguage === "zh" ? "zh" : "en");
+    toggle.addEventListener("click", () => {
+      const nextLanguage = document.documentElement.lang === "zh-CN" ? "en" : "zh";
+      setLanguage(nextLanguage);
+    });
+  </script>
 </body>
 </html>
