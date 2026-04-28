@@ -82,21 +82,10 @@
     .brand-mark {
       width: 30px;
       height: 30px;
-      border-radius: 9px;
-      display: grid;
-      place-items: center;
-      background: linear-gradient(145deg, #111111, #3b3b3d);
-      box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.22), 0 10px 22px rgba(0, 0, 0, 0.18);
-    }
-
-    .brand-mark svg {
-      width: 19px;
-      height: 19px;
-      fill: none;
-      stroke: #ffffff;
-      stroke-width: 2.1;
-      stroke-linecap: round;
-      stroke-linejoin: round;
+      border-radius: 8px;
+      display: block;
+      object-fit: cover;
+      box-shadow: 0 10px 22px rgba(255, 94, 20, 0.24);
     }
 
     .nav-links {
@@ -108,7 +97,6 @@
     }
 
     .nav-link,
-    .nav-button,
     .language-toggle {
       min-height: 40px;
       display: inline-flex;
@@ -139,19 +127,6 @@
     .language-toggle:hover {
       background: rgba(0, 0, 0, 0.05);
       transform: translateY(-1px);
-    }
-
-    .nav-button {
-      padding: 0 18px;
-      color: #ffffff;
-      background: var(--blue);
-      box-shadow: 0 10px 24px rgba(0, 113, 227, 0.28);
-    }
-
-    .nav-button:hover {
-      background: var(--blue-dark);
-      transform: translateY(-1px);
-      box-shadow: 0 12px 30px rgba(0, 113, 227, 0.34);
     }
 
     main {
@@ -202,57 +177,9 @@
       font-weight: 450;
     }
 
-    .hero-actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-      margin-top: 34px;
-    }
-
-    .action {
-      min-height: 48px;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      padding: 0 21px;
-      border-radius: 999px;
-      font-size: 16px;
-      font-weight: 650;
-      border: 1px solid transparent;
-      transition: transform 180ms ease, box-shadow 180ms ease, background 180ms ease;
-    }
-
-    .action.primary {
-      color: #ffffff;
-      background: var(--blue);
-      box-shadow: 0 18px 38px rgba(0, 113, 227, 0.26);
-    }
-
-    .action.secondary {
-      color: var(--blue);
-      background: rgba(255, 255, 255, 0.72);
-      border-color: rgba(0, 113, 227, 0.24);
-      box-shadow: 0 16px 36px rgba(0, 0, 0, 0.06);
-    }
-
-    .action:hover {
-      transform: translateY(-2px);
-    }
-
-    .arrow {
-      width: 17px;
-      height: 17px;
-      fill: none;
-      stroke: currentColor;
-      stroke-width: 2.2;
-      stroke-linecap: round;
-      stroke-linejoin: round;
-    }
-
     .product-stage {
       position: relative;
-      min-height: 620px;
+      min-height: 630px;
       perspective: 1200px;
     }
 
@@ -269,10 +196,10 @@
 
     .stage-reflection {
       position: absolute;
-      left: 0;
-      right: -5%;
-      bottom: 10px;
-      height: 86px;
+      left: 6%;
+      right: 0;
+      bottom: 20px;
+      height: 80px;
       border-radius: 50%;
       background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.14), rgba(0, 0, 0, 0.04) 43%, transparent 72%);
       filter: blur(10px);
@@ -281,23 +208,23 @@
 
     .macbook {
       position: absolute;
-      top: 44px;
-      left: 5%;
-      width: min(650px, 92%);
-      padding: 16px 16px 30px;
-      border-radius: 28px 28px 18px 18px;
-      background: linear-gradient(145deg, #171719 0%, #2a2b2f 48%, #111113 100%);
-      box-shadow: 0 34px 92px rgba(0, 0, 0, 0.22);
+      top: 50px;
+      left: 4%;
+      width: min(640px, 88%);
+      padding: 11px 11px 24px;
+      border-radius: 22px 22px 15px 15px;
+      background: linear-gradient(145deg, #25262b 0%, #141417 52%, #30323a 100%);
+      box-shadow: 0 34px 90px rgba(0, 0, 0, 0.18);
       z-index: 1;
     }
 
     .macbook::before {
       content: "";
       position: absolute;
-      top: 9px;
+      top: 7px;
       left: 50%;
-      width: 86px;
-      height: 15px;
+      width: 72px;
+      height: 12px;
       border-radius: 0 0 12px 12px;
       background: #0b0b0d;
       transform: translateX(-50%);
@@ -312,7 +239,7 @@
 
     .screen {
       aspect-ratio: 16 / 10;
-      border-radius: 18px;
+      border-radius: 15px;
       border: 1px solid rgba(255, 255, 255, 0.2);
       box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.12);
     }
@@ -324,13 +251,23 @@
       object-fit: cover;
     }
 
+    .device-sheen {
+      pointer-events: none;
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      background: linear-gradient(115deg, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.03) 28%, transparent 42%);
+      mix-blend-mode: screen;
+      opacity: 0.34;
+    }
+
     .base {
       position: absolute;
-      left: -8%;
-      right: -8%;
-      bottom: -24px;
-      height: 34px;
-      border-radius: 0 0 42px 42px;
+      left: -10%;
+      right: -10%;
+      bottom: -28px;
+      height: 32px;
+      border-radius: 0 0 46px 46px;
       background: linear-gradient(180deg, #e8e8ed 0%, #b5b7bf 52%, #8d9098 100%);
       box-shadow: 0 24px 38px rgba(0, 0, 0, 0.2);
     }
@@ -348,41 +285,41 @@
 
     .ipad {
       position: absolute;
-      right: -4%;
-      bottom: 98px;
-      width: 450px;
-      padding: 12px;
-      border-radius: 30px;
-      background: linear-gradient(145deg, #0d0d0f, #2a2b2f 52%, #08080a);
-      box-shadow: 0 34px 80px rgba(0, 0, 0, 0.28);
+      right: -3%;
+      bottom: 96px;
+      width: 392px;
+      padding: 8px;
+      border-radius: 24px;
+      background: linear-gradient(145deg, #232428, #09090b 54%, #2c2e34);
+      box-shadow: 0 30px 74px rgba(0, 0, 0, 0.23);
       z-index: 3;
     }
 
     .ipad .device-screen {
       aspect-ratio: 16 / 10;
-      border-radius: 20px;
+      border-radius: 17px;
       border: 1px solid rgba(255, 255, 255, 0.12);
     }
 
     .iphone {
       position: absolute;
-      left: 42%;
-      bottom: 42px;
-      width: 168px;
-      padding: 9px;
-      border-radius: 40px;
-      background: linear-gradient(145deg, #0c0c0e, #242428 52%, #050506);
-      box-shadow: 0 32px 76px rgba(0, 0, 0, 0.28);
+      left: 36%;
+      bottom: 38px;
+      width: 150px;
+      padding: 6px;
+      border-radius: 34px;
+      background: linear-gradient(145deg, #24252a, #08080a 54%, #2f3137);
+      box-shadow: 0 30px 72px rgba(0, 0, 0, 0.24);
       z-index: 4;
     }
 
     .iphone::before {
       content: "";
       position: absolute;
-      top: 15px;
+      top: 10px;
       left: 50%;
-      width: 54px;
-      height: 15px;
+      width: 48px;
+      height: 13px;
       border-radius: 0 0 11px 11px;
       background: #050506;
       transform: translateX(-50%);
@@ -391,7 +328,7 @@
 
     .iphone .device-screen {
       aspect-ratio: 370 / 800;
-      border-radius: 31px;
+      border-radius: 28px;
       border: 1px solid rgba(255, 255, 255, 0.16);
     }
 
@@ -457,61 +394,6 @@
       font-weight: 460;
     }
 
-    .policy-strip {
-      width: min(1180px, calc(100% - 40px));
-      margin: 0 auto;
-      padding: 0 0 76px;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 14px;
-    }
-
-    .policy-link {
-      min-height: 118px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 18px;
-      padding: 24px 26px;
-      border-radius: 26px;
-      background: #f5f5f7;
-      border: 1px solid rgba(0, 0, 0, 0.05);
-      transition: transform 180ms ease, background 180ms ease;
-    }
-
-    .policy-link:hover {
-      transform: translateY(-2px);
-      background: #f0f4fb;
-    }
-
-    .policy-link strong {
-      display: block;
-      color: var(--ink);
-      font-size: 23px;
-      line-height: 1.15;
-      font-weight: 740;
-    }
-
-    .policy-link span {
-      display: block;
-      margin-top: 7px;
-      color: var(--muted);
-      font-size: 15px;
-      font-weight: 560;
-    }
-
-    .policy-link svg {
-      width: 25px;
-      height: 25px;
-      color: var(--blue);
-      fill: none;
-      stroke: currentColor;
-      stroke-width: 2.1;
-      stroke-linecap: round;
-      stroke-linejoin: round;
-      flex: 0 0 auto;
-    }
-
     @media (prefers-reduced-motion: no-preference) {
       .macbook,
       .ipad,
@@ -553,16 +435,16 @@
 
       .macbook {
         left: 1%;
-        width: min(650px, 95vw);
+        width: min(620px, 94vw);
       }
 
       .ipad {
         right: 0;
-        width: 420px;
+        width: 370px;
       }
 
       .iphone {
-        left: 32%;
+        left: 31%;
       }
 
       .feature-rail {
@@ -595,15 +477,8 @@
         font-size: 12px;
       }
 
-      .nav-button {
-        min-height: 34px;
-        padding: 0 12px;
-        font-size: 12px;
-      }
-
       .hero,
-      .feature-wrap,
-      .policy-strip {
+      .feature-wrap {
         width: min(100% - 28px, 1180px);
       }
 
@@ -617,10 +492,6 @@
 
       .sublead {
         font-size: 16px;
-      }
-
-      .action {
-        width: 100%;
       }
 
       .product-stage {
@@ -641,12 +512,12 @@
       }
 
       .ipad {
-        width: 270px;
-        right: -2px;
-        bottom: 54px;
+        width: 245px;
+        right: 0;
+        bottom: 60px;
         left: auto;
-        padding: 8px;
-        border-radius: 22px;
+        padding: 6px;
+        border-radius: 19px;
       }
 
       .aura {
@@ -654,28 +525,27 @@
       }
 
       .ipad .device-screen {
-        border-radius: 15px;
+        border-radius: 13px;
       }
 
       .iphone {
-        width: 102px;
-        left: 30%;
+        width: 92px;
+        left: 28%;
         right: auto;
-        bottom: 26px;
-        padding: 6px;
-        border-radius: 25px;
+        bottom: 30px;
+        padding: 5px;
+        border-radius: 22px;
       }
 
       .iphone .device-screen {
-        border-radius: 19px;
+        border-radius: 17px;
       }
 
       .features {
         padding-top: 32px;
       }
 
-      .feature-rail,
-      .policy-strip {
+      .feature-rail {
         grid-template-columns: 1fr;
       }
 
@@ -683,9 +553,6 @@
         grid-column: auto;
       }
 
-      .policy-link {
-        min-height: 104px;
-      }
     }
 
     @media (max-width: 430px) {
@@ -701,7 +568,6 @@
       }
 
       .nav-link,
-      .nav-button,
       .language-toggle {
         flex: 1 1 auto;
       }
@@ -720,19 +586,12 @@
   <header class="site-header">
     <nav class="nav" aria-label="NuFeed">
       <a class="brand" href="./" aria-label="NuFeed home">
-        <span class="brand-mark" aria-hidden="true">
-          <svg viewBox="0 0 24 24">
-            <path d="M5 6.5h7.5a6.5 6.5 0 0 1 0 13H5z"></path>
-            <path d="M5 12h7.25a3.75 3.75 0 0 1 0 7.5"></path>
-            <path d="M5 6.5v13"></path>
-          </svg>
-        </span>
+        <img class="brand-mark" src="./assets/nufeed-icon.png" alt="" aria-hidden="true">
         <span data-i18n="brand">NuFeed</span>
       </a>
       <div class="nav-links">
         <a class="nav-link" href="./privacy.html" data-i18n="navPrivacy">Privacy Policy</a>
         <a class="nav-link" href="./support.html" data-i18n="navSupport">Support</a>
-        <a class="nav-button" href="./support.html" data-i18n="navGetSupport">Get Support</a>
         <button class="language-toggle" type="button" data-language-toggle data-i18n="languageToggle" aria-label="Switch language">CN</button>
       </div>
     </nav>
@@ -744,16 +603,6 @@
         <h1 id="title">NuFeed</h1>
         <p class="lead" data-i18n="lead">A focused RSS and web subscription reader for iPhone, iPad, and Mac.</p>
         <p class="sublead" data-i18n="sublead">Read feeds, follow sites without RSS, extract full articles, translate bilingual content, summarize long reads, and keep your progress in sync with iCloud.</p>
-        <div class="hero-actions" aria-label="Important links">
-          <a class="action primary" href="./support.html">
-            <span data-i18n="heroSupport">Support</span>
-            <svg class="arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14"></path><path d="m13 6 6 6-6 6"></path></svg>
-          </a>
-          <a class="action secondary" href="./privacy.html">
-            <span data-i18n="heroPrivacy">Privacy Policy</span>
-            <svg class="arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14"></path><path d="m13 6 6 6-6 6"></path></svg>
-          </a>
-        </div>
       </div>
 
       <div class="product-stage" aria-label="NuFeed app preview">
@@ -762,6 +611,7 @@
         <div class="macbook">
           <div class="screen">
             <img class="device-shot" src="./assets/nufeed-mac.png" alt="NuFeed Mac app screenshot">
+            <span class="device-sheen" aria-hidden="true"></span>
           </div>
           <div class="base" aria-hidden="true"></div>
         </div>
@@ -769,12 +619,14 @@
         <div class="ipad" aria-hidden="true">
           <div class="device-screen">
             <img class="device-shot" src="./assets/nufeed-mac.png" alt="">
+            <span class="device-sheen" aria-hidden="true"></span>
           </div>
         </div>
 
         <div class="iphone" aria-hidden="true">
           <div class="device-screen">
             <img class="device-shot" src="./assets/nufeed-iphone.png" alt="">
+            <span class="device-sheen" aria-hidden="true"></span>
           </div>
         </div>
 
@@ -814,22 +666,6 @@
       </div>
     </section>
 
-    <section class="policy-strip" aria-label="Policy and support links">
-      <a class="policy-link" href="./privacy.html">
-        <span>
-          <strong data-i18n="policyPrivacyTitle">Privacy Policy</strong>
-          <span data-i18n="policyPrivacyBody">Data handling and app permissions</span>
-        </span>
-        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7"></path><path d="M9 7h8v8"></path></svg>
-      </a>
-      <a class="policy-link" href="./support.html">
-        <span>
-          <strong data-i18n="policySupportTitle">Support</strong>
-          <span data-i18n="policySupportBody">Help, common questions, and contact details</span>
-        </span>
-        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7"></path><path d="M9 7h8v8"></path></svg>
-      </a>
-    </section>
   </main>
   <script>
     const copy = {
@@ -837,12 +673,9 @@
         brand: "NuFeed",
         navPrivacy: "Privacy Policy",
         navSupport: "Support",
-        navGetSupport: "Get Support",
         languageToggle: "CN",
         lead: "A focused RSS and web subscription reader for iPhone, iPad, and Mac.",
         sublead: "Read feeds, follow sites without RSS, extract full articles, translate bilingual content, summarize long reads, and keep your progress in sync with iCloud.",
-        heroSupport: "Support",
-        heroPrivacy: "Privacy Policy",
         mockFeeds: "Feeds",
         mockToday: "Today",
         mockFavorites: "Favorites",
@@ -880,12 +713,9 @@
         brand: "NuFeed",
         navPrivacy: "隐私政策",
         navSupport: "支持",
-        navGetSupport: "获取支持",
         languageToggle: "EN",
         lead: "专注、安静的 RSS 与网页订阅阅读器，适用于 iPhone、iPad 和 Mac。",
         sublead: "阅读订阅源，关注没有 RSS 的网站，提取全文，生成双语翻译与长文摘要，并通过 iCloud 同步阅读进度。",
-        heroSupport: "支持",
-        heroPrivacy: "隐私政策",
         mockFeeds: "订阅",
         mockToday: "今日",
         mockFavorites: "收藏",
