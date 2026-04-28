@@ -252,30 +252,43 @@
 
     .product-stage {
       position: relative;
-      min-height: 620px;
+      min-height: 610px;
+      perspective: 1200px;
     }
 
     .aura {
       position: absolute;
-      inset: 6% -9% 0 5%;
-      border-radius: 42px;
+      inset: 12% -7% 4% -2%;
+      border-radius: 54px;
       background:
-        radial-gradient(circle at 25% 18%, rgba(0, 113, 227, 0.2), transparent 30%),
-        radial-gradient(circle at 82% 28%, rgba(120, 120, 128, 0.2), transparent 32%),
-        linear-gradient(145deg, rgba(255, 255, 255, 0.72), rgba(255, 255, 255, 0.18));
-      filter: blur(2px);
+        radial-gradient(circle at 36% 18%, rgba(0, 113, 227, 0.14), transparent 30%),
+        radial-gradient(circle at 78% 52%, rgba(0, 0, 0, 0.1), transparent 36%),
+        linear-gradient(180deg, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.18));
+      filter: blur(1px);
+    }
+
+    .stage-reflection {
+      position: absolute;
+      left: 0;
+      right: -5%;
+      bottom: 10px;
+      height: 86px;
+      border-radius: 50%;
+      background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.14), rgba(0, 0, 0, 0.04) 43%, transparent 72%);
+      filter: blur(10px);
+      opacity: 0.55;
     }
 
     .macbook {
       position: absolute;
-      top: 40px;
-      right: 0;
-      width: min(620px, 100%);
-      padding: 14px 14px 26px;
-      border-radius: 34px 34px 26px 26px;
-      background: linear-gradient(145deg, #ececf1, #fdfdff 46%, #d7d8df);
-      box-shadow: var(--shadow);
-      transform: perspective(1100px) rotateY(-8deg) rotateX(3deg);
+      top: 42px;
+      left: 4%;
+      width: min(650px, 91%);
+      padding: 15px 15px 28px;
+      border-radius: 28px 28px 20px 20px;
+      background: linear-gradient(145deg, #d9d9de, #fdfdff 48%, #b9bbc2);
+      box-shadow: 0 34px 92px rgba(0, 0, 0, 0.18);
+      z-index: 1;
     }
 
     .screen {
@@ -312,7 +325,7 @@
     }
 
     .screen-grid {
-      height: 392px;
+      height: 374px;
       display: grid;
       grid-template-columns: 160px 1fr 188px;
       background: #ffffff;
@@ -436,51 +449,138 @@
 
     .base {
       position: absolute;
-      left: 8%;
-      right: 8%;
-      bottom: 4px;
-      height: 16px;
-      border-radius: 0 0 24px 24px;
-      background: linear-gradient(180deg, #e5e5ea, #bfc0c7);
-      box-shadow: 0 18px 35px rgba(0, 0, 0, 0.14);
+      left: 6%;
+      right: 6%;
+      bottom: -17px;
+      height: 28px;
+      border-radius: 0 0 28px 28px;
+      background: linear-gradient(180deg, #d7d8dd 0%, #9b9da5 100%);
+      box-shadow: 0 22px 38px rgba(0, 0, 0, 0.18);
+    }
+
+    .base::before {
+      content: "";
+      position: absolute;
+      left: 43%;
+      right: 43%;
+      top: 0;
+      height: 7px;
+      border-radius: 0 0 8px 8px;
+      background: rgba(0, 0, 0, 0.16);
     }
 
     .ipad {
       position: absolute;
-      left: 0;
-      bottom: 72px;
-      width: 250px;
+      right: -1%;
+      bottom: 82px;
+      width: 415px;
       padding: 10px;
-      border-radius: 32px;
+      border-radius: 30px;
       background: #171719;
-      box-shadow: var(--small-shadow);
-      transform: rotate(-7deg);
+      box-shadow: 0 28px 70px rgba(0, 0, 0, 0.22);
+      z-index: 3;
     }
 
     .ipad .device-screen {
-      min-height: 324px;
-      border-radius: 23px;
-      padding: 18px;
-      background: linear-gradient(180deg, #ffffff, #f4f7ff);
+      min-height: 286px;
+      border-radius: 22px;
+      padding: 15px;
+      background: #fbfbfd;
     }
 
     .iphone {
       position: absolute;
-      right: 28px;
-      bottom: 18px;
-      width: 152px;
+      left: 39%;
+      bottom: 44px;
+      width: 154px;
       padding: 8px;
       border-radius: 32px;
       background: #111113;
-      box-shadow: var(--small-shadow);
-      transform: rotate(8deg);
+      box-shadow: 0 28px 70px rgba(0, 0, 0, 0.24);
+      z-index: 4;
     }
 
     .iphone .device-screen {
-      min-height: 292px;
+      min-height: 274px;
       border-radius: 25px;
       padding: 16px 12px;
       background: linear-gradient(180deg, #ffffff, #f6f6f9);
+    }
+
+    .ipad-layout {
+      height: 256px;
+      display: grid;
+      grid-template-columns: 42% 58%;
+      gap: 14px;
+    }
+
+    .tablet-list {
+      display: grid;
+      gap: 8px;
+      overflow: hidden;
+    }
+
+    .tablet-row {
+      min-height: 42px;
+      padding: 9px;
+      border-radius: 12px;
+      background: rgba(0, 0, 0, 0.045);
+    }
+
+    .tablet-row strong,
+    .tablet-row span,
+    .translation-panel strong,
+    .translation-panel span {
+      display: block;
+      height: 7px;
+      border-radius: 999px;
+      background: rgba(0, 0, 0, 0.72);
+    }
+
+    .tablet-row span,
+    .translation-panel span {
+      width: 72%;
+      margin-top: 8px;
+      background: rgba(0, 0, 0, 0.18);
+    }
+
+    .translation-panel {
+      display: grid;
+      grid-template-rows: 36px 1fr 70px;
+      gap: 10px;
+    }
+
+    .translation-tabs {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      padding: 4px;
+      border-radius: 12px;
+      background: #eef0f4;
+    }
+
+    .translation-tabs span {
+      height: auto;
+      margin: 0;
+      display: grid;
+      place-items: center;
+      border-radius: 9px;
+      background: transparent;
+      color: #606067;
+      font-size: 10px;
+      font-weight: 700;
+    }
+
+    .translation-tabs span:first-child {
+      background: #ffffff;
+      color: #1d1d1f;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    }
+
+    .translation-card {
+      padding: 14px;
+      border-radius: 16px;
+      background: #ffffff;
+      box-shadow: 0 8px 22px rgba(0, 0, 0, 0.06);
     }
 
     .device-title {
@@ -670,11 +770,21 @@
       }
 
       .product-stage {
-        min-height: 570px;
+        min-height: 610px;
       }
 
       .macbook {
-        width: min(620px, 94vw);
+        left: 1%;
+        width: min(650px, 95vw);
+      }
+
+      .ipad {
+        right: 0;
+        width: 390px;
+      }
+
+      .iphone {
+        left: 34%;
       }
 
       .feature-rail {
@@ -736,15 +846,16 @@
       }
 
       .product-stage {
-        min-height: 438px;
+        min-height: 492px;
         overflow: hidden;
       }
 
       .macbook {
         top: 16px;
+        left: 0;
+        width: 100%;
         padding: 9px 9px 18px;
         border-radius: 24px;
-        transform: none;
       }
 
       .screen {
@@ -779,9 +890,10 @@
       }
 
       .ipad {
-        width: 165px;
-        bottom: 18px;
-        left: 0;
+        width: 260px;
+        right: 0;
+        bottom: 40px;
+        left: auto;
         border-radius: 24px;
       }
 
@@ -790,20 +902,46 @@
       }
 
       .ipad .device-screen {
-        min-height: 200px;
+        min-height: 178px;
         border-radius: 18px;
-        padding: 13px;
+        padding: 10px;
+      }
+
+      .ipad-layout {
+        height: 158px;
+        gap: 8px;
+      }
+
+      .tablet-list {
+        gap: 6px;
+      }
+
+      .tablet-row {
+        min-height: 31px;
+        padding: 7px;
+        border-radius: 9px;
+      }
+
+      .translation-panel {
+        grid-template-rows: 26px 1fr 42px;
+        gap: 7px;
+      }
+
+      .translation-card {
+        padding: 9px;
+        border-radius: 12px;
       }
 
       .iphone {
-        width: 112px;
-        right: 4px;
-        bottom: 0;
+        width: 104px;
+        left: 34%;
+        right: auto;
+        bottom: 18px;
         border-radius: 25px;
       }
 
       .iphone .device-screen {
-        min-height: 205px;
+        min-height: 188px;
         border-radius: 20px;
       }
 
@@ -895,6 +1033,7 @@
 
       <div class="product-stage" aria-label="NuFeed app preview">
         <div class="aura" aria-hidden="true"></div>
+        <div class="stage-reflection" aria-hidden="true"></div>
         <div class="macbook">
           <div class="screen">
             <div class="screen-top" aria-hidden="true">
@@ -942,11 +1081,32 @@
 
         <div class="ipad" aria-hidden="true">
           <div class="device-screen">
-            <div class="device-title" data-i18n="mockFavorites">Favorites</div>
-            <div class="mini-list">
-              <div class="mini-item"><strong></strong><span></span></div>
-              <div class="mini-item"><strong></strong><span></span></div>
-              <div class="mini-item"><strong></strong><span></span></div>
+            <div class="ipad-layout">
+              <div>
+                <div class="device-title" data-i18n="mockUnread">Unread</div>
+                <div class="tablet-list">
+                  <div class="tablet-row"><strong></strong><span></span></div>
+                  <div class="tablet-row"><strong></strong><span></span></div>
+                  <div class="tablet-row"><strong></strong><span></span></div>
+                  <div class="tablet-row"><strong></strong><span></span></div>
+                </div>
+              </div>
+              <div class="translation-panel">
+                <div class="translation-tabs">
+                  <span data-i18n="mockTranslation">Translation</span>
+                  <span data-i18n="mockSummaryShort">Summary</span>
+                </div>
+                <div class="translation-card">
+                  <strong></strong>
+                  <span></span>
+                  <span></span>
+                  <span></span>
+                </div>
+                <div class="translation-card">
+                  <strong></strong>
+                  <span></span>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -1040,6 +1200,8 @@
         mockArticle3: "Independent publishing and RSS again",
         mockArticle3Meta: "Synced across iCloud devices",
         mockSummaryTitle: "AI Summary",
+        mockTranslation: "Translation",
+        mockSummaryShort: "Summary",
         mockSummary: "NuFeed keeps the original article beside a concise bilingual summary, so long reads stay easy to scan without losing context.",
         mockUnread: "Unread",
         featuresTitle: "Everything you need to read the web with less noise.",
@@ -1081,6 +1243,8 @@
         mockArticle3: "独立发布与 RSS 的回归",
         mockArticle3Meta: "已同步到 iCloud 设备",
         mockSummaryTitle: "AI 摘要",
+        mockTranslation: "翻译",
+        mockSummaryShort: "摘要",
         mockSummary: "NuFeed 将原文与简洁的双语摘要并排呈现，让长文更容易浏览，同时保留上下文。",
         mockUnread: "未读",
         featuresTitle: "用更少噪音，阅读整个网页。",
