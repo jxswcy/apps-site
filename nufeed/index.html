@@ -1,97 +1,1122 @@
 <!doctype html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>NuFeed</title>
+  <meta name="description" content="NuFeed is an RSS and web subscription reader for iPhone, iPad, and Mac.">
   <style>
     :root {
-      color-scheme: light dark;
-      --bg: #f7f7f4;
-      --fg: #171717;
-      --muted: #66645f;
-      --card: #ffffff;
-      --line: #dedbd3;
-      --accent: #1f6feb;
+      color-scheme: light;
+      --bg: #f5f5f7;
+      --ink: #050505;
+      --text: #1d1d1f;
+      --muted: #6e6e73;
+      --soft: #86868b;
+      --line: rgba(0, 0, 0, 0.09);
+      --glass: rgba(255, 255, 255, 0.74);
+      --panel: rgba(255, 255, 255, 0.9);
+      --blue: #0071e3;
+      --blue-dark: #0057b8;
+      --green: #28c840;
+      --shadow: 0 30px 90px rgba(0, 0, 0, 0.13);
+      --small-shadow: 0 18px 45px rgba(0, 0, 0, 0.1);
+      --radius: 28px;
     }
-    @media (prefers-color-scheme: dark) {
-      :root {
-        --bg: #111110;
-        --fg: #f4f2ec;
-        --muted: #aaa59a;
-        --card: #1a1917;
-        --line: #34312c;
-        --accent: #7aa7ff;
-      }
+
+    * {
+      box-sizing: border-box;
     }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
     body {
       margin: 0;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      background: var(--bg);
-      color: var(--fg);
-      line-height: 1.6;
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Segoe UI", sans-serif;
+      background:
+        radial-gradient(circle at 50% -10%, rgba(255, 255, 255, 0.95), rgba(245, 245, 247, 0.72) 34%, transparent 62%),
+        linear-gradient(180deg, #fbfbfd 0%, var(--bg) 54%, #ffffff 100%);
+      color: var(--text);
+      line-height: 1.5;
+      min-height: 100vh;
+      overflow-x: hidden;
     }
-    main {
-      max-width: 760px;
-      margin: 0 auto;
-      padding: 72px 24px;
-    }
-    h1 {
-      font-size: 44px;
-      line-height: 1.12;
-      margin: 0 0 12px;
-      letter-spacing: -0.04em;
-    }
-    p {
-      margin: 0 0 20px;
-      color: var(--muted);
-    }
-    .card {
-      margin-top: 32px;
-      padding: 24px;
-      border: 1px solid var(--line);
-      border-radius: 20px;
-      background: var(--card);
-    }
-    ul {
-      margin: 12px 0 0;
-      padding-left: 20px;
-    }
+
     a {
-      color: var(--accent);
+      color: inherit;
       text-decoration: none;
     }
-    a:hover {
-      text-decoration: underline;
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+      background: rgba(251, 251, 253, 0.74);
+      backdrop-filter: saturate(180%) blur(24px);
     }
-    .links {
+
+    .nav {
+      width: min(1180px, calc(100% - 40px));
+      min-height: 64px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 22px;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 17px;
+      font-weight: 700;
+      letter-spacing: 0;
+      color: var(--ink);
+      white-space: nowrap;
+    }
+
+    .brand-mark {
+      width: 30px;
+      height: 30px;
+      border-radius: 9px;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(145deg, #111111, #3b3b3d);
+      box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.22), 0 10px 22px rgba(0, 0, 0, 0.18);
+    }
+
+    .brand-mark svg {
+      width: 19px;
+      height: 19px;
+      fill: none;
+      stroke: #ffffff;
+      stroke-width: 2.1;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .nav-link,
+    .nav-button,
+    .language-toggle {
+      min-height: 40px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 999px;
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 0;
+      white-space: nowrap;
+      transition: transform 180ms ease, background 180ms ease, color 180ms ease, box-shadow 180ms ease;
+    }
+
+    .nav-link,
+    .language-toggle {
+      padding: 0 14px;
+      color: #38383d;
+    }
+
+    .language-toggle {
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      background: rgba(255, 255, 255, 0.62);
+      cursor: pointer;
+      font-family: inherit;
+    }
+
+    .nav-link:hover,
+    .language-toggle:hover {
+      background: rgba(0, 0, 0, 0.05);
+      transform: translateY(-1px);
+    }
+
+    .nav-button {
+      padding: 0 18px;
+      color: #ffffff;
+      background: var(--blue);
+      box-shadow: 0 10px 24px rgba(0, 113, 227, 0.28);
+    }
+
+    .nav-button:hover {
+      background: var(--blue-dark);
+      transform: translateY(-1px);
+      box-shadow: 0 12px 30px rgba(0, 113, 227, 0.34);
+    }
+
+    main {
+      position: relative;
+    }
+
+    .hero {
+      width: min(1180px, calc(100% - 40px));
+      min-height: calc(100vh - 64px);
+      margin: 0 auto;
+      padding: 72px 0 54px;
+      display: grid;
+      grid-template-columns: minmax(0, 0.86fr) minmax(430px, 1.14fr);
+      align-items: center;
+      gap: 54px;
+    }
+
+    .hero-copy {
+      position: relative;
+      z-index: 2;
+    }
+
+    h1 {
+      margin: 0;
+      color: var(--ink);
+      font-size: clamp(62px, 8vw, 118px);
+      line-height: 0.95;
+      font-weight: 750;
+      letter-spacing: 0;
+    }
+
+    .lead {
+      max-width: 580px;
+      margin: 26px 0 0;
+      color: #303035;
+      font-size: clamp(20px, 2.2vw, 30px);
+      line-height: 1.18;
+      font-weight: 600;
+      letter-spacing: 0;
+    }
+
+    .sublead {
+      max-width: 560px;
+      margin: 18px 0 0;
+      color: var(--muted);
+      font-size: 18px;
+      line-height: 1.55;
+      font-weight: 450;
+    }
+
+    .hero-actions {
       display: flex;
       flex-wrap: wrap;
-      gap: 16px;
-      margin-top: 24px;
+      gap: 12px;
+      margin-top: 34px;
+    }
+
+    .action {
+      min-height: 48px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 0 21px;
+      border-radius: 999px;
+      font-size: 16px;
+      font-weight: 650;
+      border: 1px solid transparent;
+      transition: transform 180ms ease, box-shadow 180ms ease, background 180ms ease;
+    }
+
+    .action.primary {
+      color: #ffffff;
+      background: var(--blue);
+      box-shadow: 0 18px 38px rgba(0, 113, 227, 0.26);
+    }
+
+    .action.secondary {
+      color: var(--blue);
+      background: rgba(255, 255, 255, 0.72);
+      border-color: rgba(0, 113, 227, 0.24);
+      box-shadow: 0 16px 36px rgba(0, 0, 0, 0.06);
+    }
+
+    .action:hover {
+      transform: translateY(-2px);
+    }
+
+    .arrow {
+      width: 17px;
+      height: 17px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 2.2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .product-stage {
+      position: relative;
+      min-height: 620px;
+    }
+
+    .aura {
+      position: absolute;
+      inset: 6% -9% 0 5%;
+      border-radius: 42px;
+      background:
+        radial-gradient(circle at 25% 18%, rgba(0, 113, 227, 0.2), transparent 30%),
+        radial-gradient(circle at 82% 28%, rgba(120, 120, 128, 0.2), transparent 32%),
+        linear-gradient(145deg, rgba(255, 255, 255, 0.72), rgba(255, 255, 255, 0.18));
+      filter: blur(2px);
+    }
+
+    .macbook {
+      position: absolute;
+      top: 40px;
+      right: 0;
+      width: min(620px, 100%);
+      padding: 14px 14px 26px;
+      border-radius: 34px 34px 26px 26px;
+      background: linear-gradient(145deg, #ececf1, #fdfdff 46%, #d7d8df);
+      box-shadow: var(--shadow);
+      transform: perspective(1100px) rotateY(-8deg) rotateX(3deg);
+    }
+
+    .screen {
+      overflow: hidden;
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      border-radius: 24px;
+      background: #f8f8fb;
+      box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.8);
+    }
+
+    .screen-top {
+      height: 42px;
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      padding: 0 16px;
+      background: rgba(255, 255, 255, 0.78);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+    }
+
+    .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #ff5f57;
+    }
+
+    .dot:nth-child(2) {
+      background: #ffbd2e;
+    }
+
+    .dot:nth-child(3) {
+      background: var(--green);
+    }
+
+    .screen-grid {
+      height: 392px;
+      display: grid;
+      grid-template-columns: 160px 1fr 188px;
+      background: #ffffff;
+    }
+
+    .sidebar {
+      padding: 18px 14px;
+      border-right: 1px solid rgba(0, 0, 0, 0.07);
+      background: #f5f5f7;
+    }
+
+    .side-title,
+    .pane-title,
+    .summary-title {
+      color: #1d1d1f;
+      font-size: 12px;
+      font-weight: 760;
+    }
+
+    .feed-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      height: 32px;
+      margin-top: 9px;
+      padding: 0 10px;
+      border-radius: 10px;
+      color: #5c5c62;
+      font-size: 12px;
+      font-weight: 650;
+    }
+
+    .feed-row.active {
+      color: #ffffff;
+      background: #1d1d1f;
+    }
+
+    .feed-icon {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: currentColor;
+      opacity: 0.55;
+      flex: 0 0 auto;
+    }
+
+    .article-pane {
+      padding: 18px 18px 20px;
+      border-right: 1px solid rgba(0, 0, 0, 0.07);
+    }
+
+    .article-list {
+      display: grid;
+      gap: 11px;
+      margin-top: 14px;
+    }
+
+    .article {
+      padding: 13px;
+      border-radius: 15px;
+      background: #f7f7fa;
+      border: 1px solid rgba(0, 0, 0, 0.04);
+    }
+
+    .article.selected {
+      background: #eef5ff;
+      border-color: rgba(0, 113, 227, 0.22);
+    }
+
+    .article strong {
+      display: block;
+      color: #1d1d1f;
+      font-size: 13px;
+      line-height: 1.3;
+    }
+
+    .article span {
+      display: block;
+      margin-top: 5px;
+      color: #85858b;
+      font-size: 11px;
+      line-height: 1.35;
+    }
+
+    .summary-pane {
+      padding: 18px 16px;
+      background: linear-gradient(180deg, #fbfbfd, #f1f6ff);
+    }
+
+    .summary-card {
+      margin-top: 14px;
+      padding: 14px;
+      border-radius: 18px;
+      color: #2f3338;
+      background: rgba(255, 255, 255, 0.86);
+      box-shadow: 0 16px 28px rgba(0, 0, 0, 0.07);
+    }
+
+    .summary-card p {
+      margin: 0;
+      color: #5f6369;
+      font-size: 11px;
+      line-height: 1.55;
+    }
+
+    .meter {
+      height: 8px;
+      margin-top: 14px;
+      border-radius: 999px;
+      background: rgba(0, 113, 227, 0.12);
+      overflow: hidden;
+    }
+
+    .meter span {
+      display: block;
+      width: 72%;
+      height: 100%;
+      border-radius: inherit;
+      background: linear-gradient(90deg, var(--blue), #54a6ff);
+    }
+
+    .base {
+      position: absolute;
+      left: 8%;
+      right: 8%;
+      bottom: 4px;
+      height: 16px;
+      border-radius: 0 0 24px 24px;
+      background: linear-gradient(180deg, #e5e5ea, #bfc0c7);
+      box-shadow: 0 18px 35px rgba(0, 0, 0, 0.14);
+    }
+
+    .ipad {
+      position: absolute;
+      left: 0;
+      bottom: 72px;
+      width: 250px;
+      padding: 10px;
+      border-radius: 32px;
+      background: #171719;
+      box-shadow: var(--small-shadow);
+      transform: rotate(-7deg);
+    }
+
+    .ipad .device-screen {
+      min-height: 324px;
+      border-radius: 23px;
+      padding: 18px;
+      background: linear-gradient(180deg, #ffffff, #f4f7ff);
+    }
+
+    .iphone {
+      position: absolute;
+      right: 28px;
+      bottom: 18px;
+      width: 152px;
+      padding: 8px;
+      border-radius: 32px;
+      background: #111113;
+      box-shadow: var(--small-shadow);
+      transform: rotate(8deg);
+    }
+
+    .iphone .device-screen {
+      min-height: 292px;
+      border-radius: 25px;
+      padding: 16px 12px;
+      background: linear-gradient(180deg, #ffffff, #f6f6f9);
+    }
+
+    .device-title {
+      color: #111113;
+      font-size: 15px;
+      line-height: 1.15;
+      font-weight: 760;
+    }
+
+    .mini-list {
+      display: grid;
+      gap: 10px;
+      margin-top: 16px;
+    }
+
+    .mini-item {
+      min-height: 48px;
+      border-radius: 15px;
+      background: rgba(0, 0, 0, 0.045);
+      padding: 10px;
+    }
+
+    .mini-item strong,
+    .mini-item span {
+      display: block;
+      height: 7px;
+      border-radius: 999px;
+      background: rgba(0, 0, 0, 0.72);
+    }
+
+    .mini-item span {
+      width: 70%;
+      margin-top: 8px;
+      background: rgba(0, 0, 0, 0.18);
+    }
+
+    .features {
+      padding: 38px 0 84px;
+      background: #ffffff;
+    }
+
+    .feature-wrap {
+      width: min(1180px, calc(100% - 40px));
+      margin: 0 auto;
+    }
+
+    .section-heading {
+      max-width: 760px;
+      margin: 0 0 24px;
+      color: var(--ink);
+      font-size: clamp(34px, 5vw, 64px);
+      line-height: 1.02;
+      font-weight: 750;
+      letter-spacing: 0;
+    }
+
+    .feature-rail {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .feature {
+      min-height: 174px;
+      padding: 22px;
+      border-radius: 24px;
+      background: #f5f5f7;
+      border: 1px solid rgba(0, 0, 0, 0.05);
+    }
+
+    .feature svg {
+      width: 30px;
+      height: 30px;
+      color: var(--blue);
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .feature h2 {
+      margin: 16px 0 8px;
+      color: var(--ink);
+      font-size: 18px;
+      line-height: 1.2;
+      font-weight: 730;
+      letter-spacing: 0;
+    }
+
+    .feature p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.45;
+      font-weight: 460;
+    }
+
+    .policy-strip {
+      width: min(1180px, calc(100% - 40px));
+      margin: 0 auto;
+      padding: 0 0 76px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+
+    .policy-link {
+      min-height: 118px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      padding: 24px 26px;
+      border-radius: 26px;
+      background: #f5f5f7;
+      border: 1px solid rgba(0, 0, 0, 0.05);
+      transition: transform 180ms ease, background 180ms ease;
+    }
+
+    .policy-link:hover {
+      transform: translateY(-2px);
+      background: #f0f4fb;
+    }
+
+    .policy-link strong {
+      display: block;
+      color: var(--ink);
+      font-size: 23px;
+      line-height: 1.15;
+      font-weight: 740;
+    }
+
+    .policy-link span {
+      display: block;
+      margin-top: 7px;
+      color: var(--muted);
+      font-size: 15px;
+      font-weight: 560;
+    }
+
+    .policy-link svg {
+      width: 25px;
+      height: 25px;
+      color: var(--blue);
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 2.1;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      flex: 0 0 auto;
+    }
+
+    @media (prefers-reduced-motion: no-preference) {
+      .macbook,
+      .ipad,
+      .iphone {
+        animation: rise 780ms cubic-bezier(0.2, 0.75, 0.25, 1) both;
+      }
+
+      .ipad {
+        animation-delay: 100ms;
+      }
+
+      .iphone {
+        animation-delay: 180ms;
+      }
+    }
+
+    @keyframes rise {
+      from {
+        opacity: 0;
+        translate: 0 22px;
+      }
+      to {
+        opacity: 1;
+        translate: 0 0;
+      }
+    }
+
+    @media (max-width: 980px) {
+      .hero {
+        min-height: auto;
+        padding-top: 58px;
+        grid-template-columns: 1fr;
+        gap: 34px;
+      }
+
+      .product-stage {
+        min-height: 570px;
+      }
+
+      .macbook {
+        width: min(620px, 94vw);
+      }
+
+      .feature-rail {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .feature:last-child {
+        grid-column: span 2;
+      }
+    }
+
+    @media (max-width: 720px) {
+      .nav {
+        width: min(100% - 28px, 1180px);
+        min-height: 58px;
+      }
+
+      .brand {
+        font-size: 16px;
+      }
+
+      .nav-links {
+        gap: 4px;
+      }
+
+      .nav-link,
+      .language-toggle {
+        min-height: 34px;
+        padding: 0 9px;
+        font-size: 12px;
+      }
+
+      .nav-button {
+        min-height: 34px;
+        padding: 0 12px;
+        font-size: 12px;
+      }
+
+      .hero,
+      .feature-wrap,
+      .policy-strip {
+        width: min(100% - 28px, 1180px);
+      }
+
+      .hero {
+        padding: 42px 0 36px;
+      }
+
+      .lead {
+        font-size: 24px;
+      }
+
+      .sublead {
+        font-size: 16px;
+      }
+
+      .action {
+        width: 100%;
+      }
+
+      .product-stage {
+        min-height: 438px;
+        overflow: hidden;
+      }
+
+      .macbook {
+        top: 16px;
+        padding: 9px 9px 18px;
+        border-radius: 24px;
+        transform: none;
+      }
+
+      .screen {
+        border-radius: 18px;
+      }
+
+      .screen-top {
+        height: 34px;
+      }
+
+      .screen-grid {
+        height: 285px;
+        grid-template-columns: 112px 1fr;
+      }
+
+      .summary-pane {
+        display: none;
+      }
+
+      .sidebar,
+      .article-pane {
+        padding: 13px 10px;
+      }
+
+      .feed-row {
+        padding: 0 7px;
+        font-size: 10px;
+      }
+
+      .article strong {
+        font-size: 11px;
+      }
+
+      .ipad {
+        width: 165px;
+        bottom: 18px;
+        left: 0;
+        border-radius: 24px;
+      }
+
+      .aura {
+        inset: 6% 0 0 0;
+      }
+
+      .ipad .device-screen {
+        min-height: 200px;
+        border-radius: 18px;
+        padding: 13px;
+      }
+
+      .iphone {
+        width: 112px;
+        right: 4px;
+        bottom: 0;
+        border-radius: 25px;
+      }
+
+      .iphone .device-screen {
+        min-height: 205px;
+        border-radius: 20px;
+      }
+
+      .features {
+        padding-top: 32px;
+      }
+
+      .feature-rail,
+      .policy-strip {
+        grid-template-columns: 1fr;
+      }
+
+      .feature:last-child {
+        grid-column: auto;
+      }
+
+      .policy-link {
+        min-height: 104px;
+      }
+    }
+
+    @media (max-width: 430px) {
+      .nav {
+        align-items: flex-start;
+        flex-direction: column;
+        padding: 12px 0;
+      }
+
+      .nav-links {
+        width: 100%;
+        justify-content: space-between;
+      }
+
+      .nav-link,
+      .nav-button,
+      .language-toggle {
+        flex: 1 1 auto;
+      }
+
+      h1 {
+        font-size: 60px;
+      }
+
+      .lead {
+        font-size: 22px;
+      }
     }
   </style>
 </head>
 <body>
-  <main>
-    <h1>NuFeed</h1>
-    <p>NuFeed is an RSS and web subscription reader for iPhone, iPad, and Mac. It helps you read feeds, extract full articles, translate bilingual content, summarize long reads, and sync reading progress with iCloud.</p>
+  <header class="site-header">
+    <nav class="nav" aria-label="NuFeed">
+      <a class="brand" href="./" aria-label="NuFeed home">
+        <span class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 24 24">
+            <path d="M5 6.5h7.5a6.5 6.5 0 0 1 0 13H5z"></path>
+            <path d="M5 12h7.25a3.75 3.75 0 0 1 0 7.5"></path>
+            <path d="M5 6.5v13"></path>
+          </svg>
+        </span>
+        <span data-i18n="brand">NuFeed</span>
+      </a>
+      <div class="nav-links">
+        <a class="nav-link" href="./privacy.html" data-i18n="navPrivacy">Privacy Policy</a>
+        <a class="nav-link" href="./support.html" data-i18n="navSupport">Support</a>
+        <a class="nav-button" href="./support.html" data-i18n="navGetSupport">Get Support</a>
+        <button class="language-toggle" type="button" data-language-toggle data-i18n="languageToggle" aria-label="Switch language">中文</button>
+      </div>
+    </nav>
+  </header>
 
-    <section class="card">
-      <strong>Key features</strong>
-      <ul>
-        <li>RSS subscriptions, folders, unread state, and favorites.</li>
-        <li>Web subscriptions for sites without RSS feeds.</li>
-        <li>Full article extraction for sources that only publish summaries.</li>
-        <li>Bilingual translation and full-article summaries using your own AI API configuration.</li>
-        <li>iCloud sync for subscriptions, reading state, and favorites.</li>
-      </ul>
+  <main>
+    <section class="hero" aria-labelledby="title">
+      <div class="hero-copy">
+        <h1 id="title">NuFeed</h1>
+        <p class="lead" data-i18n="lead">A focused RSS and web subscription reader for iPhone, iPad, and Mac.</p>
+        <p class="sublead" data-i18n="sublead">Read feeds, follow sites without RSS, extract full articles, translate bilingual content, summarize long reads, and keep your progress in sync with iCloud.</p>
+        <div class="hero-actions" aria-label="Important links">
+          <a class="action primary" href="./support.html">
+            <span data-i18n="heroSupport">Support</span>
+            <svg class="arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14"></path><path d="m13 6 6 6-6 6"></path></svg>
+          </a>
+          <a class="action secondary" href="./privacy.html">
+            <span data-i18n="heroPrivacy">Privacy Policy</span>
+            <svg class="arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14"></path><path d="m13 6 6 6-6 6"></path></svg>
+          </a>
+        </div>
+      </div>
+
+      <div class="product-stage" aria-label="NuFeed app preview">
+        <div class="aura" aria-hidden="true"></div>
+        <div class="macbook">
+          <div class="screen">
+            <div class="screen-top" aria-hidden="true">
+              <span class="dot"></span>
+              <span class="dot"></span>
+              <span class="dot"></span>
+            </div>
+            <div class="screen-grid">
+              <aside class="sidebar">
+                <div class="side-title" data-i18n="mockFeeds">Feeds</div>
+                <div class="feed-row active"><span class="feed-icon"></span><span data-i18n="mockToday">Today</span></div>
+                <div class="feed-row"><span class="feed-icon"></span><span data-i18n="mockFavorites">Favorites</span></div>
+                <div class="feed-row"><span class="feed-icon"></span><span data-i18n="mockTech">Tech</span></div>
+                <div class="feed-row"><span class="feed-icon"></span><span data-i18n="mockDesign">Design</span></div>
+                <div class="feed-row"><span class="feed-icon"></span>Web</div>
+              </aside>
+              <section class="article-pane">
+                <div class="pane-title" data-i18n="mockQueue">Reading Queue</div>
+                <div class="article-list">
+                  <article class="article selected">
+                    <strong data-i18n="mockArticle1">How thoughtful feeds make reading calmer</strong>
+                    <span data-i18n="mockArticle1Meta">Full article extracted · bilingual view ready</span>
+                  </article>
+                  <article class="article">
+                    <strong data-i18n="mockArticle2">Building a better personal web inbox</strong>
+                    <span data-i18n="mockArticle2Meta">Summarized in 6 key points</span>
+                  </article>
+                  <article class="article">
+                    <strong data-i18n="mockArticle3">Independent publishing and RSS again</strong>
+                    <span data-i18n="mockArticle3Meta">Synced across iCloud devices</span>
+                  </article>
+                </div>
+              </section>
+              <aside class="summary-pane">
+                <div class="summary-title" data-i18n="mockSummaryTitle">AI Summary</div>
+                <div class="summary-card">
+                  <p data-i18n="mockSummary">NuFeed keeps the original article beside a concise bilingual summary, so long reads stay easy to scan without losing context.</p>
+                  <div class="meter" aria-hidden="true"><span></span></div>
+                </div>
+              </aside>
+            </div>
+          </div>
+          <div class="base" aria-hidden="true"></div>
+        </div>
+
+        <div class="ipad" aria-hidden="true">
+          <div class="device-screen">
+            <div class="device-title" data-i18n="mockFavorites">Favorites</div>
+            <div class="mini-list">
+              <div class="mini-item"><strong></strong><span></span></div>
+              <div class="mini-item"><strong></strong><span></span></div>
+              <div class="mini-item"><strong></strong><span></span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="iphone" aria-hidden="true">
+          <div class="device-screen">
+            <div class="device-title" data-i18n="mockUnread">Unread</div>
+            <div class="mini-list">
+              <div class="mini-item"><strong></strong><span></span></div>
+              <div class="mini-item"><strong></strong><span></span></div>
+              <div class="mini-item"><strong></strong><span></span></div>
+            </div>
+          </div>
+        </div>
+
+      </div>
     </section>
 
-    <div class="links">
-      <a href="./privacy.html">Privacy Policy</a>
-      <a href="./support.html">Support</a>
-    </div>
+    <section class="features" aria-labelledby="features-title">
+      <div class="feature-wrap">
+        <h2 class="section-heading" id="features-title" data-i18n="featuresTitle">Everything you need to read the web with less noise.</h2>
+        <div class="feature-rail">
+          <section class="feature">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 5v14"></path><path d="M9 5v14"></path><path d="M14 7h5"></path><path d="M14 12h5"></path><path d="M14 17h5"></path></svg>
+            <h2 data-i18n="featureRssTitle">RSS subscriptions</h2>
+            <p data-i18n="featureRssBody">Folders, unread state, favorites, and a calm daily queue.</p>
+          </section>
+          <section class="feature">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18Z"></path><path d="M3.6 9h16.8"></path><path d="M3.6 15h16.8"></path><path d="M12 3c2.2 2.4 3.2 5.4 3.2 9s-1 6.6-3.2 9"></path><path d="M12 3c-2.2 2.4-3.2 5.4-3.2 9s1 6.6 3.2 9"></path></svg>
+            <h2 data-i18n="featureWebTitle">Web subscriptions</h2>
+            <p data-i18n="featureWebBody">Follow useful sites even when they do not publish RSS feeds.</p>
+          </section>
+          <section class="feature">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 4h9l3 3v13H6z"></path><path d="M15 4v4h4"></path><path d="M9 12h6"></path><path d="M9 16h6"></path></svg>
+            <h2 data-i18n="featureFullTitle">Full articles</h2>
+            <p data-i18n="featureFullBody">Extract complete stories from sources that only publish snippets.</p>
+          </section>
+          <section class="feature">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 7h8"></path><path d="M9 4v3"></path><path d="M7 7c.8 2.7 2.8 5 5.5 6.3"></path><path d="M12 7c-.8 2.4-2.2 4.2-4.3 5.6"></path><path d="M14 20l4-9 4 9"></path><path d="M15.4 17h5.2"></path></svg>
+            <h2 data-i18n="featureAiTitle">AI translation</h2>
+            <p data-i18n="featureAiBody">Use your own API configuration for bilingual reads and summaries.</p>
+          </section>
+          <section class="feature">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17.5a4.5 4.5 0 0 1 .4-9A5.6 5.6 0 0 1 18 10.2a3.7 3.7 0 0 1-.7 7.3Z"></path><path d="m9.5 14 2.5-2.5 2.5 2.5"></path><path d="M12 11.5V20"></path></svg>
+            <h2 data-i18n="featureSyncTitle">iCloud sync</h2>
+            <p data-i18n="featureSyncBody">Subscriptions, reading progress, and favorites stay with you.</p>
+          </section>
+        </div>
+      </div>
+    </section>
+
+    <section class="policy-strip" aria-label="Policy and support links">
+      <a class="policy-link" href="./privacy.html">
+        <span>
+          <strong data-i18n="policyPrivacyTitle">Privacy Policy</strong>
+          <span data-i18n="policyPrivacyBody">Data handling and app permissions</span>
+        </span>
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7"></path><path d="M9 7h8v8"></path></svg>
+      </a>
+      <a class="policy-link" href="./support.html">
+        <span>
+          <strong data-i18n="policySupportTitle">Support</strong>
+          <span data-i18n="policySupportBody">Help, common questions, and contact details</span>
+        </span>
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7"></path><path d="M9 7h8v8"></path></svg>
+      </a>
+    </section>
   </main>
+  <script>
+    const copy = {
+      en: {
+        brand: "NuFeed",
+        navPrivacy: "Privacy Policy",
+        navSupport: "Support",
+        navGetSupport: "Get Support",
+        languageToggle: "CN",
+        lead: "A focused RSS and web subscription reader for iPhone, iPad, and Mac.",
+        sublead: "Read feeds, follow sites without RSS, extract full articles, translate bilingual content, summarize long reads, and keep your progress in sync with iCloud.",
+        heroSupport: "Support",
+        heroPrivacy: "Privacy Policy",
+        mockFeeds: "Feeds",
+        mockToday: "Today",
+        mockFavorites: "Favorites",
+        mockTech: "Tech",
+        mockDesign: "Design",
+        mockQueue: "Reading Queue",
+        mockArticle1: "How thoughtful feeds make reading calmer",
+        mockArticle1Meta: "Full article extracted · bilingual view ready",
+        mockArticle2: "Building a better personal web inbox",
+        mockArticle2Meta: "Summarized in 6 key points",
+        mockArticle3: "Independent publishing and RSS again",
+        mockArticle3Meta: "Synced across iCloud devices",
+        mockSummaryTitle: "AI Summary",
+        mockSummary: "NuFeed keeps the original article beside a concise bilingual summary, so long reads stay easy to scan without losing context.",
+        mockUnread: "Unread",
+        featuresTitle: "Everything you need to read the web with less noise.",
+        featureRssTitle: "RSS subscriptions",
+        featureRssBody: "Folders, unread state, favorites, and a calm daily queue.",
+        featureWebTitle: "Web subscriptions",
+        featureWebBody: "Follow useful sites even when they do not publish RSS feeds.",
+        featureFullTitle: "Full articles",
+        featureFullBody: "Extract complete stories from sources that only publish snippets.",
+        featureAiTitle: "AI translation",
+        featureAiBody: "Use your own API configuration for bilingual reads and summaries.",
+        featureSyncTitle: "iCloud sync",
+        featureSyncBody: "Subscriptions, reading progress, and favorites stay with you.",
+        policyPrivacyTitle: "Privacy Policy",
+        policyPrivacyBody: "Data handling and app permissions",
+        policySupportTitle: "Support",
+        policySupportBody: "Help, common questions, and contact details"
+      },
+      zh: {
+        brand: "NuFeed",
+        navPrivacy: "隐私政策",
+        navSupport: "支持",
+        navGetSupport: "获取支持",
+        languageToggle: "EN",
+        lead: "专注、安静的 RSS 与网页订阅阅读器，适用于 iPhone、iPad 和 Mac。",
+        sublead: "阅读订阅源，关注没有 RSS 的网站，提取全文，生成双语翻译与长文摘要，并通过 iCloud 同步阅读进度。",
+        heroSupport: "支持",
+        heroPrivacy: "隐私政策",
+        mockFeeds: "订阅",
+        mockToday: "今日",
+        mockFavorites: "收藏",
+        mockTech: "科技",
+        mockDesign: "设计",
+        mockQueue: "阅读队列",
+        mockArticle1: "让订阅阅读变得更平静",
+        mockArticle1Meta: "已提取全文 · 可查看双语内容",
+        mockArticle2: "打造更好的个人网页收件箱",
+        mockArticle2Meta: "已总结为 6 个要点",
+        mockArticle3: "独立发布与 RSS 的回归",
+        mockArticle3Meta: "已同步到 iCloud 设备",
+        mockSummaryTitle: "AI 摘要",
+        mockSummary: "NuFeed 将原文与简洁的双语摘要并排呈现，让长文更容易浏览，同时保留上下文。",
+        mockUnread: "未读",
+        featuresTitle: "用更少噪音，阅读整个网页。",
+        featureRssTitle: "RSS 订阅",
+        featureRssBody: "文件夹、未读状态、收藏，以及安静清晰的每日阅读队列。",
+        featureWebTitle: "网页订阅",
+        featureWebBody: "即使网站没有 RSS，也能持续关注有价值的内容。",
+        featureFullTitle: "全文提取",
+        featureFullBody: "从只提供摘要的来源中提取完整文章。",
+        featureAiTitle: "AI 翻译",
+        featureAiBody: "使用你自己的 API 配置，生成双语阅读和长文摘要。",
+        featureSyncTitle: "iCloud 同步",
+        featureSyncBody: "订阅、阅读进度和收藏会跟随你的设备。",
+        policyPrivacyTitle: "隐私政策",
+        policyPrivacyBody: "数据处理与应用权限说明",
+        policySupportTitle: "支持",
+        policySupportBody: "帮助、常见问题与联系方式"
+      }
+    };
+
+    const setLanguage = (language) => {
+      document.documentElement.lang = language === "zh" ? "zh-CN" : "en";
+      document.querySelectorAll("[data-i18n]").forEach((element) => {
+        const key = element.dataset.i18n;
+        element.textContent = copy[language][key] || copy.en[key] || "";
+      });
+      localStorage.setItem("nufeed-language", language);
+    };
+
+    const toggle = document.querySelector("[data-language-toggle]");
+    const savedLanguage = localStorage.getItem("nufeed-language") || "en";
+    setLanguage(savedLanguage === "zh" ? "zh" : "en");
+    toggle.addEventListener("click", () => {
+      const nextLanguage = document.documentElement.lang === "zh-CN" ? "en" : "zh";
+      setLanguage(nextLanguage);
+    });
+  </script>
 </body>
 </html>
