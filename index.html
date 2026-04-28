@@ -212,26 +212,14 @@
       box-shadow: 0 16px 34px rgba(255, 94, 20, 0.25);
     }
 
-    .placeholder-icon {
+    .nuread-icon {
       width: 58px;
       height: 58px;
       flex: 0 0 auto;
-      display: grid;
-      place-items: center;
+      display: block;
       border-radius: 15px;
-      background: linear-gradient(145deg, #151517, #3b3c42);
-      color: #ffffff;
-      box-shadow: 0 16px 34px rgba(0, 0, 0, 0.18);
-    }
-
-    .placeholder-icon svg {
-      width: 31px;
-      height: 31px;
-      fill: none;
-      stroke: currentColor;
-      stroke-width: 2;
-      stroke-linecap: round;
-      stroke-linejoin: round;
+      object-fit: cover;
+      box-shadow: 0 16px 34px rgba(0, 113, 227, 0.22);
     }
 
     .status {
@@ -554,9 +542,7 @@
         <div class="side-stack">
           <article class="app-card soon">
             <div class="soon-top">
-              <div class="placeholder-icon" aria-hidden="true">
-                <svg viewBox="0 0 24 24"><path d="M5 4.5h9a4 4 0 0 1 4 4v11H9a4 4 0 0 0-4 0z"></path><path d="M5 4.5v15"></path><path d="M9 8h5"></path><path d="M9 12h4"></path></svg>
-              </div>
+              <img class="nuread-icon" src="./nufeed/assets/nuread-icon.png" alt="" aria-hidden="true">
               <div>
                 <p class="status" data-i18n="nureadStatus">Coming soon</p>
                 <h3>NuRead</h3>
