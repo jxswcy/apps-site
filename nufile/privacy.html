@@ -45,14 +45,14 @@
     .site-header {
       position: sticky;
       top: 0;
-      z-index: 10;
+      z-index: 20;
       border-bottom: 1px solid rgba(0, 0, 0, 0.06);
       background: rgba(251, 251, 253, 0.74);
       backdrop-filter: saturate(180%) blur(24px);
     }
 
     .nav {
-      width: min(980px, calc(100% - 40px));
+      width: min(1180px, calc(100% - 40px));
       min-height: 64px;
       margin: 0 auto;
       display: flex;
@@ -198,7 +198,10 @@
     }
 
     @media (max-width: 720px) {
-      .nav,
+      .nav {
+        width: min(100% - 28px, 1180px);
+      }
+
       main {
         width: min(100% - 28px, 980px);
       }
@@ -208,6 +211,10 @@
         min-height: 58px;
         padding: 12px 0;
         flex-direction: column;
+      }
+
+      .brand {
+        font-size: 16px;
       }
 
       .nav-links {
