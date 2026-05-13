@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Nu Apps</title>
-  <meta name="description" content="Nu Apps is a collection of focused apps for reading, focus, and everyday workflows.">
+  <meta name="description" content="Nu Apps is a collection of focused apps for reading, documents, focus, and everyday workflows.">
   <style>
     :root {
       color-scheme: light;
@@ -16,6 +16,7 @@
       --panel: rgba(255, 255, 255, 0.88);
       --blue: #0071e3;
       --orange: #f46b2f;
+      --red: #e52b2b;
       --shadow: 0 30px 90px rgba(0, 0, 0, 0.12);
     }
 
@@ -222,6 +223,16 @@
       box-shadow: 0 16px 34px rgba(0, 113, 227, 0.22);
     }
 
+    .nufile-icon {
+      width: 58px;
+      height: 58px;
+      flex: 0 0 auto;
+      display: block;
+      border-radius: 15px;
+      object-fit: cover;
+      box-shadow: 0 16px 34px rgba(229, 43, 43, 0.22);
+    }
+
     .status {
       margin: 0 0 10px;
       color: var(--blue);
@@ -232,6 +243,10 @@
 
     .soon .status {
       color: #a64719;
+    }
+
+    .nufile-card .status {
+      color: var(--red);
     }
 
     .app-card h3 {
@@ -340,6 +355,38 @@
       gap: 14px;
     }
 
+    .mini-actions {
+      margin-top: 18px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .mini-action {
+      min-height: 36px;
+      padding: 0 13px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 999px;
+      background: rgba(229, 43, 43, 0.08);
+      color: #bc1717;
+      font-size: 13px;
+      font-weight: 700;
+      transition: transform 180ms ease, background 180ms ease;
+    }
+
+    .mini-action:hover {
+      transform: translateY(-1px);
+      background: rgba(229, 43, 43, 0.13);
+    }
+
+    .mini-action.primary-mini {
+      background: var(--red);
+      color: #fff;
+      box-shadow: 0 12px 26px rgba(229, 43, 43, 0.2);
+    }
+
     .family-card {
       min-height: 202px;
       padding: 28px;
@@ -398,6 +445,10 @@
 
       .side-stack {
         grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .family-card {
+        grid-column: 1 / -1;
       }
     }
 
@@ -460,6 +511,10 @@
       .side-stack {
         grid-template-columns: 1fr;
       }
+
+      .family-card {
+        grid-column: auto;
+      }
     }
 
     @media (max-width: 430px) {
@@ -500,6 +555,7 @@
       <div class="nav-links">
         <a class="nav-link" href="#apps" data-i18n="navApps">Apps</a>
         <a class="nav-link" href="./nufeed/" data-i18n="navNuFeed">NuFeed</a>
+        <a class="nav-link" href="./nufile/" data-i18n="navNuFile">NuFile</a>
         <button class="language-toggle" type="button" data-language-toggle data-i18n="languageToggle" aria-label="Switch language">CN</button>
       </div>
     </nav>
@@ -509,7 +565,7 @@
     <section class="hero" aria-labelledby="title">
       <h1 id="title" data-i18n="title">Nu Apps</h1>
       <p class="lead" data-i18n="lead">Focused apps for reading, focus, and everyday workflows.</p>
-      <p class="sublead" data-i18n="sublead">NuFeed is available now. More apps, including NuRead, are planned for the same clean and quiet product family.</p>
+      <p class="sublead" data-i18n="sublead">NuFeed is available now. NuFile brings local OFD/PDF workflows to the family, with NuRead planned next.</p>
     </section>
 
     <section class="apps-section" id="apps" aria-labelledby="apps-title">
@@ -540,6 +596,23 @@
         </article>
 
         <div class="side-stack">
+          <article class="app-card soon nufile-card">
+            <div class="soon-top">
+              <img class="nufile-icon" src="./nufile/assets/nufile-icon.png" alt="" aria-hidden="true">
+              <div>
+                <p class="status" data-i18n="nufileStatus">Coming soon</p>
+                <h3>NuFile</h3>
+              </div>
+            </div>
+            <p data-i18n="nufileBody">A local OFD/PDF utility for conversion, watermarking, invoice fields, and batch document workflows on Apple devices.</p>
+            <div class="mini-actions" aria-label="NuFile links">
+              <a class="mini-action primary-mini" href="https://apps.apple.com/app/id6768900848" target="_blank" rel="noopener" data-i18n="appStoreAction">App Store</a>
+              <a class="mini-action" href="./nufile/" data-i18n="overviewAction">Overview</a>
+              <a class="mini-action" href="./nufile/support.html" data-i18n="supportAction">Support</a>
+              <a class="mini-action" href="./nufile/privacy.html" data-i18n="privacyAction">Privacy Policy</a>
+            </div>
+          </article>
+
           <article class="app-card soon">
             <div class="soon-top">
               <img class="nuread-icon" src="./nufeed/assets/nuread-icon.png" alt="" aria-hidden="true">
@@ -573,10 +646,11 @@
         brand: "Nu Apps",
         navApps: "Apps",
         navNuFeed: "NuFeed",
+        navNuFile: "NuFile",
         languageToggle: "CN",
         title: "Nu Apps",
         lead: "Focused apps for reading, focus, and everyday workflows.",
-        sublead: "NuFeed is available now. More apps, including NuRead, are planned for the same clean and quiet product family.",
+        sublead: "NuFeed is available now. NuFile brings local OFD/PDF workflows to the family, with NuRead planned next.",
         appsTitle: "Available and upcoming apps.",
         nufeedStatus: "Available now",
         nufeedBody: "A focused RSS and web subscription reader for iPhone, iPad, and Mac. Read feeds, follow sites without RSS, extract full articles, translate bilingual content, and keep progress in sync with iCloud.",
@@ -584,6 +658,8 @@
         overviewAction: "Overview",
         supportAction: "Support",
         privacyAction: "Privacy Policy",
+        nufileStatus: "Coming soon",
+        nufileBody: "A local OFD/PDF utility for conversion, watermarking, invoice fields, and batch document workflows on Apple devices.",
         nureadStatus: "Coming soon",
         nureadBody: "A new reading app is planned for long-form reading and saved articles.",
         familyTitle: "More apps are coming.",
@@ -593,10 +669,11 @@
         brand: "Nu Apps",
         navApps: "应用",
         navNuFeed: "NuFeed",
+        navNuFile: "NuFile",
         languageToggle: "EN",
         title: "Nu Apps",
         lead: "为阅读、专注和日常工作流打造的一组轻量应用。",
-        sublead: "NuFeed 现在已经上线。包括 NuRead 在内的更多应用，会陆续加入同一套清爽安静的产品家族。",
+        sublead: "NuFeed 现在已经上线。NuFile 会把本地 OFD/PDF 工作流带入这个产品家族，NuRead 也在后续计划中。",
         appsTitle: "已上线与即将推出的应用。",
         nufeedStatus: "现已上线",
         nufeedBody: "NuFeed 是适用于 iPhone、iPad 和 Mac 的 RSS 与网页订阅阅读器。你可以阅读订阅源，关注没有 RSS 的网站，提取全文，生成双语内容，并通过 iCloud 同步进度。",
@@ -604,6 +681,8 @@
         overviewAction: "查看介绍",
         supportAction: "支持",
         privacyAction: "隐私政策",
+        nufileStatus: "即将推出",
+        nufileBody: "NuFile 是面向 Apple 设备的本地 OFD/PDF 工具，支持转换、水印、发票字段和批量文档工作流。",
         nureadStatus: "即将推出",
         nureadBody: "NuRead 计划面向长文阅读和稍后读场景，提供新的阅读体验。",
         familyTitle: "更多应用正在路上。",
