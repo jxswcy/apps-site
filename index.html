@@ -17,6 +17,7 @@
       --blue: #0071e3;
       --orange: #f46b2f;
       --red: #e52b2b;
+      --charcoal: #1d1d1f;
       --shadow: 0 30px 90px rgba(0, 0, 0, 0.12);
     }
 
@@ -165,7 +166,7 @@
       display: grid;
       grid-template-columns: 1.35fr 0.65fr;
       gap: 16px;
-      align-items: stretch;
+      align-items: start;
     }
 
     .app-card {
@@ -233,6 +234,16 @@
       box-shadow: 0 16px 34px rgba(229, 43, 43, 0.22);
     }
 
+    .nutype-icon {
+      width: 58px;
+      height: 58px;
+      flex: 0 0 auto;
+      display: block;
+      border-radius: 15px;
+      object-fit: cover;
+      box-shadow: 0 16px 34px rgba(29, 29, 31, 0.22);
+    }
+
     .status {
       margin: 0 0 10px;
       color: var(--blue);
@@ -247,6 +258,10 @@
 
     .nufile-card .status {
       color: var(--red);
+    }
+
+    .nutype-card .status {
+      color: var(--charcoal);
     }
 
     .app-card h3 {
@@ -385,6 +400,17 @@
       background: var(--red);
       color: #fff;
       box-shadow: 0 12px 26px rgba(229, 43, 43, 0.2);
+    }
+
+    .mini-action.disabled-mini {
+      background: rgba(29, 29, 31, 0.08);
+      color: var(--charcoal);
+      cursor: default;
+    }
+
+    .mini-action.disabled-mini:hover {
+      transform: none;
+      background: rgba(29, 29, 31, 0.08);
     }
 
     .family-card {
@@ -556,6 +582,7 @@
         <a class="nav-link" href="#apps" data-i18n="navApps">Apps</a>
         <a class="nav-link" href="./nufeed/" data-i18n="navNuFeed">NuFeed</a>
         <a class="nav-link" href="./nufile/" data-i18n="navNuFile">NuFile</a>
+        <a class="nav-link" href="./nutype/" data-i18n="navNuType">NuType</a>
         <button class="language-toggle" type="button" data-language-toggle data-i18n="languageToggle" aria-label="Switch language">CN</button>
       </div>
     </nav>
@@ -565,7 +592,7 @@
     <section class="hero" aria-labelledby="title">
       <h1 id="title" data-i18n="title">Nu Apps</h1>
       <p class="lead" data-i18n="lead">Focused apps for reading, focus, and everyday workflows.</p>
-      <p class="sublead" data-i18n="sublead">NuFeed is available now. NuFile brings local OFD/PDF workflows to the family, with NuRead planned next.</p>
+      <p class="sublead" data-i18n="sublead">NuFeed is available now. NuFile and NuType are joining the family, with NuRead planned next.</p>
     </section>
 
     <section class="apps-section" id="apps" aria-labelledby="apps-title">
@@ -613,6 +640,23 @@
             </div>
           </article>
 
+          <article class="app-card soon nutype-card">
+            <div class="soon-top">
+              <img class="nutype-icon" src="./nutype/assets/nutype-icon.png" alt="" aria-hidden="true">
+              <div>
+                <p class="status" data-i18n="nutypeStatus">Coming soon</p>
+                <h3>NuType</h3>
+              </div>
+            </div>
+            <p data-i18n="nutypeBody">A lightweight Mac voice input tool that turns natural speech into clean text and inserts it into the current app.</p>
+            <div class="mini-actions" aria-label="NuType links">
+              <span class="mini-action disabled-mini" data-i18n="comingSoonAction">Coming Soon</span>
+              <a class="mini-action" href="./nutype/" data-i18n="overviewAction">Overview</a>
+              <a class="mini-action" href="./nutype/support.html" data-i18n="supportAction">Support</a>
+              <a class="mini-action" href="./nutype/privacy.html" data-i18n="privacyAction">Privacy Policy</a>
+            </div>
+          </article>
+
           <article class="app-card soon">
             <div class="soon-top">
               <img class="nuread-icon" src="./nufeed/assets/nuread-icon.png" alt="" aria-hidden="true">
@@ -647,10 +691,11 @@
         navApps: "Apps",
         navNuFeed: "NuFeed",
         navNuFile: "NuFile",
+        navNuType: "NuType",
         languageToggle: "CN",
         title: "Nu Apps",
         lead: "Focused apps for reading, focus, and everyday workflows.",
-        sublead: "NuFeed is available now. NuFile brings local OFD/PDF workflows to the family, with NuRead planned next.",
+        sublead: "NuFeed is available now. NuFile and NuType are joining the family, with NuRead planned next.",
         appsTitle: "Available and upcoming apps.",
         nufeedStatus: "Available now",
         nufeedBody: "A focused RSS and web subscription reader for iPhone, iPad, and Mac. Read feeds, follow sites without RSS, extract full articles, translate bilingual content, and keep progress in sync with iCloud.",
@@ -660,6 +705,9 @@
         privacyAction: "Privacy Policy",
         nufileStatus: "Coming soon",
         nufileBody: "A local OFD/PDF utility for conversion, watermarking, invoice fields, and batch document workflows on Apple devices.",
+        nutypeStatus: "Coming soon",
+        nutypeBody: "A lightweight Mac voice input tool that turns natural speech into clean text and inserts it into the current app.",
+        comingSoonAction: "Coming Soon",
         nureadStatus: "Coming soon",
         nureadBody: "A new reading app is planned for long-form reading and saved articles.",
         familyTitle: "More apps are coming.",
@@ -670,10 +718,11 @@
         navApps: "应用",
         navNuFeed: "NuFeed",
         navNuFile: "NuFile",
+        navNuType: "NuType",
         languageToggle: "EN",
         title: "Nu Apps",
         lead: "为阅读、专注和日常工作流打造的一组轻量应用。",
-        sublead: "NuFeed 现在已经上线。NuFile 会把本地 OFD/PDF 工作流带入这个产品家族，NuRead 也在后续计划中。",
+        sublead: "NuFeed 现在已经上线。NuFile 和 NuType 会加入这个产品家族，NuRead 也在后续计划中。",
         appsTitle: "已上线与即将推出的应用。",
         nufeedStatus: "现已上线",
         nufeedBody: "NuFeed 是适用于 iPhone、iPad 和 Mac 的 RSS 与网页订阅阅读器。你可以阅读订阅源，关注没有 RSS 的网站，提取全文，生成双语内容，并通过 iCloud 同步进度。",
@@ -683,6 +732,9 @@
         privacyAction: "隐私政策",
         nufileStatus: "即将推出",
         nufileBody: "NuFile 是面向 Apple 设备的本地 OFD/PDF 工具，支持转换、水印、发票字段和批量文档工作流。",
+        nutypeStatus: "即将推出",
+        nutypeBody: "NuType 是轻量的 Mac 语音输入工具，把自然说话整理成干净文本，并插入当前 App。",
+        comingSoonAction: "即将推出",
         nureadStatus: "即将推出",
         nureadBody: "NuRead 计划面向长文阅读和稍后读场景，提供新的阅读体验。",
         familyTitle: "更多应用正在路上。",
