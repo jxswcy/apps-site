@@ -1,0 +1,209 @@
+<!DOCTYPE html><html lang="en" data-astro-cid-26lxfoyo> <head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>BYOK reality check: 5 things that break in Open Design today — Open Design</title><meta name="description" content="We promised BYOK as first-class. Five open bug threads from this week — Gemini, DeepSeek, OpenCode, Windows — show where the seams are still rough, and what to use until each fix lands."><meta name="theme-color" content="#efe7d2"><link rel="canonical" href="https://nuapp.site/blog/byok-reality-check-5-things-that-break/"><link rel="alternate" type="application/rss+xml" title="Open Design Blog" href="https://nuapp.site/blog/rss.xml"><meta property="og:type" content="article"><meta property="og:site_name" content="Open Design"><meta property="og:title" content="BYOK reality check: 5 things that break in Open Design today"><meta property="og:description" content="We promised BYOK as first-class. Five open bug threads from this week — Gemini, DeepSeek, OpenCode, Windows — show where the seams are still rough, and what to use until each fix lands."><meta property="og:url" content="https://nuapp.site/blog/byok-reality-check-5-things-that-break/"><meta property="og:image" content="https://static.open-design.ai/cdn-cgi/image/width=1200,quality=86,format=auto/https://static.open-design.ai/landing/assets/hero.png"><meta property="og:locale" content="en_US"><meta property="article:published_time" content="2026-05-14T00:00:00.000Z"><meta property="article:modified_time" content="2026-05-14T00:00:00.000Z"><meta property="article:section" content="Guides"><meta property="article:author" content="Open Design"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="BYOK reality check: 5 things that break in Open Design today"><meta name="twitter:description" content="We promised BYOK as first-class. Five open bug threads from this week — Gemini, DeepSeek, OpenCode, Windows — show where the seams are still rough, and what to use until each fix lands."><meta name="twitter:image" content="https://static.open-design.ai/cdn-cgi/image/width=1200,quality=86,format=auto/https://static.open-design.ai/landing/assets/hero.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"BYOK reality check: 5 things that break in Open Design today","description":"We promised BYOK as first-class. Five open bug threads from this week — Gemini, DeepSeek, OpenCode, Windows — show where the seams are still rough, and what to use until each fix lands.","image":["https://static.open-design.ai/cdn-cgi/image/width=1200,quality=86,format=auto/https://static.open-design.ai/landing/assets/hero.png"],"datePublished":"2026-05-14T00:00:00.000Z","dateModified":"2026-05-14T00:00:00.000Z","articleSection":"Guides","author":{"@type":"Organization","name":"Open Design","url":"https://nuapp.site/"},"publisher":{"@type":"Organization","name":"Open Design","url":"https://nuapp.site/","logo":{"@type":"ImageObject","url":"https://static.open-design.ai/cdn-cgi/image/width=1200,quality=86,format=auto/https://static.open-design.ai/landing/assets/hero.png"}},"mainEntityOfPage":{"@type":"WebPage","@id":"https://nuapp.site/blog/byok-reality-check-5-things-that-break/"}}</script><link rel="stylesheet" href="/_astro/_slug_.CnvQ8Wom.css">
+<link rel="stylesheet" href="/_astro/_slug_.CqXSRc6-.css">
+<link rel="stylesheet" href="/_astro/_slug_.VvqN3H9p.css"></head> <body data-astro-cid-26lxfoyo> <div class="shell" data-astro-cid-26lxfoyo> <div class="topbar" data-od-id="topbar"> <div class="container topbar-inner"> <span> <b>OD / 2026</b> · Vol. 01 / Issue Nº 26
+</span> <span class="mid"> <span>
+Filed under <b class="coral">Design · Intelligence</b> </span> <span>Apache-2.0 · Made on Earth</span> </span> <span class="right"> <a class="topbar-link" href="https://github.com/nexu-io/open-design/releases" target="_blank" rel="noreferrer noopener"> <span class="pulse"></span>
+Live · <span data-github-version>v0.7.0</span> </a> <span class="locale-switch"> <b>EN</b>  ·  <a class="topbar-link" href="https://github.com/nexu-io/open-design" target="_blank" rel="noreferrer noopener" title="Localization in progress — open the repo on GitHub">
+DE
+</a>  ·  <a class="topbar-link" href="https://github.com/nexu-io/open-design" target="_blank" rel="noreferrer noopener" title="Localization in progress — open the repo on GitHub">
+中文
+</a>  ·  <a class="topbar-link" href="https://github.com/nexu-io/open-design" target="_blank" rel="noreferrer noopener" title="Localization in progress — open the repo on GitHub">
+日本語
+</a> </span> </span> </div> </div> <header class="nav" data-od-id="nav" data-nav-headroom="true"><div class="container nav-inner"><a href="/" class="brand"><span class="brand-mark"><img src="/logo.png" alt="" width="36" height="36"/></span><span>Open Design</span><span class="brand-meta"><b>Studio Nº 01</b>Berlin / Open / Earth</span></a><nav><ul class="nav-links"><li><a href="/skills/">Skills<span class="num">131</span></a></li><li><a href="/systems/">Systems<span class="num">150</span></a></li><li><a href="/templates/">Templates<span class="num">9</span></a></li><li><a href="/craft/">Craft<span class="num">11</span></a></li><li><a href="/blog/" class="is-active">Blog</a></li><li><a href="/#contact">Contact</a></li></ul></nav><div class="nav-side"><a class="nav-cta ghost" href="https://github.com/nexu-io/open-design/releases" aria-label="Download Open Design desktop" title="Download the desktop app" target="_blank" rel="noreferrer noopener">Download</a><a class="nav-cta" href="https://github.com/nexu-io/open-design" aria-label="Star Open Design on GitHub" title="Click to star us on GitHub" target="_blank" rel="noreferrer noopener">Star · <span data-github-stars="true">44K</span></a><span class="status-dot" aria-hidden="true"></span></div></div></header> <main class="post-shell" data-astro-cid-26lxfoyo> <article class="post" data-astro-cid-26lxfoyo> <div class="container" data-astro-cid-26lxfoyo> <a class="post-back" href="/blog/" data-astro-cid-26lxfoyo>← Back to Blog</a> <h1 class="post-title" data-astro-cid-26lxfoyo>BYOK reality check: 5 things that break in Open Design today</h1> <p class="post-summary" data-astro-cid-26lxfoyo>We promised BYOK as first-class. Five open bug threads from this week — Gemini, DeepSeek, OpenCode, Windows — show where the seams are still rough, and what to use until each fix lands.</p> <div class="post-meta" data-astro-cid-26lxfoyo> <span data-astro-cid-26lxfoyo>May 14, 2026</span> <span data-astro-cid-26lxfoyo>7 min read</span> <span data-astro-cid-26lxfoyo>Guides</span> </div> <hr class="post-rule" data-astro-cid-26lxfoyo> <div class="post-body" data-astro-cid-26lxfoyo> <p>We’ve been telling people Open Design is BYOK from the ground up. That’s still true. The seed post on the <a href="/blog/byok-design-workflow-claude-codex-qwen/">BYOK design workflow</a> walks through the working path — point the daemon at any OpenAI-compatible endpoint, paste your key, you’re done.</p>
+<p>But “BYOK” isn’t a single feature. It’s a contract that reaches into the chat composer, the finalize endpoint, the model picker, the CLI launch path, and the analytics layer. Every one of those is a place where the contract can break — and right now, four of them are open issues in our <a href="https://github.com/nexu-io/open-design/issues">public tracker</a>, reported by users in the last 48 hours.</p>
+<p>This post lists what’s broken, why it’s broken, what to do today, and which PR is fixing it. Treat it as the Windows-and-Gemini honesty pass that the seed BYOK post didn’t give you.</p>
+<h2 id="the-promise-vs-the-bug-list">The promise vs the bug list</h2>
+<p>The framing matters. None of these are “BYOK doesn’t work” bugs. They’re all at the boundary between an adapter we own (the OpenAI-compatible layer) and one we don’t (the upstream provider’s CLI, their packaging, or the host platform’s process model). That’s where reality lives in any open-source CLI orchestrator — and where we’ve been doing most of the firefighting this week.</p>
+<p>Here are the five.</p>
+<h2 id="gemini-gets-lost-on-the-way-to-finish-design">Gemini gets lost on the way to “Finish Design”</h2>
+<p><strong><a href="https://github.com/nexu-io/open-design/issues/1619">Issue #1619</a> — <code>bug</code>, open</strong></p>
+<p>Reporter: BYOK is configured for Gemini. The Settings test connection succeeds. The model picker returns Gemini models. Regular chat works. But the moment they hit <strong>Finish Design</strong>, the daemon throws an Anthropic-shaped error.</p>
+<p>The maintainer reply confirms it: regular API-mode chat honors the selected Gemini BYOK provider, but Finish Design has not yet been generalized beyond the Anthropic-compatible finalize path. Everything else routes through the provider-aware proxy; Finish Design still goes through a hardcoded Anthropic finalize endpoint.</p>
+<p><strong>What to do today:</strong> route Gemini through OpenRouter under the Anthropic-compatible provider slot. The Finish Design path then sees an Anthropic-shaped response from OpenRouter’s shim and finalizes correctly. It’s an extra hop, but it’s stable.</p>
+<p><strong>Who’s fixing it:</strong> the Finish Design generalization is now on the BYOK roadmap as a P1. No PR yet — this is the next thing the daemon team picks up.</p>
+<h2 id="gemini-3-flash-dies-on-windows-before-the-prompt-lands">Gemini 3 Flash dies on Windows before the prompt lands</h2>
+<p><strong><a href="https://github.com/nexu-io/open-design/issues/1611">Issue #1611</a> — <code>bug</code>, open</strong></p>
+<p>Reporter: Gemini 3 Flash Preview fails inside Open Design on Windows with <code>stdin: write EOF</code> after about 1.5 seconds. Gemini 3 Pro works fine in the same install. Direct Gemini CLI (<code>gemini --model gemini-3-flash-preview ...</code>) succeeds when <code>GEMINI_CLI_TRUST_WORKSPACE=true</code> is set.</p>
+<p>The diagnosis took two passes. First read of the screenshot looked like upstream <code>429 RESOURCE_EXHAUSTED</code>. After a clean PowerShell repro that wrote <code>OD_GEMINI_3_FLASH_OK</code> to stdout, the picture changed: the model is reachable, the CLI is healthy, the failure is on the Open Design → Gemini CLI launch path, and it’s specific to the Flash variant on Windows.</p>
+<p><strong>What to do today:</strong> select Gemini 3 Pro Preview in the model picker. It runs through the same launch path and works. Also check <code>~/.gemini/hooks/</code> — a slow <code>gsd-check-update.js</code> hook (<code>Hook execution error: Hook timed out after 60000ms</code>) was adding ~104s of overhead to every run in this user’s case, independent of the Flash bug. Clean Gemini hooks separately.</p>
+<p><strong>Who’s fixing it:</strong> flagged as Flash-specific OD-side. Investigation in progress on the daemon’s stdin write path.</p>
+<h2 id="deepseek-tui-has-a-30-kb-prompt-ceiling-on-windows">DeepSeek TUI has a 30 KB prompt ceiling on Windows</h2>
+<p><strong><a href="https://github.com/nexu-io/open-design/issues/1610">Issue #1610</a> — <code>bug</code>, open</strong></p>
+<p>Reporter (DeepSeek wrapper v0.8.33, Windows packaged build): a long composed prompt fails with our pre-flight guard at <code>81397 > 30000 bytes</code>.</p>
+<p>That guard is intentional. Without it, Windows would fail later with a less useful <code>ENAMETOOLONG</code> spawn error. The DeepSeek TUI adapter currently sends the prompt as a positional command-line argument — argv-bound — so any prompt over the Windows command-line ceiling is unsafe to spawn. The high-level docs imply Windows long-prompt fallbacks apply broadly; the DeepSeek path doesn’t have one yet.</p>
+<p><strong>What to do today:</strong> if you’re on Windows with the DeepSeek TUI adapter, keep the composed prompt under 30 KB or switch to a stdin-based adapter (Claude Code, Codex, OpenCode). On macOS and Linux, this issue does not bite — the argv ceiling is much higher.</p>
+<p><strong>Who’s fixing it:</strong> the right fix is a stdin or prompt-file transport for the DeepSeek TUI adapter. Tracked on the adapter team’s queue.</p>
+<h2 id="the-opencode-local-cli-test-times-out-before-the-model-warms-up">The OpenCode local-CLI test times out before the model warms up</h2>
+<p><strong><a href="https://github.com/nexu-io/open-design/issues/1603">Issue #1603</a> — <code>bug</code>, <code>priority:p0</code>, open</strong></p>
+<p>Reporter: in Settings → BYOK → OpenCode, the connection test reliably times out at 45 seconds. But if they first open OpenCode Desktop’s terminal and attach a local LLM there, the same Open Design test then succeeds.</p>
+<p>That’s the useful clue. Open Design doesn’t attach to the running OpenCode Desktop session — for a Settings smoke test, the daemon spawns its own fresh OpenCode CLI subprocess and waits for an <code>ok</code> reply. With a cold local model, that first reply can take longer than the 45-second budget. The OpenCode Desktop terminal step warms the model in a way the daemon’s fresh subprocess can then see.</p>
+<p><strong>What to do today:</strong> before testing OpenCode in Open Design, open OpenCode Desktop, attach your local LLM, and let it answer one prompt. Then run the OD connection test. As of v0.7.0, the connection-test budget is configurable; bump it if your local model is slow to load.</p>
+<p><strong>Who’s fixing it:</strong> the daemon-side fix is a longer / configurable warmup window for local-model adapters. Tracked at p0.</p>
+<h2 id="the-packaged-web-app-refuses-to-load-over-plain-http">The packaged web app refuses to load over plain HTTP</h2>
+<p><strong><a href="https://github.com/nexu-io/open-design/issues/1620">Issue #1620</a> — <code>bug</code>, open</strong></p>
+<p>Slightly different bug, same family. Reporter is running the packaged web app on a LAN IP over plain HTTP. After PR #1428, the analytics provider and the PDF export nonce started calling <code>crypto.randomUUID()</code> directly, bypassing the tiered helper from PR #900. Chromium does not expose <code>crypto.randomUUID</code> in non-secure contexts, so the page throws on load.</p>
+<p>This isn’t strictly a BYOK bug, but it bites the same audience: people running their own infrastructure, often air-gapped, often over plain HTTP because the cert story isn’t worth it for an internal tool.</p>
+<p><strong>What to do today:</strong> serve the web app over HTTPS or <code>localhost</code>. Both paths satisfy the Chromium secure-context requirement and the page loads.</p>
+<p><strong>Who’s fixing it:</strong> PR #1621 routes the remaining call sites through the tiered UUID helper. Open and under review.</p>
+<h2 id="what-this-actually-says-about-byok-in-open-design">What this actually says about BYOK in Open Design</h2>
+<p>Read the list as a contract map, not a quality verdict. Four of these five issues are at adapter boundaries — Gemini’s CLI, DeepSeek’s CLI, OpenCode’s CLI launch model, the host platform’s secure-context rules. The fifth is at our own finalize endpoint where we hardcoded an Anthropic-shaped response a release ago and haven’t generalized yet.</p>
+<p>That’s where every BYOK system that isn’t a rebadged proxy ends up. You either own the inference (and lose BYOK) or you respect the upstream tools (and inherit their edges). We <a href="/blog/why-we-built-open-design-as-a-skill-layer/">picked the second posture deliberately</a>. The cost is that triage looks like this week, where the daemon team filed five PRs across five surfaces in two days.</p>
+<p>The trade is still right. A working setup on Claude Code, Codex, Cursor, Gemini Pro on macOS, and DeepSeek on Linux — the matrix that covers ~90% of our actual users — runs cleanly today, with no proxy tax and no margin on tokens. The five threads above are what the other 10% of the matrix looks like in mid-May 2026, with named PRs against each one.</p>
+<h2 id="what-to-use-today-matrix">What to use today (matrix)</h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Provider</th><th>macOS</th><th>Linux</th><th>Windows</th><th>Finish Design path</th></tr></thead><tbody><tr><td>Claude Code (Sonnet / Opus)</td><td>✓</td><td>✓</td><td>✓</td><td>native</td></tr><tr><td>Codex</td><td>✓</td><td>✓</td><td>✓</td><td>native</td></tr><tr><td>Cursor (BYOK)</td><td>✓</td><td>✓</td><td>✓</td><td>native</td></tr><tr><td>Gemini 3 Pro Preview</td><td>✓</td><td>✓</td><td>✓</td><td>OpenRouter shim</td></tr><tr><td>Gemini 3 Flash Preview</td><td>✓</td><td>✓</td><td>✗ (<a href="https://github.com/nexu-io/open-design/issues/1611">#1611</a>)</td><td>OpenRouter shim</td></tr><tr><td>DeepSeek (API)</td><td>✓</td><td>✓</td><td>✓</td><td>OpenRouter shim</td></tr><tr><td>DeepSeek TUI (long prompts)</td><td>✓</td><td>✓</td><td>✗ (<a href="https://github.com/nexu-io/open-design/issues/1610">#1610</a>)</td><td>OpenRouter shim</td></tr><tr><td>OpenCode (local model)</td><td>✓</td><td>✓</td><td>✓ (warm first)</td><td>n/a</td></tr></tbody></table>
+<p>Subscribe to the <a href="https://github.com/nexu-io/open-design/issues?q=is%3Aissue+label%3Abug+BYOK">BYOK label on the tracker</a> if you want notifications when each row above flips.</p>
+<h2 id="what-to-do-next">What to do next</h2>
+<p>Open Design’s <a href="https://github.com/nexu-io/open-design/tree/main/skills">skills library</a> is the working layer underneath all of this — the file-driven contracts that the BYOK adapter feeds into. If you want to see what a skill actually consumes from the model and what it doesn’t care about, that directory is the right place to start.</p>
+<p><a href="https://github.com/nexu-io/open-design/tree/main/skills">Browse the skills library</a>.</p>
+<h2 id="related-reading">Related reading</h2>
+<ul>
+<li><a href="/blog/byok-design-workflow-claude-codex-qwen/">BYOK design workflow: run Claude, Codex, or Qwen on your own key</a> — the original BYOK explainer</li>
+<li><a href="/blog/31-skills-72-systems-how-the-library-works/">31 skills, 72 systems — how the library works</a> — what BYOK actually feeds into</li>
+<li>
+<!-- TODO: backfill related when "Open Design on Windows" ships -->
+</li>
+</ul> </div> <hr class="post-rule" data-astro-cid-26lxfoyo> <div class="post-foot" data-astro-cid-26lxfoyo> <a class="post-back" href="/blog/" data-astro-cid-26lxfoyo>← Back to Blog</a> <a class="post-github" href="https://github.com/nexu-io/open-design/blob/main/apps/landing-page/app/content/blog/byok-reality-check-5-things-that-break.md" target="_blank" rel="noreferrer noopener" data-astro-cid-26lxfoyo>
+View source on GitHub ↗
+</a> </div> </div> </article> </main> <footer class="sub-footer" data-od-id="sub-footer"> <div class="container sub-footer-inner"> <div class="sub-footer-grid"> <div class="sub-footer-brand"> <a href="/" class="brand"> <span class="brand-mark"> <img src="/logo.png" alt="" width="36" height="36"> </span> <span>Open Design</span> </a> <p>
+The open-source alternative to Claude Design. Apache-2.0,
+          local-first, BYOK at every layer.
+</p> </div> <div class="sub-footer-col"> <h5>Catalog</h5> <ul> <li><a href="/skills/">131 Skills</a></li> <li><a href="/systems/">150 Systems</a></li> <li><a href="/templates/">9 Templates</a></li> <li><a href="/craft/">11 Craft principles</a></li> </ul> </div> <div class="sub-footer-col"> <h5>Connect</h5> <ul> <li><a href="https://github.com/nexu-io/open-design" target="_blank" rel="noopener">GitHub</a></li> <li><a href="https://github.com/nexu-io/open-design/issues" target="_blank" rel="noopener">Issues</a></li> <li><a href="https://github.com/nexu-io/open-design/releases" target="_blank" rel="noopener">Releases</a></li> <li><a href="/blog/rss.xml">RSS</a></li> <li><a href="/#contact">Contact</a></li> </ul> </div> </div> <div class="sub-footer-bottom"> <span>● Open Design · Apache-2.0 · 2026 / Volume 01 / Issue Nº 26</span> <span>Berlin / Open / Earth · 52.5200° N · 13.4050° E</span> </div> </div> </footer> </div> <script>
+  (() => {
+    const REPO_API = 'https://api.github.com/repos/nexu-io/open-design';
+
+    const formatStars = (count) => {
+      if (!Number.isFinite(count) || count <= 0) return null;
+      if (count < 1000) return String(count);
+      return `${(count / 1000).toFixed(1).replace(/\.0$/, '')}K`;
+    };
+
+    const formatVersion = (release) => {
+      const fromTag = (tag) => {
+        if (typeof tag !== 'string') return null;
+        const cleaned = tag.replace(/^open-design[-_]?v?/i, '').trim();
+        return cleaned ? `v${cleaned.replace(/^v/, '')}` : null;
+      };
+      const fromName = (name) => {
+        if (typeof name !== 'string') return null;
+        const m = name.match(/(\d+\.\d+\.\d+(?:[-+][\w.]+)?)/);
+        return m ? `v${m[1]}` : null;
+      };
+      return fromName(release?.name) ?? fromTag(release?.tag_name) ?? null;
+    };
+
+    const nav = document.querySelector('[data-nav-headroom]');
+    if (nav) {
+      let lastY = window.scrollY;
+      const showTopThreshold = 100;
+      const scrollDelta = 6;
+      window.addEventListener(
+        'scroll',
+        () => {
+          const y = window.scrollY;
+          const delta = y - lastY;
+          if (y <= showTopThreshold) nav.classList.remove('is-hidden');
+          else if (delta > scrollDelta) nav.classList.add('is-hidden');
+          else if (delta < -scrollDelta) nav.classList.remove('is-hidden');
+          lastY = y;
+        },
+        { passive: true },
+      );
+    }
+
+    const starSlots = document.querySelectorAll('[data-github-stars]');
+    if (starSlots.length > 0) {
+      fetch(REPO_API, {
+        headers: { Accept: 'application/vnd.github+json' },
+      })
+        .then((r) => (r.ok ? r.json() : Promise.reject(new Error('http error'))))
+        .then((data) => {
+          const label = formatStars(data?.stargazers_count);
+          if (!label) return;
+          for (const slot of starSlots) slot.textContent = label;
+        })
+        .catch(() => {});
+    }
+
+    const versionSlots = document.querySelectorAll('[data-github-version]');
+    if (versionSlots.length > 0) {
+      fetch(`${REPO_API}/releases/latest`, {
+        headers: { Accept: 'application/vnd.github+json' },
+      })
+        .then((r) => (r.ok ? r.json() : Promise.reject(new Error('http error'))))
+        .then((data) => {
+          const label = formatVersion(data);
+          if (!label) return;
+          for (const slot of versionSlots) slot.textContent = label;
+        })
+        .catch(() => {});
+    }
+  })();
+</script>  </body> </html>

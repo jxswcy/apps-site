@@ -1,763 +1,183 @@
-<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Nu Apps</title>
-  <meta name="description" content="Nu Apps is a collection of focused apps for reading, documents, focus, and everyday workflows.">
-  <style>
-    :root {
-      color-scheme: light;
-      --bg: #f5f5f7;
-      --ink: #050505;
-      --text: #1d1d1f;
-      --muted: #6e6e73;
-      --line: rgba(0, 0, 0, 0.09);
-      --panel: rgba(255, 255, 255, 0.88);
-      --blue: #0071e3;
-      --orange: #f46b2f;
-      --red: #e52b2b;
-      --charcoal: #1d1d1f;
-      --shadow: 0 30px 90px rgba(0, 0, 0, 0.12);
-    }
-
-    * {
-      box-sizing: border-box;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
-    body {
-      margin: 0;
-      min-height: 100vh;
-      overflow-x: hidden;
-      color: var(--text);
-      background:
-        radial-gradient(circle at 50% -12%, rgba(255, 255, 255, 0.96), rgba(245, 245, 247, 0.72) 34%, transparent 62%),
-        linear-gradient(180deg, #fbfbfd 0%, var(--bg) 54%, #ffffff 100%);
-      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Segoe UI", sans-serif;
-      line-height: 1.5;
-    }
-
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
-
-    .site-header {
-      position: sticky;
-      top: 0;
-      z-index: 10;
-      border-bottom: 1px solid rgba(0, 0, 0, 0.06);
-      background: rgba(251, 251, 253, 0.74);
-      backdrop-filter: saturate(180%) blur(24px);
-    }
-
-    .nav {
-      width: min(1180px, calc(100% - 40px));
-      min-height: 64px;
-      margin: 0 auto;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 22px;
-    }
-
-    .brand {
-      color: var(--ink);
-      font-size: 17px;
-      font-weight: 750;
-      letter-spacing: 0;
-      white-space: nowrap;
-    }
-
-    .nav-links {
-      display: flex;
-      align-items: center;
-      justify-content: flex-end;
-      flex-wrap: wrap;
-      gap: 8px;
-    }
-
-    .nav-link,
-    .language-toggle {
-      min-height: 40px;
-      padding: 0 14px;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      border-radius: 999px;
-      color: #38383d;
-      font-family: inherit;
-      font-size: 14px;
-      font-weight: 600;
-      letter-spacing: 0;
-      white-space: nowrap;
-      transition: transform 180ms ease, background 180ms ease;
-    }
-
-    .language-toggle {
-      border: 1px solid rgba(0, 0, 0, 0.08);
-      background: rgba(255, 255, 255, 0.62);
-      cursor: pointer;
-    }
-
-    .nav-link:hover,
-    .language-toggle:hover {
-      background: rgba(0, 0, 0, 0.05);
-      transform: translateY(-1px);
-    }
-
-    main {
-      width: min(1180px, calc(100% - 40px));
-      margin: 0 auto;
-      padding: 88px 0 96px;
-    }
-
-    .hero {
-      max-width: 920px;
-      padding: 44px 0 58px;
-    }
-
-    h1 {
-      margin: 0;
-      color: var(--ink);
-      font-size: clamp(66px, 10vw, 132px);
-      line-height: 0.92;
-      font-weight: 760;
-      letter-spacing: 0;
-    }
-
-    .lead {
-      max-width: 780px;
-      margin: 26px 0 0;
-      color: #303035;
-      font-size: clamp(22px, 3vw, 36px);
-      line-height: 1.14;
-      font-weight: 650;
-      letter-spacing: 0;
-    }
-
-    .sublead {
-      max-width: 650px;
-      margin: 18px 0 0;
-      color: var(--muted);
-      font-size: 18px;
-      line-height: 1.58;
-      font-weight: 460;
-    }
-
-    .apps-section {
-      padding-top: 12px;
-    }
-
-    .section-heading {
-      margin: 0 0 22px;
-      color: var(--ink);
-      font-size: clamp(34px, 5vw, 64px);
-      line-height: 1.02;
-      font-weight: 750;
-      letter-spacing: 0;
-    }
-
-    .app-grid {
-      display: grid;
-      grid-template-columns: 1.35fr 0.65fr;
-      gap: 16px;
-      align-items: start;
-    }
-
-    .app-card {
-      position: relative;
-      min-height: 420px;
-      overflow: hidden;
-      border: 1px solid rgba(0, 0, 0, 0.06);
-      border-radius: 32px;
-      background: var(--panel);
-      box-shadow: var(--shadow);
-      backdrop-filter: blur(24px);
-    }
-
-    .app-card.primary {
-      display: grid;
-      grid-template-columns: minmax(0, 0.9fr) minmax(360px, 1.1fr);
-      gap: 8px;
-    }
-
-    .app-copy {
-      position: relative;
-      z-index: 2;
-      padding: 34px;
-      display: flex;
-      min-width: 0;
-      flex-direction: column;
-      align-items: flex-start;
-      justify-content: space-between;
-      gap: 28px;
-    }
-
-    .app-title-row {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-    }
-
-    .app-icon {
-      width: 58px;
-      height: 58px;
-      flex: 0 0 auto;
-      display: block;
-      border-radius: 15px;
-      object-fit: cover;
-      box-shadow: 0 16px 34px rgba(255, 94, 20, 0.25);
-    }
-
-    .nuread-icon {
-      width: 58px;
-      height: 58px;
-      flex: 0 0 auto;
-      display: block;
-      border-radius: 15px;
-      object-fit: cover;
-      box-shadow: 0 16px 34px rgba(0, 113, 227, 0.22);
-    }
-
-    .nufile-icon {
-      width: 58px;
-      height: 58px;
-      flex: 0 0 auto;
-      display: block;
-      border-radius: 15px;
-      object-fit: cover;
-      box-shadow: 0 16px 34px rgba(229, 43, 43, 0.22);
-    }
-
-    .nutype-icon {
-      width: 58px;
-      height: 58px;
-      flex: 0 0 auto;
-      display: block;
-      border-radius: 15px;
-      object-fit: cover;
-      box-shadow: 0 16px 34px rgba(29, 29, 31, 0.22);
-    }
-
-    .status {
-      margin: 0 0 10px;
-      color: var(--blue);
-      font-size: 13px;
-      font-weight: 720;
-      letter-spacing: 0;
-    }
-
-    .soon .status {
-      color: #a64719;
-    }
-
-    .nufile-card .status {
-      color: var(--red);
-    }
-
-    .nutype-card .status {
-      color: var(--charcoal);
-    }
-
-    .app-card h3 {
-      margin: 0;
-      color: var(--ink);
-      font-size: clamp(34px, 4vw, 52px);
-      line-height: 0.98;
-      font-weight: 750;
-      letter-spacing: 0;
-    }
-
-    .soon h3 {
-      font-size: clamp(32px, 4vw, 44px);
-    }
-
-    .app-card p {
-      max-width: 470px;
-      margin: 18px 0 0;
-      color: var(--muted);
-      font-size: 17px;
-      line-height: 1.58;
-      font-weight: 460;
-    }
-
-    .app-actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-    }
-
-    .action {
-      min-height: 42px;
-      padding: 0 16px;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      border-radius: 999px;
-      background: rgba(0, 113, 227, 0.1);
-      color: var(--blue);
-      font-size: 14px;
-      font-weight: 700;
-      transition: transform 180ms ease, background 180ms ease;
-    }
-
-    .action.primary-action {
-      background: var(--blue);
-      color: #ffffff;
-      box-shadow: 0 14px 30px rgba(0, 113, 227, 0.25);
-    }
-
-    .action:hover {
-      transform: translateY(-1px);
-      background: rgba(0, 113, 227, 0.15);
-    }
-
-    .primary-action:hover {
-      background: #0066cc;
-    }
-
-    .app-visual {
-      position: relative;
-      min-height: 420px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .app-visual::before {
-      content: "";
-      position: absolute;
-      inset: 22% 0 4% -12%;
-      border-radius: 50%;
-      background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.04) 44%, transparent 72%);
-      filter: blur(12px);
-      opacity: 0.7;
-    }
-
-    .device-showcase {
-      position: relative;
-      width: min(660px, 132%);
-      max-width: none;
-      height: auto;
-      display: block;
-      filter: drop-shadow(0 26px 58px rgba(0, 0, 0, 0.12));
-      transform: translateX(7%);
-    }
-
-    .side-stack {
-      display: grid;
-      gap: 16px;
-    }
-
-    .soon {
-      min-height: 202px;
-      padding: 28px;
-    }
-
-    .soon p {
-      margin-top: 14px;
-      font-size: 16px;
-    }
-
-    .soon-top {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-    }
-
-    .mini-actions {
-      margin-top: 18px;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-    }
-
-    .mini-action {
-      min-height: 36px;
-      padding: 0 13px;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      border-radius: 999px;
-      background: rgba(229, 43, 43, 0.08);
-      color: #bc1717;
-      font-size: 13px;
-      font-weight: 700;
-      transition: transform 180ms ease, background 180ms ease;
-    }
-
-    .mini-action:hover {
-      transform: translateY(-1px);
-      background: rgba(229, 43, 43, 0.13);
-    }
-
-    .mini-action.primary-mini {
-      background: var(--red);
-      color: #fff;
-      box-shadow: 0 12px 26px rgba(229, 43, 43, 0.2);
-    }
-
-    .mini-action.disabled-mini {
-      background: rgba(29, 29, 31, 0.08);
-      color: var(--charcoal);
-      cursor: default;
-    }
-
-    .mini-action.disabled-mini:hover {
-      transform: none;
-      background: rgba(29, 29, 31, 0.08);
-    }
-
-    .family-card {
-      min-height: 202px;
-      padding: 28px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      gap: 22px;
-    }
-
-    .family-card h3 {
-      font-size: clamp(30px, 4vw, 44px);
-    }
-
-    .dot-row {
-      display: flex;
-      gap: 8px;
-    }
-
-    .dot {
-      width: 13px;
-      height: 13px;
-      border-radius: 999px;
-      background: var(--orange);
-      box-shadow: 0 0 0 6px rgba(244, 107, 47, 0.12);
-    }
-
-    .dot:nth-child(2) {
-      background: var(--blue);
-      box-shadow: 0 0 0 6px rgba(0, 113, 227, 0.12);
-    }
-
-    .dot:nth-child(3) {
-      background: #28c840;
-      box-shadow: 0 0 0 6px rgba(40, 200, 64, 0.12);
-    }
-
-    @media (max-width: 980px) {
-      main {
-        padding-top: 58px;
-      }
-
-      .app-grid,
-      .app-card.primary {
-        grid-template-columns: 1fr;
-      }
-
-      .app-visual {
-        min-height: 360px;
-        order: -1;
-      }
-
-      .device-showcase {
-        width: min(760px, 104vw);
-        transform: translateX(0);
-      }
-
-      .side-stack {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
-
-      .family-card {
-        grid-column: 1 / -1;
-      }
-    }
-
-    @media (max-width: 720px) {
-      .nav,
-      main {
-        width: min(100% - 28px, 1180px);
-      }
-
-      .nav {
-        min-height: 58px;
-      }
-
-      .brand {
-        font-size: 16px;
-      }
-
-      .nav-links {
-        gap: 4px;
-      }
-
-      .nav-link,
-      .language-toggle {
-        min-height: 34px;
-        padding: 0 9px;
-        font-size: 12px;
-      }
-
-      .hero {
-        padding: 34px 0 40px;
-      }
-
-      .lead {
-        font-size: 24px;
-      }
-
-      .sublead {
-        font-size: 16px;
-      }
-
-      .app-card {
-        border-radius: 26px;
-      }
-
-      .app-copy,
-      .soon,
-      .family-card {
-        padding: 24px;
-      }
-
-      .app-visual {
-        min-height: 270px;
-        overflow: hidden;
-      }
-
-      .device-showcase {
-        width: 112%;
-      }
-
-      .side-stack {
-        grid-template-columns: 1fr;
-      }
-
-      .family-card {
-        grid-column: auto;
-      }
-    }
-
-    @media (max-width: 430px) {
-      .nav {
-        align-items: flex-start;
-        flex-direction: column;
-        padding: 12px 0;
-      }
-
-      .nav-links {
-        width: 100%;
-        justify-content: space-between;
-      }
-
-      .nav-link,
-      .language-toggle {
-        flex: 1 1 auto;
-      }
-
-      h1 {
-        font-size: 62px;
-      }
-
-      .app-actions {
-        width: 100%;
-      }
-
-      .action {
-        flex: 1 1 auto;
-      }
-    }
-  </style>
-</head>
-<body>
-  <header class="site-header">
-    <nav class="nav" aria-label="Nu Apps">
-      <a class="brand" href="./" aria-label="Nu Apps home" data-i18n="brand">Nu Apps</a>
-      <div class="nav-links">
-        <a class="nav-link" href="#apps" data-i18n="navApps">Apps</a>
-        <a class="nav-link" href="./nufeed/" data-i18n="navNuFeed">NuFeed</a>
-        <a class="nav-link" href="./nufile/" data-i18n="navNuFile">NuFile</a>
-        <a class="nav-link" href="./nutype/" data-i18n="navNuType">NuType</a>
-        <button class="language-toggle" type="button" data-language-toggle data-i18n="languageToggle" aria-label="Switch language">CN</button>
-      </div>
-    </nav>
-  </header>
-
-  <main>
-    <section class="hero" aria-labelledby="title">
-      <h1 id="title" data-i18n="title">Nu Apps</h1>
-      <p class="lead" data-i18n="lead">Focused apps for reading, focus, and everyday workflows.</p>
-      <p class="sublead" data-i18n="sublead">NuFeed is available now. NuFile and NuType are joining the family, with NuRead planned next.</p>
-    </section>
-
-    <section class="apps-section" id="apps" aria-labelledby="apps-title">
-      <h2 class="section-heading" id="apps-title" data-i18n="appsTitle">Available and upcoming apps.</h2>
-      <div class="app-grid">
-        <article class="app-card primary">
-          <div class="app-copy">
-            <div>
-              <div class="app-title-row">
-                <img class="app-icon" src="./nufeed/assets/nufeed-icon.png" alt="" aria-hidden="true">
-                <div>
-                  <p class="status" data-i18n="nufeedStatus">Available now</p>
-                  <h3>NuFeed</h3>
-                </div>
-              </div>
-              <p data-i18n="nufeedBody">A focused RSS and web subscription reader for iPhone, iPad, and Mac. Read feeds, follow sites without RSS, extract full articles, translate bilingual content, and keep progress in sync with iCloud.</p>
-            </div>
-            <div class="app-actions" aria-label="NuFeed links">
-              <a class="action primary-action" href="https://apps.apple.com/app/id6762549046" target="_blank" rel="noopener" data-i18n="appStoreAction">App Store</a>
-              <a class="action" href="./nufeed/" data-i18n="overviewAction">Overview</a>
-              <a class="action" href="./nufeed/support.html" data-i18n="supportAction">Support</a>
-              <a class="action" href="./nufeed/privacy.html" data-i18n="privacyAction">Privacy Policy</a>
-            </div>
-          </div>
-          <div class="app-visual" aria-hidden="true">
-            <img class="device-showcase" src="./nufeed/assets/nufeed-device-showcase.png" alt="">
-          </div>
-        </article>
-
-        <div class="side-stack">
-          <article class="app-card soon nufile-card">
-            <div class="soon-top">
-              <img class="nufile-icon" src="./nufile/assets/nufile-icon.png" alt="" aria-hidden="true">
-              <div>
-                <p class="status" data-i18n="nufileStatus">Coming soon</p>
-                <h3>NuFile</h3>
-              </div>
-            </div>
-            <p data-i18n="nufileBody">A local OFD/PDF utility for conversion, watermarking, invoice fields, and batch document workflows on Apple devices.</p>
-            <div class="mini-actions" aria-label="NuFile links">
-              <a class="mini-action primary-mini" href="https://apps.apple.com/app/id6768900848" target="_blank" rel="noopener" data-i18n="appStoreAction">App Store</a>
-              <a class="mini-action" href="./nufile/" data-i18n="overviewAction">Overview</a>
-              <a class="mini-action" href="./nufile/support.html" data-i18n="supportAction">Support</a>
-              <a class="mini-action" href="./nufile/privacy.html" data-i18n="privacyAction">Privacy Policy</a>
-            </div>
-          </article>
-
-          <article class="app-card soon nutype-card">
-            <div class="soon-top">
-              <img class="nutype-icon" src="./nutype/assets/nutype-icon.png" alt="" aria-hidden="true">
-              <div>
-                <p class="status" data-i18n="nutypeStatus">Coming soon</p>
-                <h3>NuType</h3>
-              </div>
-            </div>
-            <p data-i18n="nutypeBody">A lightweight Mac voice input tool that turns natural speech into clean text and inserts it into the current app.</p>
-            <div class="mini-actions" aria-label="NuType links">
-              <span class="mini-action disabled-mini" data-i18n="comingSoonAction">Coming Soon</span>
-              <a class="mini-action" href="./nutype/" data-i18n="overviewAction">Overview</a>
-              <a class="mini-action" href="./nutype/support.html" data-i18n="supportAction">Support</a>
-              <a class="mini-action" href="./nutype/privacy.html" data-i18n="privacyAction">Privacy Policy</a>
-            </div>
-          </article>
-
-          <article class="app-card soon">
-            <div class="soon-top">
-              <img class="nuread-icon" src="./nufeed/assets/nuread-icon.png" alt="" aria-hidden="true">
-              <div>
-                <p class="status" data-i18n="nureadStatus">Coming soon</p>
-                <h3>NuRead</h3>
-              </div>
-            </div>
-            <p data-i18n="nureadBody">A new reading app is planned for long-form reading and saved articles.</p>
-          </article>
-
-          <article class="app-card family-card">
-            <div class="dot-row" aria-hidden="true">
-              <span class="dot"></span>
-              <span class="dot"></span>
-              <span class="dot"></span>
-            </div>
-            <div>
-              <h3 data-i18n="familyTitle">More apps are coming.</h3>
-              <p data-i18n="familyBody">This page will grow into the home for the Nu app family as new products are released.</p>
-            </div>
-          </article>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <script>
-    const copy = {
-      en: {
-        brand: "Nu Apps",
-        navApps: "Apps",
-        navNuFeed: "NuFeed",
-        navNuFile: "NuFile",
-        navNuType: "NuType",
-        languageToggle: "CN",
-        title: "Nu Apps",
-        lead: "Focused apps for reading, focus, and everyday workflows.",
-        sublead: "NuFeed is available now. NuFile and NuType are joining the family, with NuRead planned next.",
-        appsTitle: "Available and upcoming apps.",
-        nufeedStatus: "Available now",
-        nufeedBody: "A focused RSS and web subscription reader for iPhone, iPad, and Mac. Read feeds, follow sites without RSS, extract full articles, translate bilingual content, and keep progress in sync with iCloud.",
-        appStoreAction: "App Store",
-        overviewAction: "Overview",
-        supportAction: "Support",
-        privacyAction: "Privacy Policy",
-        nufileStatus: "Coming soon",
-        nufileBody: "A local OFD/PDF utility for conversion, watermarking, invoice fields, and batch document workflows on Apple devices.",
-        nutypeStatus: "Coming soon",
-        nutypeBody: "A lightweight Mac voice input tool that turns natural speech into clean text and inserts it into the current app.",
-        comingSoonAction: "Coming Soon",
-        nureadStatus: "Coming soon",
-        nureadBody: "A new reading app is planned for long-form reading and saved articles.",
-        familyTitle: "More apps are coming.",
-        familyBody: "This page will grow into the home for the Nu app family as new products are released."
-      },
-      zh: {
-        brand: "Nu Apps",
-        navApps: "应用",
-        navNuFeed: "NuFeed",
-        navNuFile: "NuFile",
-        navNuType: "NuType",
-        languageToggle: "EN",
-        title: "Nu Apps",
-        lead: "一组为阅读、文件处理和日常输入打造的轻量 App。",
-        sublead: "NuFeed 已上线。NuFile 和 NuType 正在准备中，后续还会有 NuRead。",
-        appsTitle: "已上线和即将推出",
-        nufeedStatus: "现已上线",
-        nufeedBody: "用 NuFeed 管理 RSS 和网页订阅，在 iPhone、iPad、Mac 上读订阅、追踪没有 RSS 的网站、提取全文、生成双语内容，并用 iCloud 同步进度。",
-        appStoreAction: "App Store",
-        overviewAction: "查看介绍",
-        supportAction: "支持",
-        privacyAction: "隐私政策",
-        nufileStatus: "即将推出",
-        nufileBody: "NuFile 是本地 OFD/PDF 工具，可用于转换、加水印、整理发票字段和批量处理文档。",
-        nutypeStatus: "即将推出",
-        nutypeBody: "NuType 是 Mac 上的轻量语音输入工具，把自然说话整理成干净文字，直接插入当前 App。",
-        comingSoonAction: "即将推出",
-        nureadStatus: "即将推出",
-        nureadBody: "NuRead 会专注长文阅读和稍后读，带来更安静的阅读体验。",
-        familyTitle: "更多应用会陆续上线。",
-        familyBody: "新产品发布后，这里会继续更新，作为 Nu Apps 的入口页。"
-      }
-    };
-
-    const setLanguage = (language) => {
-      document.documentElement.lang = language === "zh" ? "zh-CN" : "en";
-      document.querySelectorAll("[data-i18n]").forEach((element) => {
-        const key = element.dataset.i18n;
-        element.textContent = copy[language][key] || copy.en[key] || "";
-      });
-      localStorage.setItem("nufeed-language", language);
-    };
-
-    const toggle = document.querySelector("[data-language-toggle]");
-    const savedLanguage = localStorage.getItem("nufeed-language") || "en";
-    setLanguage(savedLanguage === "zh" ? "zh" : "en");
-    toggle.addEventListener("click", () => {
-      const nextLanguage = document.documentElement.lang === "zh-CN" ? "en" : "zh";
-      setLanguage(nextLanguage);
-    });
-  </script>
-</body>
-</html>
+<!DOCTYPE html><html lang="en"> <head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="theme-color" content="#efe7d2"><title>Open Design — Design with the agent already on your laptop.</title><meta name="description" content="The open-source alternative to Claude Design. Your existing coding agent — Claude · Codex · Cursor · Gemini · OpenCode · Qwen — becomes the design engine, driven by 131 composable skills and 150 brand-grade design systems."><link rel="canonical" href="https://nuapp.site/"><link rel="icon" type="image/png" sizes="32x32" href="/favicon.png"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><meta property="og:type" content="website"><meta property="og:site_name" content="Open Design"><meta property="og:title" content="Open Design — Design with the agent already on your laptop."><meta property="og:description" content="The open-source alternative to Claude Design. Your existing coding agent — Claude · Codex · Cursor · Gemini · OpenCode · Qwen — becomes the design engine, driven by 131 composable skills and 150 brand-grade design systems."><meta property="og:url" content="https://nuapp.site/"><meta property="og:image" content="https://static.open-design.ai/cdn-cgi/image/width=1024,quality=82,format=auto/https://static.open-design.ai/landing/assets/hero.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Open Design — Design with the agent already on your laptop."><meta name="twitter:description" content="The open-source alternative to Claude Design. Your existing coding agent — Claude · Codex · Cursor · Gemini · OpenCode · Qwen — becomes the design engine, driven by 131 composable skills and 150 brand-grade design systems."><meta name="twitter:image" content="https://static.open-design.ai/cdn-cgi/image/width=1024,quality=82,format=auto/https://static.open-design.ai/landing/assets/hero.png"><link rel="stylesheet" href="/_astro/_slug_.CnvQ8Wom.css"></head> <body> <div class="side-rail right" data-od-id="rail-right"><span class="rail-text">Open Design — Vol. 01 · Issue Nº 26 · Apache-2.0</span></div><div class="side-rail left" data-od-id="rail-left"><span class="rail-text">Skills · Systems · Agents · BYOK · Local-first</span></div><div class="shell"><div class="topbar" data-od-id="topbar"><div class="container topbar-inner"><span><b>OD / 2026</b> · Vol. 01 / Issue Nº 26</span><span class="mid"><span>Filed under <b class="coral">Design · Intelligence</b></span><span>Apache-2.0 · Made on Earth</span></span><span class="right"><a class="topbar-link" href="https://github.com/nexu-io/open-design/releases" target="_blank" rel="noreferrer noopener"><span class="pulse"></span>Live · <span data-github-version="true">v0.7.0</span></a><span class="locale-switch"><b>EN</b> · <a class="topbar-link" href="https://github.com/nexu-io/open-design" target="_blank" rel="noreferrer noopener" title="Localization in progress — open the repo on GitHub">DE</a> · <a class="topbar-link" href="https://github.com/nexu-io/open-design" target="_blank" rel="noreferrer noopener" title="Localization in progress — open the repo on GitHub">中文</a> · <a class="topbar-link" href="https://github.com/nexu-io/open-design" target="_blank" rel="noreferrer noopener" title="Localization in progress — open the repo on GitHub">日本語</a></span></span></div></div><header class="nav" data-od-id="nav" data-nav-headroom="true"><div class="container nav-inner"><a href="#top" class="brand"><span class="brand-mark"><img src="/logo.png" alt="" width="36" height="36"/></span><span>Open Design</span><span class="brand-meta"><b>Studio Nº 01</b>Berlin / Open / Earth</span></a><nav><ul class="nav-links"><li><a href="/skills/">Skills<span class="num">131</span></a></li><li><a href="/systems/">Systems<span class="num">150</span></a></li><li><a href="/templates/">Templates<span class="num">9</span></a></li><li><a href="/craft/">Craft<span class="num">11</span></a></li><li><a href="/blog/">Blog</a></li><li><a href="#contact">Contact</a></li></ul></nav><div class="nav-side"><a class="nav-cta ghost" href="https://github.com/nexu-io/open-design/releases" aria-label="Download Open Design desktop" title="Download the desktop app" target="_blank" rel="noreferrer noopener">Download</a><a class="nav-cta" href="https://github.com/nexu-io/open-design" aria-label="Star Open Design on GitHub" title="Click to star us on GitHub" target="_blank" rel="noreferrer noopener">Star · <span data-github-stars="true">44K</span></a><span class="status-dot" aria-hidden="true"></span></div></div></header><section class="hero" id="top" data-od-id="hero"><div class="container hero-grid"><div class="hero-copy"><span class="label" data-reveal="true">Open-source design studio <span class="ix">· Nº 01</span></span><h1 class="display" data-reveal="true">Designing <em>intelligence</em> with skills, <em>taste,</em> and <em>code</em><span class="dot">.</span></h1><p class="lead" data-reveal="true">The open-source alternative to Claude Design. Your existing coding agent — Claude · Codex · Cursor · Gemini · OpenCode · Qwen — becomes the design engine, driven by 131 composable skills and 150 brand-grade design systems.</p><div class="hero-actions" data-reveal="true"><a class="btn btn-primary" href="https://github.com/nexu-io/open-design" target="_blank" rel="noreferrer noopener">Star us on GitHub<span class="arrow"><svg viewBox="0 0 24 24"><path d="M5 19L19 5M19 5H8M19 5v11"></path></svg></span></a><a class="btn btn-ghost" href="https://github.com/nexu-io/open-design/releases" target="_blank" rel="noreferrer noopener">Download desktop<span class="arrow"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><path d="M9 12h6M12 9v6"></path></svg></span></a></div><div class="hero-stats" data-reveal="true"><div class="stat"><span class="ring solid">131</span><span class="stat-label"><b>skills</b>shippable</span></div><div class="stat"><span class="ring">150</span><span class="stat-label"><b>systems</b>portable</span></div><div class="stat"><span class="ring coral">12</span><span class="stat-label"><b>CLIs</b>BYO agent</span></div></div><div class="hero-foot" data-reveal="true"><span class="meta">↳  pnpm tools-dev  ·  3 commands to start</span><span class="coord">52.5200° N · 13.4050° E</span></div></div><div class="hero-art" data-reveal="scale"><span class="corner tl"></span><span class="corner tr"></span><span class="corner bl"></span><span class="corner br"></span><span class="annot annot-tl coord">FIG. 01 / OD-26</span><span class="annot annot-tr">Plate Nº 08</span><span class="annot annot-bl coord">SHA · a1b2c3d</span><span class="annot annot-br">Composed in <span style="color:var(--coral)">Open Design</span></span><img src="https://static.open-design.ai/cdn-cgi/image/width=1024,quality=82,format=auto/https://static.open-design.ai/landing/assets/hero.png" alt=""/><div class="index"><span><span class="n">01</span>Detect</span><span class="on"><span class="n">02</span>Discover</span><span><span class="n">03</span>Direct</span><span><span class="n">04</span>Deliver</span></div></div></div></section><section class="wire" data-od-id="wire" aria-label="Global wire — cities and contributors"><div class="container wire-inner"><div class="wire-left"><span class="wire-mark" aria-hidden="true"><span class="wire-pulse"></span></span><span class="wire-title"><b>From the field</b><span>Open · 23 cities · <span data-wire-contributors-count="true">6</span> contributors</span></span></div><div class="wire-rows"><div class="wire-row"><div class="marquee-track" aria-hidden="true"><span class="wire-item"><span class="wire-dot">·</span><span class="wire-coord">52.52°N</span><span class="wire-name">Berlin</span></span><span class="wire-item"><span class="wire-dot">·</span><span class="wire-coord">35.68°N</span><span class="wire-name">Tokyo</span></span><span class="wire-item"><span class="wire-dot">·</span><span class="wire-coord">31.23°N</span><span class="wire-name">Shanghai</span></span><span class="wire-item"><span class="wire-dot">·</span><span class="wire-coord">39.90°N</span><span class="wire-name">Beijing</span></span><span class="wire-item"><span class="wire-dot">·</span><span class="wire-coord">25.03°N</span><span class="wire-name">Taipei</span></span><span class="wire-item"><span class="wire-dot">·</span><span class="wire-coord">1.35°N</span><span class="wire-name">Singapore</span></span><span class="wire-item"><span class="wire-dot">·</span><span class="wire-coord">12.97°N</span><span class="wire-name">Bangalore</span></span><span class="wire-item"><span class="wire-dot">·</span><span class="wire-coord">25.20°N</span><span class="wire-name">Dubai</span></span><span class="wire-item"><span class="wire-dot">·</span><span class="wire-coord">6.52°N</span><span class="wire-name">Lagos</span></span><span class="wire-item"><span class="wire-dot">·</span><span class="wire-coord">1.29°S</span><span class="wire-name">Nairobi</span></span><span class="wire-item"><span class="wire-dot">·</span><span class="wire-coord">33.92°S</span><span class="wire-name">Cape Town</span></span><span class="wire-item"><span class="wire-dot">·</span><span class="wire-coord">38.72°N</span><span class="wire-name">Lisbon</span></span><span class="wire-item"><span class="wire-dot">·</span><span class="wire-coord">40.42°N</span><span class="wire-name">Madrid</span></span><span class="wire-item"><span class="wire-dot">·</span><span class="wire-coord">48.86°N</span><span class="wire-name">Paris</span></span><span class="wire-item"><span class="wire-dot">·</span><span class="wire-coord">51.51°N</span><span class="wire-name">London</span></span><span class="wire-item"><span class="wire-dot">·</span><span class="wire-coord">52.37°N</span><span class="wire-name">Amsterdam</span></span><span class="wire-item"><span class="wire-dot">·</span><span class="wire-coord">59.33°N</span><span class="wire-name">Stockholm</span></span><span class="wire-item"><span class="wire-dot">·</span><span class="wire-coord">43.65°N</span><span class="wire-name">Toronto</span></span><span class="wire-item"><span class="wire-dot">·</span><span class="wire-coord">40.71°N</span><span class="wire-name">New York</span></span><span class="wire-item"><span class="wire-dot">·</span><span class="wire-coord">37.77°N</span><span class="wire-name">San Francisco</span></span><span class="wire-item"><span class="wire-dot">·</span><span class="wire-coord">19.43°N</span><span class="wire-name">Mexico City</span></span><span class="wire-item"><span class="wire-dot">·</span><span class="wire-coord">23.55°S</span><span class="wire-name">São Paulo</span></span><span class="wire-item"><span class="wire-dot">·</span><span class="wire-coord">33.87°S</span><span class="wire-name">Sydney</span></span><span class="wire-item"><span class="wire-dot">·</span><span class="wire-coord">52.52°N</span><span class="wire-name">Berlin</span></span><span class="wire-item"><span class="wire-dot">·</span><span class="wire-coord">35.68°N</span><span class="wire-name">Tokyo</span></span><span class="wire-item"><span class="wire-dot">·</span><span class="wire-coord">31.23°N</span><span class="wire-name">Shanghai</span></span><span class="wire-item"><span class="wire-dot">·</span><span class="wire-coord">39.90°N</span><span class="wire-name">Beijing</span></span><span class="wire-item"><span class="wire-dot">·</span><span class="wire-coord">25.03°N</span><span class="wire-name">Taipei</span></span><span class="wire-item"><span class="wire-dot">·</span><span class="wire-coord">1.35°N</span><span class="wire-name">Singapore</span></span><span class="wire-item"><span class="wire-dot">·</span><span class="wire-coord">12.97°N</span><span class="wire-name">Bangalore</span></span><span class="wire-item"><span class="wire-dot">·</span><span class="wire-coord">25.20°N</span><span class="wire-name">Dubai</span></span><span class="wire-item"><span class="wire-dot">·</span><span class="wire-coord">6.52°N</span><span class="wire-name">Lagos</span></span><span class="wire-item"><span class="wire-dot">·</span><span class="wire-coord">1.29°S</span><span class="wire-name">Nairobi</span></span><span class="wire-item"><span class="wire-dot">·</span><span class="wire-coord">33.92°S</span><span class="wire-name">Cape Town</span></span><span class="wire-item"><span class="wire-dot">·</span><span class="wire-coord">38.72°N</span><span class="wire-name">Lisbon</span></span><span class="wire-item"><span class="wire-dot">·</span><span class="wire-coord">40.42°N</span><span class="wire-name">Madrid</span></span><span class="wire-item"><span class="wire-dot">·</span><span class="wire-coord">48.86°N</span><span class="wire-name">Paris</span></span><span class="wire-item"><span class="wire-dot">·</span><span class="wire-coord">51.51°N</span><span class="wire-name">London</span></span><span class="wire-item"><span class="wire-dot">·</span><span class="wire-coord">52.37°N</span><span class="wire-name">Amsterdam</span></span><span class="wire-item"><span class="wire-dot">·</span><span class="wire-coord">59.33°N</span><span class="wire-name">Stockholm</span></span><span class="wire-item"><span class="wire-dot">·</span><span class="wire-coord">43.65°N</span><span class="wire-name">Toronto</span></span><span class="wire-item"><span class="wire-dot">·</span><span class="wire-coord">40.71°N</span><span class="wire-name">New York</span></span><span class="wire-item"><span class="wire-dot">·</span><span class="wire-coord">37.77°N</span><span class="wire-name">San Francisco</span></span><span class="wire-item"><span class="wire-dot">·</span><span class="wire-coord">19.43°N</span><span class="wire-name">Mexico City</span></span><span class="wire-item"><span class="wire-dot">·</span><span class="wire-coord">23.55°S</span><span class="wire-name">São Paulo</span></span><span class="wire-item"><span class="wire-dot">·</span><span class="wire-coord">33.87°S</span><span class="wire-name">Sydney</span></span></div></div><div class="wire-row reverse"><div class="marquee-track" data-wire-contributors-track="true"><a class="wire-item is-link" href="https://github.com/tw93" aria-label="Open tw93 on GitHub" target="_blank" rel="noreferrer noopener"><span class="wire-dot">·</span><span class="wire-handle">@tw93</span><span class="wire-role">kami</span></a><a class="wire-item is-link" href="https://github.com/op7418" aria-label="Open op7418 on GitHub" target="_blank" rel="noreferrer noopener"><span class="wire-dot">·</span><span class="wire-handle">@op7418</span><span class="wire-role">guizang</span></a><a class="wire-item is-link" href="https://github.com/alchaincyf" aria-label="Open alchaincyf on GitHub" target="_blank" rel="noreferrer noopener"><span class="wire-dot">·</span><span class="wire-handle">@alchaincyf</span><span class="wire-role">huashu</span></a><a class="wire-item is-link" href="https://github.com/multica-ai" aria-label="Open multica-ai on GitHub" target="_blank" rel="noreferrer noopener"><span class="wire-dot">·</span><span class="wire-handle">@multica-ai</span><span class="wire-role">daemon</span></a><a class="wire-item is-link" href="https://github.com/OpenCoworkAI" aria-label="Open OpenCoworkAI on GitHub" target="_blank" rel="noreferrer noopener"><span class="wire-dot">·</span><span class="wire-handle">@OpenCoworkAI</span><span class="wire-role">codesign</span></a><a class="wire-item is-link" href="https://github.com/nexu-io" aria-label="Open nexu-io on GitHub" target="_blank" rel="noreferrer noopener"><span class="wire-dot">·</span><span class="wire-handle">@nexu-io</span><span class="wire-role">studio</span></a><a class="wire-item is-link" href="https://github.com/nexu-io/open-design/graphs/contributors" aria-label="Open you on GitHub" target="_blank" rel="noreferrer noopener"><span class="wire-dot">·</span><span class="wire-handle">@you</span><span class="wire-role">be next</span></a><a class="wire-item is-link" href="https://github.com/tw93" aria-label="Open tw93 on GitHub" target="_blank" rel="noreferrer noopener"><span class="wire-dot">·</span><span class="wire-handle">@tw93</span><span class="wire-role">kami</span></a><a class="wire-item is-link" href="https://github.com/op7418" aria-label="Open op7418 on GitHub" target="_blank" rel="noreferrer noopener"><span class="wire-dot">·</span><span class="wire-handle">@op7418</span><span class="wire-role">guizang</span></a><a class="wire-item is-link" href="https://github.com/alchaincyf" aria-label="Open alchaincyf on GitHub" target="_blank" rel="noreferrer noopener"><span class="wire-dot">·</span><span class="wire-handle">@alchaincyf</span><span class="wire-role">huashu</span></a><a class="wire-item is-link" href="https://github.com/multica-ai" aria-label="Open multica-ai on GitHub" target="_blank" rel="noreferrer noopener"><span class="wire-dot">·</span><span class="wire-handle">@multica-ai</span><span class="wire-role">daemon</span></a><a class="wire-item is-link" href="https://github.com/OpenCoworkAI" aria-label="Open OpenCoworkAI on GitHub" target="_blank" rel="noreferrer noopener"><span class="wire-dot">·</span><span class="wire-handle">@OpenCoworkAI</span><span class="wire-role">codesign</span></a><a class="wire-item is-link" href="https://github.com/nexu-io" aria-label="Open nexu-io on GitHub" target="_blank" rel="noreferrer noopener"><span class="wire-dot">·</span><span class="wire-handle">@nexu-io</span><span class="wire-role">studio</span></a><a class="wire-item is-link" href="https://github.com/nexu-io/open-design/graphs/contributors" aria-label="Open you on GitHub" target="_blank" rel="noreferrer noopener"><span class="wire-dot">·</span><span class="wire-handle">@you</span><span class="wire-role">be next</span></a></div></div></div></div></section><section class="about" data-od-id="about"><div class="container"><div class="sec-rule"><span class="roman">I.</span><span class="meta-grp"><span>About / Manifesto</span><span class="dot-mark">•</span><span>Open Design / Volume 01</span></span><span>002 / 008</span></div><div class="about-grid"><div class="about-copy" data-reveal="true"><span class="label">About the studio <span class="ix">· Nº 02</span></span><h2 class="display">We treat <em>your agent</em> as a creative <em>collaborator,</em> not a black box<span class="dot">.</span></h2><p class="lead">The strongest coding agents already live on your laptop. We don’t ship one — we wire them into a skill-driven design workflow that runs locally with <code class="code-inline">pnpm tools-dev</code>, deploys the web layer to Vercel, and stays BYOK at every layer.</p><a class="btn btn-ghost" href="https://github.com/nexu-io/open-design/tree/main/apps/daemon" target="_blank" rel="noreferrer noopener">Read our approach<span class="arrow"><svg viewBox="0 0 24 24"><path d="M5 19L19 5M19 5H8M19 5v11"></path></svg></span></a><div class="footer-row"><span class="mark">Ø</span><span>Research · Design · Engineering · Repeat</span><span class="stamp"><span>Studio practice</span><span style="color:var(--ink)">Est. MMXXVI</span></span></div></div><div class="about-art" data-reveal="right"><img src="https://static.open-design.ai/cdn-cgi/image/width=1024,quality=82,format=auto/https://static.open-design.ai/landing/assets/about.png" alt=""/><div class="about-side-note"><b></b>From model behavior<br/>to visual taste, we<br/>prototype the full<br/>stack of creative<br/>systems.</div><div class="about-caption"><b>Studies in form · perception · machine imagination.</b>(Open Design, MMXXVI)</div></div></div></div></section><section class="capabilities" id="agents" data-od-id="capabilities"><div class="container"><div class="sec-rule"><span class="roman">II.</span><span class="meta-grp"><span>Capabilities · Skills · Systems</span><span class="dot-mark">•</span><span>4 surfaces / 1 loop</span></span><span>003 / 008</span></div><div class="capabilities-grid"><div class="capabilities-art" data-reveal="left"><span class="corner tl"></span><span class="corner br"></span><img src="https://static.open-design.ai/cdn-cgi/image/width=1024,quality=82,format=auto/https://static.open-design.ai/landing/assets/capabilities.png" alt=""/><div class="ribbon"><b>OPEN DESIGN</b> · CAPABILITIES MATRIX · OD/26</div></div><div class="capabilities-copy" data-reveal="true"><span class="label">Capabilities <span class="ix">· Nº 03</span></span><h2 class="display">Skills, systems, and surfaces <em>for creative</em> intelligence<span class="dot">.</span></h2><p class="lead">We blend human taste with whichever agent you already trust to ship interfaces, decks, and editorial pages that feel intentional, expressive, and alive.</p><div class="cards"><div class="card" data-reveal="true"><div class="num">01<span class="tag">Skills</span></div><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="9" cy="9" r="5"></circle><path d="M14 14l5 5"></path></svg><h3>Skills,<br/>not plugins</h3><p>131 file-based <code style="font-family:var(--mono);font-size:12px">SKILL.md</code> bundles. Drop a folder in, restart the daemon, it appears.</p><a class="arrow-mark" href="https://github.com/nexu-io/open-design/tree/main/skills" aria-label="Browse all skills on GitHub" target="_blank" rel="noreferrer noopener"><svg viewBox="0 0 24 24"><path d="M5 19L19 5M19 5H8M19 5v11"></path></svg></a></div><div class="card" data-reveal="true"><div class="num">02<span class="tag">Systems</span></div><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3.5" y="3.5" width="8" height="8"></rect><rect x="12.5" y="3.5" width="8" height="8"></rect><rect x="3.5" y="12.5" width="8" height="8"></rect><rect x="12.5" y="12.5" width="8" height="8"></rect></svg><h3>Design Systems<br/>as Markdown</h3><p>150 portable <code style="font-family:var(--mono);font-size:12px">DESIGN.md</code> systems — Linear, Vercel, Stripe, Apple, Cursor, Figma…</p><a class="arrow-mark" href="https://github.com/nexu-io/open-design/tree/main/design-systems" aria-label="Browse all design systems on GitHub" target="_blank" rel="noreferrer noopener"><svg viewBox="0 0 24 24"><path d="M5 19L19 5M19 5H8M19 5v11"></path></svg></a></div><div class="card" data-reveal="true"><div class="num">03<span class="tag">Adapters</span></div><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="8" cy="12" r="4.5"></circle><circle cx="16" cy="12" r="4.5"></circle></svg><h3>12 Agent<br/>Adapters</h3><p>Claude · Codex · Gemini · Cursor · Copilot · OpenCode · Devin · Hermes · Pi · Kimi · Kiro · Qwen — auto-detected on $PATH.</p><a class="arrow-mark" href="https://github.com/nexu-io/open-design/tree/main/apps/daemon" aria-label="Read the agent adapter source on GitHub" target="_blank" rel="noreferrer noopener"><svg viewBox="0 0 24 24"><path d="M5 19L19 5M19 5H8M19 5v11"></path></svg></a></div><div class="card" data-reveal="true"><div class="num">04<span class="tag">BYOK</span></div><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 8h14v8H5z"></path><path d="M9 12h6M12 9v6"></path></svg><h3>BYOK<br/>at every layer</h3><p>OpenAI-compatible proxy. DeepSeek, Groq, OpenRouter, your self-hosted vLLM — paste a baseUrl + key, ship.</p><a class="arrow-mark" href="https://github.com/nexu-io/open-design" aria-label="See BYOK setup on GitHub" target="_blank" rel="noreferrer noopener"><svg viewBox="0 0 24 24"><path d="M5 19L19 5M19 5H8M19 5v11"></path></svg></a></div></div></div></div></div></section><section class="labs" id="labs" data-od-id="labs"><div class="container"><div class="sec-rule"><span class="roman">III.</span><span class="meta-grp"><span>Labs / Skills Catalog</span><span class="dot-mark">•</span><span>05 of 131 ongoing</span></span><span>004 / 008</span></div><div class="labs-head"><div data-reveal="true"><span class="label">Labs <span class="ix">· Nº 04</span></span><h2 class="display" style="margin-top:30px">A living archive of <em>experiments</em> in skills, decks, and machine-made form<span class="dot">.</span></h2></div><div class="pills" data-reveal="right"><a class="pill active" href="/skills/">All<span class="count">131</span></a><a class="pill" href="/skills/mode/prototype/">Prototype<span class="count">32</span></a><a class="pill" href="/skills/mode/deck/">Deck<span class="count">09</span></a><a class="pill" href="/skills/">Mobile<span class="count">01</span></a><a class="pill" href="/skills/">Office<span class="count">—</span></a></div></div><div class="labs-meta"><span class="ring">05</span><div class="meta-text"><b>Ongoing experiments</b>documenting ideas in flux<br/>building intelligence<br/>through making</div></div><div class="labs-grid"><div class="lab" data-reveal="true"><div class="lab-img"><span class="badge">Deck</span><img src="https://static.open-design.ai/cdn-cgi/image/width=768,quality=82,format=auto/https://static.open-design.ai/landing/assets/lab-1.png" alt=""/></div><div class="num-row"><span>Nº 01</span><span>2026</span></div><h4>Magazine Decks</h4><p>Editorial-grade slide decks with <code style="font-family:var(--mono);font-size:12px">guizang-ppt</code>. Magazine layout, WebGL hero.</p><a class="arrow-mark" href="https://github.com/nexu-io/open-design/tree/main/skills/guizang-ppt" aria-label="Open Magazine Decks on GitHub" target="_blank" rel="noreferrer noopener"><svg viewBox="0 0 24 24"><path d="M5 19L19 5M19 5H8M19 5v11"></path></svg></a></div><div class="lab" data-reveal="true"><div class="lab-img"><span class="badge">Media</span><img src="https://static.open-design.ai/cdn-cgi/image/width=768,quality=82,format=auto/https://static.open-design.ai/landing/assets/lab-2.png" alt=""/></div><div class="num-row"><span>Nº 02</span><span>2026</span></div><h4>Synthetic Matter</h4><p>Gpt-image-2 + Seedance + HyperFrames. Image, video, audio — same chat surface as code.</p><a class="arrow-mark" href="https://github.com/nexu-io/open-design/tree/main/skills/hyperframes" aria-label="Open Synthetic Matter on GitHub" target="_blank" rel="noreferrer noopener"><svg viewBox="0 0 24 24"><path d="M5 19L19 5M19 5H8M19 5v11"></path></svg></a></div><div class="lab" data-reveal="true"><div class="lab-img"><span class="badge">Loop</span><img src="https://static.open-design.ai/cdn-cgi/image/width=768,quality=82,format=auto/https://static.open-design.ai/landing/assets/lab-3.png" alt=""/></div><div class="num-row"><span>Nº 03</span><span>2026</span></div><h4>Prompt Choreography</h4><p>The interactive question form pops before a single pixel is improvised. 30s of radios beats 30min of redirects.</p><a class="arrow-mark" href="https://github.com/nexu-io/open-design/tree/main/skills/design-brief" aria-label="Open Prompt Choreography on GitHub" target="_blank" rel="noreferrer noopener"><svg viewBox="0 0 24 24"><path d="M5 19L19 5M19 5H8M19 5v11"></path></svg></a></div><div class="lab" data-reveal="true"><div class="lab-img"><span class="badge">Critique</span><img src="https://static.open-design.ai/cdn-cgi/image/width=768,quality=82,format=auto/https://static.open-design.ai/landing/assets/lab-4.png" alt=""/></div><div class="num-row"><span>Nº 04</span><span>2026</span></div><h4>Visual Reasoning</h4><p>5-dim self-critique gates every artifact: philosophy · hierarchy · execution · specificity · restraint.</p><a class="arrow-mark" href="https://github.com/nexu-io/open-design/tree/main/skills/critique" aria-label="Open Visual Reasoning on GitHub" target="_blank" rel="noreferrer noopener"><svg viewBox="0 0 24 24"><path d="M5 19L19 5M19 5H8M19 5v11"></path></svg></a></div><div class="lab" data-reveal="true"><div class="lab-img"><span class="badge">Runtime</span><img src="https://static.open-design.ai/cdn-cgi/image/width=768,quality=82,format=auto/https://static.open-design.ai/landing/assets/lab-5.png" alt=""/></div><div class="num-row"><span>Nº 05</span><span>2026</span></div><h4>Soft Systems</h4><p>Sandboxed iframe preview. Streaming todos. Real-cwd filesystem. Adaptive loops between human and machine.</p><a class="arrow-mark" href="https://github.com/nexu-io/open-design/tree/main/apps/daemon" aria-label="Open Soft Systems on GitHub" target="_blank" rel="noreferrer noopener"><svg viewBox="0 0 24 24"><path d="M5 19L19 5M19 5H8M19 5v11"></path></svg></a></div></div><div class="labs-foot"><div class="progress"><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span></span><span></span><span></span></div><span class="meta">05 / 131 SKILLS · <a href="/skills/" class="library-link" style="color:var(--coral)">VIEW FULL LIBRARY →</a></span></div></div></section><section class="method" data-od-id="method"><div class="container"><div class="sec-rule"><span class="roman">IV.</span><span class="meta-grp"><span>Method / Loop</span><span class="dot-mark">•</span><span>04 stages, iterative</span></span><span>005 / 008</span></div><div class="method-head"><div data-reveal="true"><span class="label">Method <span class="ix">· Nº 05</span></span><h2 class="display" style="margin-top:30px">From <em>signals</em> to systems<span class="dot">.</span></h2></div><div class="right" data-reveal="right"><span class="plus">+</span><p>Every stage is iterative, visual, and research-driven — composable files, not opaque prompts.</p></div></div><div class="method-grid"><div class="method-step" data-reveal="true"><div class="num">01</div><h4>Detect <span class="arrow-r">→</span></h4><p>The daemon scans your $PATH for 12 coding agents and auto-loads 131 skills + 150 systems on boot.</p><div class="img"><img src="https://static.open-design.ai/cdn-cgi/image/width=816,quality=82,format=auto/https://static.open-design.ai/landing/assets/method-1.png" alt=""/></div></div><div class="method-step" data-reveal="true"><div class="num">02</div><h4>Discover <span class="arrow-r">→</span></h4><p>Turn 1 is a question form — surface, audience, tone, scale, brand context. Locked in 30 seconds.</p><div class="img"><img src="https://static.open-design.ai/cdn-cgi/image/width=816,quality=82,format=auto/https://static.open-design.ai/landing/assets/method-2.png" alt=""/></div></div><div class="method-step" data-reveal="true"><div class="num">03</div><h4>Direct <span class="arrow-r">→</span></h4><p>Pick one of 5 deterministic visual directions. Palette in OKLch, font stack, layout posture cues.</p><div class="img"><img src="https://static.open-design.ai/cdn-cgi/image/width=816,quality=82,format=auto/https://static.open-design.ai/landing/assets/method-3.png" alt=""/></div></div><div class="method-step" data-reveal="true"><div class="num">04</div><h4>Deliver <span class="arrow-r">→</span></h4><p>The agent writes to disk, you preview in a sandboxed iframe, export HTML / PDF / PPTX / ZIP / Markdown.</p><div class="img"><img src="https://static.open-design.ai/cdn-cgi/image/width=816,quality=82,format=auto/https://static.open-design.ai/landing/assets/method-4.png" alt=""/></div></div></div><div class="method-foot"><div class="left"><span class="ring"></span><span>Skills inform everything. Files make it real.</span></div><div class="right"><a class="method-repo-link" href="https://github.com/nexu-io/open-design" target="_blank" rel="noreferrer noopener"><b>github.com/nexu-io/open-design</b></a> · Apache-2.0</div></div></div></section><section class="tight" data-od-id="work"><div class="work"><div class="work-rule"><span class="roman">V.</span><span style="display:inline-flex;gap:24px"><span>Selected Work · 2026 Catalog</span><span style="color:var(--coral)">•</span><span>Edited by Open Design</span></span><span>006 / 008</span></div><div class="work-grid"><div class="work-copy" data-reveal="true"><span class="label">Selected work</span><h2>Skills that turn briefs into <em>memorable</em> shippable <em>artifacts</em><span class="dot">.</span></h2><a class="work-link" href="/skills/">View all 131 skills</a></div><a class="work-card" data-reveal="true" href="https://github.com/nexu-io/open-design/tree/main/skills/guizang-ppt" target="_blank" rel="noreferrer noopener"><div class="label-row"><span class="small-label">Featured skill</span><span class="index">01 / 131</span></div><h3>guizang-ppt</h3><p>Magazine-style web PPT for product launches and pitch decks. Bundled verbatim, original LICENSE preserved.</p><div class="img"><img src="https://static.open-design.ai/cdn-cgi/image/width=768,quality=82,format=auto/https://static.open-design.ai/landing/assets/work-1.png" alt=""/></div><div class="meta-row"><span class="year">2026 · DECK</span><span>DEFAULT</span></div></a><a class="work-card alt" data-reveal="true" href="https://github.com/tw93/kami" target="_blank" rel="noreferrer noopener"><div class="label-row"><span class="small-label">Companion system</span><span class="index">04 / 150</span></div><h3>kami</h3><p>An editorial paper system. Warm parchment canvas, ink-blue accent, serif-led hierarchy — multilingual by design (EN · zh-CN · ja).</p><div class="img"><img src="https://static.open-design.ai/cdn-cgi/image/width=768,quality=82,format=auto/https://static.open-design.ai/landing/assets/work-2.png" alt=""/></div><div class="meta-row"><span class="year">2026 · PAPER</span><span>SYSTEM</span></div></a></div><div class="work-arrows"><button type="button" class="nav-btn"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M14 6l-6 6 6 6"></path></svg></button><button type="button" class="nav-btn active"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M10 6l6 6-6 6"></path></svg></button></div></div></section><section class="testimonial" data-od-id="testimonial"><div class="container"><div class="sec-rule"><span class="roman">VI.</span><span class="meta-grp"><span>Collaborators / Lineage</span><span class="dot-mark">•</span><span>Standing on shoulders</span></span><span>007 / 008</span></div><div class="testimonial-grid"><div class="testimonial-copy" data-reveal="true"><span class="label">Collaborators <span class="ix">· Nº 06</span></span><h2 style="margin-top:30px">“Open Design helped us turn vague <em>AI ideas</em> into a visual system that felt <em>sharp, believable,</em> and genuinely new.”</h2><div class="author"><span class="avatar">m</span><p>Mina Kovac<br/><span>Creative Director · North Form</span></p></div><div class="divider"></div><p class="partners-text">Standing on the shoulders of teams shipping open-source design culture.</p><div class="partners"><a class="partner" data-reveal="true" href="https://github.com/alchaincyf/huashu-design" target="_blank" rel="noreferrer noopener"><div class="glyph"><svg viewBox="0 0 80 30" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 24L20 6L35 24M12 18h16"></path></svg></div><span>huashu-design</span><small>Philosophy</small></a><a class="partner" data-reveal="true" href="https://github.com/op7418/guizang-ppt-skill" target="_blank" rel="noreferrer noopener"><div class="glyph"><svg viewBox="0 0 80 30" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 24L20 6L24 22L36 4"></path></svg></div><span>guizang-ppt</span><small>Decks</small></a><a class="partner" data-reveal="true" href="https://github.com/OpenCoworkAI/open-codesign" target="_blank" rel="noreferrer noopener"><div class="glyph"><svg viewBox="0 0 80 30" fill="none" stroke="currentColor" stroke-width="2"><circle cx="15" cy="15" r="9"></circle><path d="M15 6v18M6 15h18"></path></svg></div><span>open-codesign</span><small>UX</small></a><a class="partner" data-reveal="true" href="https://devin.ai/terminal" target="_blank" rel="noreferrer noopener"><div class="glyph"><svg viewBox="0 0 80 30" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 8l9 7-9 7M20 24h18"></path></svg></div><span>Devin CLI</span><small>Terminal</small></a><a class="partner" data-reveal="true" href="https://github.com/heygen-com/hyperframes" target="_blank" rel="noreferrer noopener"><div class="glyph"><svg viewBox="0 0 80 30" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="5" width="22" height="18"></rect><rect x="14" y="9" width="22" height="18"></rect></svg></div><span>hyperframes</span><small>Frames</small></a></div><a class="read-more" href="https://github.com/nexu-io/open-design" target="_blank" rel="noreferrer noopener">Read more stories</a></div><div class="testimonial-art" data-reveal="right"><img src="https://static.open-design.ai/cdn-cgi/image/width=1024,quality=82,format=auto/https://static.open-design.ai/landing/assets/testimonial.png" alt=""/></div></div></div></section><section class="cta" id="contact" data-od-id="cta"><div class="container"><div class="sec-rule"><span class="roman">VII.</span><span class="meta-grp"><span>Contact / Conversation</span><span class="dot-mark">•</span><span>Three commands to ship</span></span><span>008 / 008</span></div><div class="cta-grid"><div data-reveal="true"><span class="label">Start a conversation <span class="ix">· Nº 07</span></span><h2 class="display">Let’s build something <em>open</em> and <em>visually</em> unforgettable<span class="dot">.</span></h2><p class="lead">Star us on GitHub, drop into the issues, or run <code class="code-inline">pnpm tools-dev</code> tonight. Three commands and the loop is yours.</p><div class="cta-actions"><a class="btn btn-primary" href="https://github.com/nexu-io/open-design" target="_blank" rel="noreferrer noopener">Star on GitHub<span class="arrow"><svg viewBox="0 0 24 24"><path d="M5 19L19 5M19 5H8M19 5v11"></path></svg></span></a><a class="email-pill" href="https://github.com/nexu-io/open-design/issues" target="_blank" rel="noreferrer noopener">Open an issue<span class="arrow-circle">→</span></a></div><div class="cta-foot"><span class="stamp">● Live</span><span><span data-github-version="true">v0.7.0</span> / Apache-2.0</span><span style="margin-left:auto">52.5200° N · 13.4050° E</span></div></div><div class="cta-art" data-reveal="right"><img src="https://static.open-design.ai/cdn-cgi/image/width=1024,quality=82,format=auto/https://static.open-design.ai/landing/assets/cta.png" alt=""/><div class="index">Nº 08</div><div class="ribbon">OPEN DESIGN · FIN.</div></div></div></div></section><footer data-od-id="footer"><div class="container"><div class="foot-grid"><div class="foot-brand"><a href="#top" class="brand"><span class="brand-mark"><img src="/logo.png" alt="" width="36" height="36"/></span><span>Open Design</span></a><p style="margin-top:18px">The open-source alternative to Claude Design. Built on the shoulders of <a class="inline-link" href="https://github.com/alchaincyf/huashu-design" target="_blank" rel="noreferrer noopener">huashu-design</a>, <a class="inline-link" href="https://github.com/op7418/guizang-ppt-skill" target="_blank" rel="noreferrer noopener">guizang-ppt</a>, <a class="inline-link" href="https://github.com/multica-ai/multica" target="_blank" rel="noreferrer noopener">multica-ai</a>, and <a class="inline-link" href="https://github.com/OpenCoworkAI/open-codesign" target="_blank" rel="noreferrer noopener">open-codesign</a>.</p><a class="foot-cta" href="https://github.com/nexu-io/open-design/releases" aria-label="Download the Open Design desktop app" target="_blank" rel="noreferrer noopener">Download desktop<span class="meta">macOS · <span data-github-version="true">v0.7.0</span></span></a></div><div class="foot-col"><h5>Studio</h5><ul><li><a href="#agents">Capabilities</a></li><li><a href="#labs">Labs</a></li><li><a href="https://github.com/nexu-io/open-design/tree/main/apps/daemon" target="_blank" rel="noreferrer noopener">Method</a></li><li><a href="https://github.com/nexu-io/open-design" target="_blank" rel="noreferrer noopener">Manifesto</a></li></ul></div><div class="foot-col"><h5>Library</h5><ul><li><a href="/skills/">131 Skills</a></li><li><a href="/systems/">150 Systems</a></li><li><a href="/templates/">Templates</a></li><li><a href="/craft/">Craft</a></li></ul></div><div class="foot-col"><h5>Connect</h5><ul><li><a href="https://github.com/nexu-io/open-design" target="_blank" rel="noreferrer noopener">GitHub</a></li><li><a href="https://github.com/nexu-io/open-design/issues" target="_blank" rel="noreferrer noopener">Issues</a></li><li><a href="https://github.com/nexu-io/open-design/graphs/contributors" target="_blank" rel="noreferrer noopener">Contributors</a></li><li><a href="https://github.com/nexu-io/open-design/releases" target="_blank" rel="noreferrer noopener">Releases</a></li></ul></div><div class="foot-col"><h5>Docs</h5><ul><li><a href="https://github.com/nexu-io/open-design/blob/main/QUICKSTART.md" target="_blank" rel="noreferrer noopener">Quickstart</a></li><li><a href="https://github.com/nexu-io/open-design/blob/main/docs/architecture.md" target="_blank" rel="noreferrer noopener">Architecture</a></li><li><a href="https://github.com/nexu-io/open-design/blob/main/docs/skills-protocol.md" target="_blank" rel="noreferrer noopener">Skill Protocol</a></li><li><a href="https://github.com/nexu-io/open-design/blob/main/docs/roadmap.md" target="_blank" rel="noreferrer noopener">Roadmap</a></li></ul></div></div><div class="foot-bottom"><span><span class="pulse"></span>● <b style="color:var(--ink)">Open Design</b> · Apache-2.0 · 2026 / Volume 01 / Issue Nº 26</span><span class="right"><span>Berlin / Open / Earth</span><span>52.5200° N · 13.4050° E</span><span style="color:var(--coral)">♥ MMXXVI</span></span></div><div class="foot-mega"><div class="word" data-reveal="rise-lg">Open <em>Design</em>.</div></div></div></footer></div> <script>
+      (() => {
+        const formatStars = (count) => {
+          if (!Number.isFinite(count) || count <= 0) return '0';
+          if (count < 1000) return String(count);
+          return `${(count / 1000).toFixed(1).replace(/\.0$/, '')}K`;
+        };
+
+        // Pull a clean 'v0.3.0'-style label from a GitHub release record.
+        // We prefer release.name (e.g. 'Open Design 0.3.0') because that's
+        // what we hand-author; fall back to tag_name (e.g.
+        // 'open-design-v0.3.0') with the project prefix stripped.
+        //
+        // Expected input shapes (release.name / release.tag_name):
+        //   { name: 'Open Design 0.3.0',  tag_name: 'v0.3.0' }            → 'v0.3.0'
+        //   { name: 'Open Design v0.3.0', tag_name: 'open-design-v0.3.0' } → 'v0.3.0'
+        //   { name: '0.3.0-beta.1',       tag_name: 'open-design_0.3.0' }  → 'v0.3.0-beta.1' (name wins)
+        //   { name: null,                 tag_name: 'open-design-v0.3.0' } → 'v0.3.0' (tag fallback)
+        //   { name: null,                 tag_name: null }                  → null (caller skips)
+        const formatVersion = (release) => {
+          const fromTag = (tag) => {
+            if (typeof tag !== 'string') return null;
+            const cleaned = tag.replace(/^open-design[-_]?v?/i, '').trim();
+            return cleaned ? `v${cleaned.replace(/^v/, '')}` : null;
+          };
+          const fromName = (name) => {
+            if (typeof name !== 'string') return null;
+            const m = name.match(/(\d+\.\d+\.\d+(?:[-+][\w.]+)?)/);
+            return m ? `v${m[1]}` : null;
+          };
+          return fromName(release?.name) ?? fromTag(release?.tag_name) ?? null;
+        };
+
+        const enhanceHeader = () => {
+          const nav = document.querySelector('[data-nav-headroom]');
+          if (nav) {
+            let lastY = window.scrollY;
+            const showTopThreshold = 100;
+            const scrollDelta = 6;
+            window.addEventListener(
+              'scroll',
+              () => {
+                const y = window.scrollY;
+                const delta = y - lastY;
+                if (y <= showTopThreshold) nav.classList.remove('is-hidden');
+                else if (delta > scrollDelta) nav.classList.add('is-hidden');
+                else if (delta < -scrollDelta) nav.classList.remove('is-hidden');
+                lastY = y;
+              },
+              { passive: true },
+            );
+          }
+
+          const stars = document.querySelector('[data-github-stars]');
+          if (stars) {
+            fetch('https://api.github.com/repos/nexu-io/open-design', {
+              headers: { Accept: 'application/vnd.github+json' },
+            })
+              .then((r) => (r.ok ? r.json() : Promise.reject(new Error('http error'))))
+              .then((data) => {
+                if (typeof data?.stargazers_count === 'number') {
+                  stars.textContent = formatStars(data.stargazers_count);
+                }
+              })
+              .catch(() => {});
+          }
+
+          // Latest stable release powers every "v0.x.y" badge on the page
+          // (topbar pulse, hero CTA-foot, footer download). Hits one
+          // unauthenticated API call per page view; the static fallback in
+          // each slot keeps the layout sane if the request fails or 403s.
+          const versionSlots = document.querySelectorAll('[data-github-version]');
+          if (versionSlots.length === 0) return;
+          fetch('https://api.github.com/repos/nexu-io/open-design/releases/latest', {
+            headers: { Accept: 'application/vnd.github+json' },
+          })
+            .then((r) => (r.ok ? r.json() : Promise.reject(new Error('http error'))))
+            .then((data) => {
+              const label = formatVersion(data);
+              if (!label) return;
+              for (const slot of versionSlots) slot.textContent = label;
+            })
+            .catch(() => {});
+        };
+
+        const enhanceWire = () => {
+          const track = document.querySelector('[data-wire-contributors-track]');
+          const count = document.querySelector('[data-wire-contributors-count]');
+          if (!track) return;
+
+          const roleOverrides = {
+            tw93: 'kami',
+            op7418: 'guizang',
+            alchaincyf: 'huashu',
+            OpenCoworkAI: 'codesign',
+            'nexu-io': 'studio',
+            lewislulu: 'html-ppt',
+          };
+          const roleFor = (login, contributions) =>
+            roleOverrides[login] ?? `${contributions} ${contributions === 1 ? 'commit' : 'commits'}`;
+          const isContributor = (value) =>
+            value &&
+            typeof value.login === 'string' &&
+            typeof value.html_url === 'string' &&
+            typeof value.type === 'string' &&
+            typeof value.contributions === 'number';
+          const renderContributor = (contributor, index) => {
+            const link = document.createElement('a');
+            link.className = 'wire-item is-link';
+            link.href = contributor.href;
+            link.target = '_blank';
+            link.rel = 'noreferrer noopener';
+            link.setAttribute('aria-label', `Open ${contributor.handle} on GitHub`);
+            link.dataset.liveWireItem = String(index);
+
+            const dot = document.createElement('span');
+            dot.className = 'wire-dot';
+            dot.textContent = '·';
+            const handle = document.createElement('span');
+            handle.className = 'wire-handle';
+            handle.textContent = `@${contributor.handle}`;
+            const role = document.createElement('span');
+            role.className = 'wire-role';
+            role.textContent = contributor.role;
+
+            link.append(dot, handle, role);
+            return link;
+          };
+
+          fetch('https://api.github.com/repos/nexu-io/open-design/contributors?per_page=12', {
+            headers: { Accept: 'application/vnd.github+json' },
+          })
+            .then((r) => (r.ok ? r.json() : Promise.reject(new Error('http error'))))
+            .then((data) => {
+              if (!Array.isArray(data)) return;
+              const live = data
+                .filter(isContributor)
+                .filter((c) => c.type !== 'Bot' && !c.login.endsWith('[bot]'))
+                .slice(0, 12)
+                .map((c) => ({
+                  handle: c.login,
+                  role: roleFor(c.login, c.contributions),
+                  href: c.html_url,
+                }));
+              if (live.length === 0) return;
+              live.push({
+                handle: 'you',
+                role: 'be next',
+                href: 'https://github.com/nexu-io/open-design/graphs/contributors',
+              });
+              if (count) count.textContent = String(Math.max(0, live.length - 1));
+              track.replaceChildren(
+                ...[...live, ...live].map((contributor, index) => renderContributor(contributor, index)),
+              );
+            })
+            .catch(() => {});
+        };
+
+        const elements = document.querySelectorAll('[data-reveal]:not([data-revealed])');
+        enhanceHeader();
+        enhanceWire();
+        if (elements.length === 0) return;
+
+        const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        if (reduceMotion || !('IntersectionObserver' in window)) {
+          for (const el of elements) el.dataset.revealed = 'true';
+          return;
+        }
+
+        const observer = new IntersectionObserver(
+          (entries) => {
+            for (const entry of entries) {
+              if (!entry.isIntersecting) continue;
+              entry.target.dataset.revealed = 'true';
+              observer.unobserve(entry.target);
+            }
+          },
+          { threshold: 0.12, rootMargin: '0px 0px -8% 0px' },
+        );
+
+        for (const el of elements) observer.observe(el);
+      })();
+    </script> </body> </html>
