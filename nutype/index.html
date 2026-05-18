@@ -1,0 +1,1216 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>NuType</title>
+  <meta name="description" content="NuType is a lightweight voice input app for Mac that turns natural speech into clean text.">
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #f5f5f7;
+      --ink: #050505;
+      --text: #1d1d1f;
+      --muted: #6e6e73;
+      --soft: #86868b;
+      --line: rgba(0, 0, 0, 0.09);
+      --glass: rgba(255, 255, 255, 0.74);
+      --panel: rgba(255, 255, 255, 0.9);
+      --accent: #1d1d1f;
+      --accent-dark: #050505;
+      --gold: #d9c58f;
+      --blue: #0071e3;
+      --green: #28c840;
+      --shadow: 0 30px 90px rgba(0, 0, 0, 0.13);
+      --small-shadow: 0 18px 45px rgba(0, 0, 0, 0.1);
+      --radius: 28px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      overflow-x: hidden;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 50% -10%, rgba(255, 255, 255, 0.95), rgba(245, 245, 247, 0.72) 34%, transparent 62%),
+        linear-gradient(180deg, #fbfbfd 0%, var(--bg) 54%, #ffffff 100%);
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Segoe UI", sans-serif;
+      line-height: 1.5;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+      background: rgba(251, 251, 253, 0.74);
+      backdrop-filter: saturate(180%) blur(24px);
+    }
+
+    .nav {
+      width: min(1180px, calc(100% - 40px));
+      min-height: 64px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 22px;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--ink);
+      font-size: 17px;
+      font-weight: 740;
+      letter-spacing: 0;
+      white-space: nowrap;
+    }
+
+    .brand-mark {
+      width: 30px;
+      height: 30px;
+      border-radius: 8px;
+      display: block;
+      object-fit: cover;
+      box-shadow: 0 10px 22px rgba(29, 29, 31, 0.22);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .nav-link,
+    .language-toggle {
+      min-height: 40px;
+      padding: 0 14px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 999px;
+      color: #38383d;
+      font-family: inherit;
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 0;
+      white-space: nowrap;
+      transition: transform 180ms ease, background 180ms ease, color 180ms ease, box-shadow 180ms ease;
+    }
+
+    .language-toggle {
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      background: rgba(255, 255, 255, 0.62);
+      cursor: pointer;
+    }
+
+    .nav-link:hover,
+    .language-toggle:hover {
+      background: rgba(0, 0, 0, 0.05);
+      transform: translateY(-1px);
+    }
+
+    .app-store-link {
+      background: var(--accent);
+      color: #ffffff;
+      box-shadow: 0 12px 26px rgba(29, 29, 31, 0.2);
+    }
+
+    .app-store-link:hover {
+      background: var(--accent-dark);
+      color: #ffffff;
+    }
+
+    .nav-disabled {
+      cursor: default;
+    }
+
+    .nav-disabled:hover {
+      transform: none;
+    }
+
+    main {
+      position: relative;
+    }
+
+    .hero {
+      width: min(1180px, calc(100% - 40px));
+      min-height: calc(100vh - 64px);
+      margin: 0 auto;
+      padding: 72px 0 54px;
+      display: grid;
+      grid-template-columns: minmax(0, 0.86fr) minmax(430px, 1.14fr);
+      align-items: center;
+      gap: 68px;
+    }
+
+    .hero-copy {
+      position: relative;
+      z-index: 2;
+    }
+
+    h1 {
+      margin: 0;
+      color: var(--ink);
+      font-size: clamp(62px, 8vw, 118px);
+      line-height: 0.95;
+      font-weight: 760;
+      letter-spacing: 0;
+    }
+
+    .lead {
+      max-width: 590px;
+      margin: 26px 0 0;
+      color: #303035;
+      font-size: clamp(20px, 2.2vw, 30px);
+      line-height: 1.18;
+      font-weight: 650;
+      letter-spacing: 0;
+    }
+
+    .sublead {
+      max-width: 560px;
+      margin: 18px 0 0;
+      color: var(--muted);
+      font-size: 18px;
+      line-height: 1.55;
+      font-weight: 450;
+    }
+
+    .product-stage {
+      position: relative;
+      min-height: 640px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .stage-aura {
+      position: absolute;
+      inset: 11% -6% 6% -4%;
+      border-radius: 54px;
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.82), rgba(255, 255, 255, 0.18)),
+        radial-gradient(circle at 70% 22%, rgba(217, 197, 143, 0.22), transparent 34%),
+        radial-gradient(circle at 34% 68%, rgba(0, 0, 0, 0.08), transparent 36%);
+      filter: blur(1px);
+    }
+
+    .stage-reflection {
+      position: absolute;
+      left: 4%;
+      right: 2%;
+      bottom: 26px;
+      height: 86px;
+      border-radius: 50%;
+      background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.04) 43%, transparent 72%);
+      filter: blur(10px);
+      opacity: 0.52;
+    }
+
+    .app-window {
+      position: relative;
+      z-index: 2;
+      width: min(820px, 118%);
+      max-width: none;
+      transform: translateX(6%);
+      overflow: hidden;
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      border-radius: 26px;
+      background: #f8f8fa;
+      box-shadow: 0 34px 90px rgba(0, 0, 0, 0.15);
+    }
+
+    .window-bar {
+      height: 44px;
+      padding: 0 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.07);
+      background: rgba(255, 255, 255, 0.86);
+    }
+
+    .traffic {
+      display: flex;
+      gap: 7px;
+      flex: 0 0 auto;
+    }
+
+    .traffic span {
+      width: 11px;
+      height: 11px;
+      border-radius: 999px;
+    }
+
+    .traffic span:nth-child(1) {
+      background: #ff5f57;
+    }
+
+    .traffic span:nth-child(2) {
+      background: #febc2e;
+    }
+
+    .traffic span:nth-child(3) {
+      background: #28c840;
+    }
+
+    .window-title {
+      color: #3a3a3c;
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .window-tools {
+      display: flex;
+      gap: 8px;
+      color: #4b4b50;
+      font-size: 12px;
+      font-weight: 650;
+    }
+
+    .window-tool {
+      min-height: 28px;
+      padding: 0 10px;
+      display: inline-flex;
+      align-items: center;
+      border-radius: 999px;
+      background: #f1f1f4;
+    }
+
+    .workspace {
+      display: grid;
+      grid-template-columns: 178px minmax(0, 1fr) 196px;
+      min-height: 430px;
+    }
+
+    .pane {
+      min-width: 0;
+      padding: 16px;
+    }
+
+    .sidebar-pane {
+      border-right: 1px solid rgba(0, 0, 0, 0.06);
+      background: #f4f4f7;
+    }
+
+    .compose-pane {
+      background: #fbfbfd;
+    }
+
+    .inspector-pane {
+      border-left: 1px solid rgba(0, 0, 0, 0.06);
+      background: #f4f4f7;
+    }
+
+    .pane h2,
+    .pane h3 {
+      margin: 0;
+      color: #1d1d1f;
+      font-size: 13px;
+      line-height: 1.2;
+      font-weight: 760;
+      letter-spacing: 0;
+    }
+
+    .shortcut-card {
+      margin-top: 14px;
+      padding: 15px 12px;
+      border: 1px solid rgba(29, 29, 31, 0.12);
+      border-radius: 15px;
+      background: #ffffff;
+      color: #1f1f23;
+      box-shadow: 0 10px 22px rgba(0, 0, 0, 0.04);
+    }
+
+    .shortcut-key {
+      display: inline-flex;
+      min-height: 28px;
+      padding: 0 10px;
+      align-items: center;
+      justify-content: center;
+      border-radius: 8px;
+      background: #1d1d1f;
+      color: #fff;
+      font-size: 11px;
+      font-weight: 740;
+    }
+
+    .shortcut-note {
+      margin-top: 8px;
+      color: #6e6e73;
+      font-size: 11px;
+      line-height: 1.4;
+      font-weight: 560;
+    }
+
+    .side-list {
+      margin-top: 12px;
+      display: grid;
+      gap: 8px;
+    }
+
+    .side-row {
+      padding: 10px;
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.78);
+      color: #27272b;
+      font-size: 12px;
+      font-weight: 680;
+      box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.04);
+    }
+
+    .side-row.active {
+      background: #ffffff;
+      box-shadow: inset 0 0 0 1px rgba(29, 29, 31, 0.16), 0 10px 24px rgba(0, 0, 0, 0.06);
+    }
+
+    .side-meta {
+      margin-top: 3px;
+      color: #85858b;
+      font-size: 10px;
+      font-weight: 540;
+    }
+
+    .compose-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .status-pill {
+      min-height: 24px;
+      padding: 0 9px;
+      display: inline-flex;
+      align-items: center;
+      border-radius: 999px;
+      background: rgba(40, 200, 64, 0.12);
+      color: #177d2d;
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+    .voice-card {
+      margin-top: 16px;
+      padding: 22px;
+      min-height: 258px;
+      border-radius: 22px;
+      background:
+        radial-gradient(circle at 22% 18%, rgba(217, 197, 143, 0.22), transparent 34%),
+        #ffffff;
+      box-shadow: 0 18px 38px rgba(0, 0, 0, 0.1);
+    }
+
+    .mic-row {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .mic {
+      width: 62px;
+      height: 62px;
+      border-radius: 20px;
+      display: grid;
+      place-items: center;
+      background: #1d1d1f;
+      box-shadow: 0 18px 34px rgba(0, 0, 0, 0.18);
+    }
+
+    .mic::before {
+      content: "";
+      width: 24px;
+      height: 34px;
+      border-radius: 14px;
+      background: linear-gradient(180deg, #fff7dc, var(--gold));
+      box-shadow: 0 0 0 6px rgba(217, 197, 143, 0.13);
+    }
+
+    .wave {
+      flex: 1;
+      height: 54px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .wave span {
+      width: 7px;
+      border-radius: 999px;
+      background: #1d1d1f;
+      opacity: 0.8;
+    }
+
+    .wave span:nth-child(1) { height: 18px; opacity: 0.25; }
+    .wave span:nth-child(2) { height: 30px; opacity: 0.42; }
+    .wave span:nth-child(3) { height: 44px; opacity: 0.9; }
+    .wave span:nth-child(4) { height: 26px; opacity: 0.36; }
+    .wave span:nth-child(5) { height: 38px; opacity: 0.72; }
+    .wave span:nth-child(6) { height: 22px; opacity: 0.32; }
+    .wave span:nth-child(7) { height: 48px; opacity: 0.86; }
+    .wave span:nth-child(8) { height: 30px; opacity: 0.46; }
+
+    .text-result {
+      margin-top: 20px;
+      display: grid;
+      gap: 10px;
+    }
+
+    .result-block {
+      padding: 13px 14px;
+      border-radius: 15px;
+      background: #f4f4f7;
+    }
+
+    .result-block strong {
+      display: block;
+      color: #1d1d1f;
+      font-size: 12px;
+      line-height: 1.2;
+      font-weight: 730;
+    }
+
+    .result-block p {
+      margin: 6px 0 0;
+      color: #5e5e65;
+      font-size: 12px;
+      line-height: 1.45;
+      font-weight: 520;
+    }
+
+    .inspector-block {
+      margin-top: 14px;
+      padding: 12px;
+      border-radius: 14px;
+      background: rgba(255, 255, 255, 0.8);
+      box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.04);
+    }
+
+    .field-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      color: #3a3a3c;
+      font-size: 12px;
+      font-weight: 640;
+    }
+
+    .field-row + .field-row {
+      margin-top: 10px;
+    }
+
+    .field-value {
+      min-width: 66px;
+      height: 8px;
+      border-radius: 999px;
+      background: #d2d2d8;
+    }
+
+    .progress {
+      margin-top: 10px;
+      height: 8px;
+      overflow: hidden;
+      border-radius: 999px;
+      background: #e3e3e8;
+    }
+
+    .progress span {
+      width: 82%;
+      height: 100%;
+      display: block;
+      border-radius: inherit;
+      background: linear-gradient(90deg, #1d1d1f, var(--gold));
+    }
+
+    .features,
+    .privacy,
+    .support {
+      background: #ffffff;
+    }
+
+    .features {
+      padding: 44px 0 82px;
+    }
+
+    .section-wrap {
+      width: min(1180px, calc(100% - 40px));
+      margin: 0 auto;
+    }
+
+    .section-heading {
+      max-width: 780px;
+      margin: 0;
+      color: var(--ink);
+      font-size: clamp(38px, 5vw, 68px);
+      line-height: 1.03;
+      font-weight: 750;
+      letter-spacing: 0;
+    }
+
+    .feature-grid {
+      margin-top: 34px;
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .feature {
+      padding: 28px 24px 32px;
+      min-width: 0;
+      border-right: 1px solid var(--line);
+    }
+
+    .feature:last-child {
+      border-right: 0;
+    }
+
+    .feature-icon {
+      width: 34px;
+      height: 34px;
+      margin-bottom: 14px;
+      color: var(--accent);
+    }
+
+    .feature:nth-child(2) .feature-icon {
+      color: var(--blue);
+    }
+
+    .feature:nth-child(3) .feature-icon {
+      color: #7b61ff;
+    }
+
+    .feature:nth-child(4) .feature-icon {
+      color: #4a9d53;
+    }
+
+    .feature:nth-child(5) .feature-icon {
+      color: #b98526;
+    }
+
+    .feature h2 {
+      margin: 0;
+      color: var(--ink);
+      font-size: 17px;
+      line-height: 1.2;
+      font-weight: 730;
+      letter-spacing: 0;
+    }
+
+    .feature p {
+      margin: 14px 0 0;
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.55;
+      font-weight: 440;
+    }
+
+    .privacy {
+      padding: 84px 0;
+      border-top: 1px solid rgba(0, 0, 0, 0.06);
+    }
+
+    .privacy-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+      align-items: start;
+      gap: 56px;
+    }
+
+    .privacy-copy p,
+    .support-card p {
+      margin: 20px 0 0;
+      color: var(--muted);
+      font-size: 17px;
+      line-height: 1.58;
+    }
+
+    .privacy-list {
+      display: grid;
+      gap: 12px;
+    }
+
+    .privacy-item {
+      padding: 22px;
+      border: 1px solid rgba(0, 0, 0, 0.06);
+      border-radius: 22px;
+      background: var(--panel);
+      box-shadow: var(--small-shadow);
+    }
+
+    .privacy-item h3 {
+      margin: 0;
+      color: var(--ink);
+      font-size: 19px;
+      line-height: 1.18;
+      font-weight: 730;
+    }
+
+    .privacy-item p {
+      margin: 9px 0 0;
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.55;
+    }
+
+    .support {
+      padding: 0 0 90px;
+    }
+
+    .support-card {
+      padding: 32px;
+      border-radius: 28px;
+      background:
+        radial-gradient(circle at 80% 15%, rgba(217, 197, 143, 0.18), transparent 32%),
+        #f5f5f7;
+      border: 1px solid rgba(0, 0, 0, 0.06);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .support-card h2 {
+      margin: 0;
+      color: var(--ink);
+      font-size: clamp(30px, 4vw, 52px);
+      line-height: 1.04;
+      font-weight: 750;
+      letter-spacing: 0;
+    }
+
+    .action {
+      min-height: 46px;
+      padding: 0 18px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 999px;
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      background: var(--accent);
+      color: #fff;
+      font-size: 15px;
+      font-weight: 720;
+      white-space: nowrap;
+      box-shadow: 0 16px 34px rgba(29, 29, 31, 0.2);
+      transition: transform 180ms ease, background 180ms ease, box-shadow 180ms ease;
+    }
+
+    .action:hover {
+      transform: translateY(-1px);
+      background: var(--accent-dark);
+      box-shadow: 0 16px 34px rgba(0, 0, 0, 0.22);
+    }
+
+    @media (prefers-reduced-motion: no-preference) {
+      .app-window {
+        animation: float 6s ease-in-out infinite;
+      }
+
+      .wave span {
+        animation: pulse 1.7s ease-in-out infinite;
+      }
+
+      .wave span:nth-child(2n) {
+        animation-delay: 160ms;
+      }
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateX(6%) translateY(0); }
+      50% { transform: translateX(6%) translateY(-8px); }
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scaleY(0.76); }
+      50% { transform: scaleY(1); }
+    }
+
+    @media (max-width: 1080px) {
+      .hero {
+        grid-template-columns: 1fr;
+        gap: 22px;
+      }
+
+      .product-stage {
+        min-height: 560px;
+        order: -1;
+      }
+
+      .app-window {
+        width: min(820px, 100%);
+        transform: none;
+      }
+
+      @keyframes float {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-8px); }
+      }
+
+      .feature-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .feature,
+      .feature:last-child {
+        border-right: 1px solid var(--line);
+        border-bottom: 1px solid var(--line);
+      }
+
+      .privacy-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 720px) {
+      .nav {
+        width: min(100% - 28px, 1180px);
+      }
+
+      .section-wrap {
+        width: min(100% - 28px, 1180px);
+      }
+
+      .nav {
+        align-items: flex-start;
+        min-height: 58px;
+        padding: 12px 0;
+        flex-direction: column;
+      }
+
+      .brand {
+        font-size: 16px;
+      }
+
+      .nav-links {
+        width: 100%;
+        justify-content: space-between;
+        gap: 4px;
+      }
+
+      .nav-link,
+      .language-toggle {
+        min-height: 34px;
+        padding: 0 9px;
+        flex: 1 1 auto;
+        font-size: 12px;
+      }
+
+      .hero {
+        width: min(100% - 28px, 1180px);
+        min-height: auto;
+        padding: 46px 0 54px;
+      }
+
+      h1 {
+        font-size: 64px;
+      }
+
+      .lead {
+        font-size: 24px;
+      }
+
+      .sublead {
+        font-size: 16px;
+      }
+
+      .product-stage {
+        min-height: 470px;
+        margin: 0 -10px;
+        overflow: hidden;
+      }
+
+      .app-window {
+        width: 640px;
+        flex: 0 0 640px;
+        transform: scale(0.68);
+      }
+
+      @keyframes float {
+        0%, 100% { transform: scale(0.68) translateY(0); }
+        50% { transform: scale(0.68) translateY(-8px); }
+      }
+
+      .features {
+        padding-top: 36px;
+      }
+
+      .feature-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .feature {
+        padding: 24px 0;
+        border-right: 0;
+      }
+
+      .feature:last-child {
+        border-right: 0;
+        border-bottom: 0;
+      }
+
+      .privacy,
+      .support {
+        padding: 58px 0;
+      }
+
+      .support-card {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+    }
+
+    @media (max-width: 430px) {
+      .nav-links {
+        align-items: stretch;
+      }
+
+      .nav-link,
+      .language-toggle {
+        padding: 0 7px;
+        font-size: 11px;
+      }
+
+      h1 {
+        font-size: 58px;
+      }
+
+      .product-stage {
+        min-height: 410px;
+      }
+
+      .app-window {
+        transform: scale(0.56);
+      }
+
+      @keyframes float {
+        0%, 100% { transform: scale(0.56) translateY(0); }
+        50% { transform: scale(0.56) translateY(-8px); }
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <nav class="nav" aria-label="NuType">
+      <a class="brand" href="./" aria-label="NuType home">
+        <img class="brand-mark" src="./assets/nutype-icon.png" alt="" aria-hidden="true">
+        <span>NuType</span>
+      </a>
+      <div class="nav-links">
+        <span class="nav-link app-store-link nav-disabled" data-i18n="navAppStore" aria-disabled="true">Coming Soon</span>
+        <a class="nav-link" href="./privacy.html" data-i18n="navPrivacy">Privacy Policy</a>
+        <a class="nav-link" href="./support.html" data-i18n="navSupport">Support</a>
+        <button class="language-toggle" type="button" data-language-toggle data-i18n="languageToggle" aria-label="Switch language">CN</button>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero" aria-labelledby="title">
+      <div class="hero-copy">
+        <h1 id="title">NuType</h1>
+        <p class="lead" data-i18n="lead">Speak naturally. Insert clean text anywhere on Mac.</p>
+        <p class="sublead" data-i18n="sublead">Press your shortcut, dictate, and NuType turns speech into cleaned text with filler words removed, natural punctuation, and direct insertion into the current input field.</p>
+      </div>
+
+      <div class="product-stage" aria-hidden="true">
+        <div class="stage-aura"></div>
+        <div class="stage-reflection"></div>
+        <div class="app-window">
+          <div class="window-bar">
+            <div class="traffic"><span></span><span></span><span></span></div>
+            <div class="window-title">NuType</div>
+            <div class="window-tools">
+              <span class="window-tool" data-i18n="mockProvider">Local first</span>
+              <span class="window-tool" data-i18n="mockReady">Ready</span>
+            </div>
+          </div>
+
+          <div class="workspace">
+            <aside class="pane sidebar-pane">
+              <h2 data-i18n="mockSidebarTitle">Dictation</h2>
+              <div class="shortcut-card">
+                <span class="shortcut-key" data-i18n="mockShortcut">Right Option</span>
+                <div class="shortcut-note" data-i18n="mockShortcutNote">Hold to speak, release to insert.</div>
+              </div>
+              <div class="side-list">
+                <div class="side-row active">
+                  <div data-i18n="mockToday">Today</div>
+                  <div class="side-meta" data-i18n="mockTodayMeta">12 clean inserts</div>
+                </div>
+                <div class="side-row">
+                  <div data-i18n="mockDictionary">Dictionary</div>
+                  <div class="side-meta" data-i18n="mockDictionaryMeta">Names and terms</div>
+                </div>
+                <div class="side-row">
+                  <div data-i18n="mockHistory">History</div>
+                  <div class="side-meta" data-i18n="mockHistoryMeta">Private on device</div>
+                </div>
+              </div>
+            </aside>
+
+            <section class="pane compose-pane">
+              <div class="compose-header">
+                <h2 data-i18n="mockComposeTitle">Live voice input</h2>
+                <span class="status-pill" data-i18n="mockListening">Listening</span>
+              </div>
+              <div class="voice-card">
+                <div class="mic-row">
+                  <div class="mic"></div>
+                  <div class="wave">
+                    <span></span><span></span><span></span><span></span>
+                    <span></span><span></span><span></span><span></span>
+                  </div>
+                </div>
+                <div class="text-result">
+                  <div class="result-block">
+                    <strong data-i18n="mockRawTitle">Raw speech</strong>
+                    <p data-i18n="mockRawBody">um let's turn this note into a cleaner project update</p>
+                  </div>
+                  <div class="result-block">
+                    <strong data-i18n="mockCleanTitle">Clean insert</strong>
+                    <p data-i18n="mockCleanBody">Let's turn this note into a clearer project update.</p>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <aside class="pane inspector-pane">
+              <h3 data-i18n="mockInspectorTitle">Assistant</h3>
+              <div class="inspector-block">
+                <div class="field-row"><span data-i18n="mockAsr">Speech engine</span><span class="field-value"></span></div>
+                <div class="field-row"><span data-i18n="mockAi">Cleanup model</span><span class="field-value"></span></div>
+                <div class="progress"><span></span></div>
+              </div>
+              <div class="inspector-block">
+                <div class="field-row"><span data-i18n="mockFillers">Filler cleanup</span><span>On</span></div>
+                <div class="field-row"><span data-i18n="mockPunctuation">Punctuation</span><span>On</span></div>
+              </div>
+              <div class="inspector-block">
+                <div class="field-row"><span data-i18n="mockPrivacy">Local history</span><span>On</span></div>
+              </div>
+            </aside>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="features" aria-labelledby="features-title">
+      <div class="section-wrap">
+        <h2 class="section-heading" id="features-title" data-i18n="featuresTitle">A quieter way to type without typing.</h2>
+        <div class="feature-grid">
+          <section class="feature">
+            <svg class="feature-icon" viewBox="0 0 32 32" fill="none" aria-hidden="true"><path d="M16 5v12" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/><rect x="11" y="3" width="10" height="17" rx="5" stroke="currentColor" stroke-width="2.5"/><path d="M8 15c0 4.4 3.6 8 8 8s8-3.6 8-8M16 23v5M12 28h8" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg>
+            <h2 data-i18n="featureShortcutTitle">Shortcut dictation</h2>
+            <p data-i18n="featureShortcutBody">Hold your shortcut, speak naturally, and release to send cleaned text into the app you are already using.</p>
+          </section>
+          <section class="feature">
+            <svg class="feature-icon" viewBox="0 0 32 32" fill="none" aria-hidden="true"><path d="M6 17h4l3-8 6 16 3-8h4" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <h2 data-i18n="featureCleanTitle">Cleaned text</h2>
+            <p data-i18n="featureCleanBody">Remove filler words, smooth phrasing, and add natural punctuation before text is inserted.</p>
+          </section>
+          <section class="feature">
+            <svg class="feature-icon" viewBox="0 0 32 32" fill="none" aria-hidden="true"><path d="M8 9h16M8 16h13M8 23h9" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/><path d="M24 21l2 2 4-5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <h2 data-i18n="featureInsertTitle">Insert anywhere</h2>
+            <p data-i18n="featureInsertBody">NuType is built for current-input insertion, so notes, chats, documents, and search fields stay in flow.</p>
+          </section>
+          <section class="feature">
+            <svg class="feature-icon" viewBox="0 0 32 32" fill="none" aria-hidden="true"><path d="M7 18a9 9 0 0 1 17.4-3M25 7v8h-8M25 14a9 9 0 0 1-17.4 3M7 25v-8h8" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <h2 data-i18n="featureProviderTitle">Flexible providers</h2>
+            <p data-i18n="featureProviderBody">Use local or user-configured speech and AI providers, with keys stored locally on your Mac.</p>
+          </section>
+          <section class="feature">
+            <svg class="feature-icon" viewBox="0 0 32 32" fill="none" aria-hidden="true"><path d="M16 4l10 4v7c0 6.2-4 10.7-10 13-6-2.3-10-6.8-10-13V8l10-4z" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round"/><path d="M11 16l3 3 7-7" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <h2 data-i18n="featurePrivateTitle">Local-first privacy</h2>
+            <p data-i18n="featurePrivateBody">Dictation starts only when you trigger it. History, dictionary, and provider settings stay under your control.</p>
+          </section>
+        </div>
+      </div>
+    </section>
+
+    <section class="privacy" id="privacy" aria-labelledby="privacy-title">
+      <div class="section-wrap privacy-grid">
+        <div class="privacy-copy">
+          <h2 class="section-heading" id="privacy-title" data-i18n="privacyTitle">Built for private speech and text.</h2>
+          <p data-i18n="privacyIntro">NuType is designed around local-first voice input. It records only when you start dictation, stores sensitive credentials in Keychain, and does not run ads or cross-app tracking.</p>
+        </div>
+        <div class="privacy-list">
+          <section class="privacy-item">
+            <h3 data-i18n="privacyTriggerTitle">User-triggered recording</h3>
+            <p data-i18n="privacyTriggerBody">Microphone access is used only while you are dictating.</p>
+          </section>
+          <section class="privacy-item">
+            <h3 data-i18n="privacyProviderTitle">Your providers</h3>
+            <p data-i18n="privacyProviderBody">If you configure an external speech or AI provider, requests go from your device to that provider.</p>
+          </section>
+          <section class="privacy-item">
+            <h3 data-i18n="privacyNoTrackingTitle">No tracking</h3>
+            <p data-i18n="privacyNoTrackingBody">NuType does not include third-party advertising SDKs, analytics SDKs, or cross-app tracking.</p>
+          </section>
+        </div>
+      </div>
+    </section>
+
+    <section class="support" id="support" aria-labelledby="support-title">
+      <div class="section-wrap">
+        <div class="support-card">
+          <div>
+            <h2 id="support-title" data-i18n="supportTitle">Need help with NuType?</h2>
+            <p data-i18n="supportBody">Find setup notes for microphone permissions, shortcut behavior, text insertion, providers, and troubleshooting.</p>
+          </div>
+          <a class="action" href="./support.html" data-i18n="supportAction">Open Support</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const copy = {
+      en: {
+        navAppStore: "Coming Soon",
+        navPrivacy: "Privacy Policy",
+        navSupport: "Support",
+        languageToggle: "CN",
+        lead: "Speak naturally. Insert clean text anywhere on Mac.",
+        sublead: "Press your shortcut, dictate, and NuType turns speech into cleaned text with filler words removed, natural punctuation, and direct insertion into the current input field.",
+        mockProvider: "Local first",
+        mockReady: "Ready",
+        mockSidebarTitle: "Dictation",
+        mockShortcut: "Right Option",
+        mockShortcutNote: "Hold to speak, release to insert.",
+        mockToday: "Today",
+        mockTodayMeta: "12 clean inserts",
+        mockDictionary: "Dictionary",
+        mockDictionaryMeta: "Names and terms",
+        mockHistory: "History",
+        mockHistoryMeta: "Private on device",
+        mockComposeTitle: "Live voice input",
+        mockListening: "Listening",
+        mockRawTitle: "Raw speech",
+        mockRawBody: "um let's turn this note into a cleaner project update",
+        mockCleanTitle: "Clean insert",
+        mockCleanBody: "Let's turn this note into a clearer project update.",
+        mockInspectorTitle: "Assistant",
+        mockAsr: "Speech engine",
+        mockAi: "Cleanup model",
+        mockFillers: "Filler cleanup",
+        mockPunctuation: "Punctuation",
+        mockPrivacy: "Local history",
+        featuresTitle: "A quieter way to type without typing.",
+        featureShortcutTitle: "Shortcut dictation",
+        featureShortcutBody: "Hold your shortcut, speak naturally, and release to send cleaned text into the app you are already using.",
+        featureCleanTitle: "Cleaned text",
+        featureCleanBody: "Remove filler words, smooth phrasing, and add natural punctuation before text is inserted.",
+        featureInsertTitle: "Insert anywhere",
+        featureInsertBody: "NuType is built for current-input insertion, so notes, chats, documents, and search fields stay in flow.",
+        featureProviderTitle: "Flexible providers",
+        featureProviderBody: "Use local or user-configured speech and AI providers, with keys stored locally on your Mac.",
+        featurePrivateTitle: "Local-first privacy",
+        featurePrivateBody: "Dictation starts only when you trigger it. History, dictionary, and provider settings stay under your control.",
+        privacyTitle: "Built for private speech and text.",
+        privacyIntro: "NuType is designed around local-first voice input. It records only when you start dictation, stores sensitive credentials in Keychain, and does not run ads or cross-app tracking.",
+        privacyTriggerTitle: "User-triggered recording",
+        privacyTriggerBody: "Microphone access is used only while you are dictating.",
+        privacyProviderTitle: "Your providers",
+        privacyProviderBody: "If you configure an external speech or AI provider, requests go from your device to that provider.",
+        privacyNoTrackingTitle: "No tracking",
+        privacyNoTrackingBody: "NuType does not include third-party advertising SDKs, analytics SDKs, or cross-app tracking.",
+        supportTitle: "Need help with NuType?",
+        supportBody: "Find setup notes for microphone permissions, shortcut behavior, text insertion, providers, and troubleshooting.",
+        supportAction: "Open Support"
+      },
+      zh: {
+        navAppStore: "即将推出",
+        navPrivacy: "隐私政策",
+        navSupport: "支持",
+        languageToggle: "EN",
+        lead: "在 Mac 上自然说话，自动整理成文。",
+        sublead: "按住快捷键开始说话，NuType 会把语音转成文字，清理口头禅和停顿，补上标点，再插入当前输入位置。",
+        mockProvider: "本地优先",
+        mockReady: "就绪",
+        mockSidebarTitle: "听写",
+        mockShortcut: "右 Option",
+        mockShortcutNote: "按住说话，松开插入。",
+        mockToday: "今天",
+        mockTodayMeta: "12 条整理记录",
+        mockDictionary: "词典",
+        mockDictionaryMeta: "姓名和常用词",
+        mockHistory: "历史",
+        mockHistoryMeta: "仅保存在本机",
+        mockComposeTitle: "实时语音输入",
+        mockListening: "正在听",
+        mockRawTitle: "原始转写",
+        mockRawBody: "嗯，我们把这段话整理成更清楚的项目更新",
+        mockCleanTitle: "整理后插入",
+        mockCleanBody: "我们把这段话整理成一个更清楚的项目更新。",
+        mockInspectorTitle: "助手",
+        mockAsr: "语音引擎",
+        mockAi: "清理模型",
+        mockFillers: "清理口头词",
+        mockPunctuation: "自然标点",
+        mockPrivacy: "本地历史",
+        featuresTitle: "少打字，也能写得更顺。",
+        featureShortcutTitle: "快捷键听写",
+        featureShortcutBody: "按住快捷键说话，松开后把整理好的文字插入正在使用的 App。",
+        featureCleanTitle: "自动整理",
+        featureCleanBody: "插入前去掉口头禅，顺一顺表达，并补上自然标点。",
+        featureInsertTitle: "随处插入",
+        featureInsertBody: "围绕当前输入位置设计，笔记、聊天、文档和搜索框都能顺手使用。",
+        featureProviderTitle: "服务可选",
+        featureProviderBody: "可以使用本地能力，也可以接入你配置的语音和 AI 服务；密钥保存在 Mac 本地。",
+        featurePrivateTitle: "本地优先",
+        featurePrivateBody: "只有你触发时才开始听写。历史、词典和服务配置都由你掌控。",
+        privacyTitle: "语音和文字，都尽量留在你手里。",
+        privacyIntro: "NuType 采用本地优先设计：只在你开始听写时录音，敏感凭据存入 Keychain，也不包含广告或跨 App 追踪。",
+        privacyTriggerTitle: "你触发，才录音",
+        privacyTriggerBody: "麦克风只在听写时使用。",
+        privacyProviderTitle: "由你选择服务",
+        privacyProviderBody: "配置外部语音或 AI 服务后，请求会从你的设备发送到对应服务商。",
+        privacyNoTrackingTitle: "不追踪",
+        privacyNoTrackingBody: "NuType 不含第三方广告 SDK、分析 SDK，也不会跨 App 追踪。",
+        supportTitle: "NuType 使用遇到问题？",
+        supportBody: "这里整理了麦克风权限、快捷键、文本插入、服务配置和排查建议。",
+        supportAction: "打开支持"
+      }
+    };
+
+    const setLanguage = (language) => {
+      document.documentElement.lang = language === "zh" ? "zh-CN" : "en";
+      document.querySelectorAll("[data-i18n]").forEach((element) => {
+        const key = element.dataset.i18n;
+        element.textContent = copy[language][key] || copy.en[key] || "";
+      });
+      localStorage.setItem("nufeed-language", language);
+    };
+
+    const toggle = document.querySelector("[data-language-toggle]");
+    const savedLanguage = localStorage.getItem("nufeed-language") || "en";
+    setLanguage(savedLanguage === "zh" ? "zh" : "en");
+    toggle.addEventListener("click", () => {
+      const nextLanguage = document.documentElement.lang === "zh-CN" ? "en" : "zh";
+      setLanguage(nextLanguage);
+    });
+  </script>
+</body>
+</html>

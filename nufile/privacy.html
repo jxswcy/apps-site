@@ -1,0 +1,359 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>NuFile Privacy Policy</title>
+  <meta name="description" content="Privacy Policy for NuFile.">
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #f5f5f7;
+      --ink: #050505;
+      --text: #1d1d1f;
+      --muted: #6e6e73;
+      --panel: rgba(255, 255, 255, 0.9);
+      --red: #e52b2b;
+      --red-dark: #bd1717;
+      --shadow: 0 30px 90px rgba(0, 0, 0, 0.11);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 50% -10%, rgba(255, 255, 255, 0.95), rgba(245, 245, 247, 0.72) 34%, transparent 62%),
+        linear-gradient(180deg, #fbfbfd 0%, var(--bg) 54%, #ffffff 100%);
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Segoe UI", sans-serif;
+      line-height: 1.5;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+      background: rgba(251, 251, 253, 0.74);
+      backdrop-filter: saturate(180%) blur(24px);
+    }
+
+    .nav {
+      width: min(1180px, calc(100% - 40px));
+      min-height: 64px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 22px;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--ink);
+      font-size: 17px;
+      font-weight: 740;
+      letter-spacing: 0;
+      white-space: nowrap;
+    }
+
+    .brand-mark {
+      width: 30px;
+      height: 30px;
+      border-radius: 8px;
+      display: block;
+      object-fit: cover;
+      box-shadow: 0 10px 22px rgba(229, 43, 43, 0.22);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .nav-link,
+    .language-toggle {
+      min-height: 40px;
+      padding: 0 14px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 999px;
+      color: #38383d;
+      font-family: inherit;
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 0;
+      white-space: nowrap;
+      transition: transform 180ms ease, background 180ms ease, color 180ms ease, box-shadow 180ms ease;
+    }
+
+    .language-toggle {
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      background: rgba(255, 255, 255, 0.62);
+      cursor: pointer;
+    }
+
+    .nav-link:hover,
+    .language-toggle:hover {
+      background: rgba(0, 0, 0, 0.05);
+      transform: translateY(-1px);
+    }
+
+    .app-store-link {
+      background: var(--red);
+      color: #fff;
+      box-shadow: 0 12px 26px rgba(229, 43, 43, 0.22);
+    }
+
+    .app-store-link:hover {
+      background: var(--red-dark);
+      color: #fff;
+    }
+
+    main {
+      width: min(1180px, calc(100% - 40px));
+      margin: 0 auto;
+      padding: 86px 0 96px;
+    }
+
+    .doc-hero {
+      padding-bottom: 34px;
+    }
+
+    h1 {
+      margin: 0;
+      color: var(--ink);
+      font-size: clamp(48px, 8vw, 92px);
+      line-height: 0.96;
+      font-weight: 760;
+      letter-spacing: 0;
+    }
+
+    .lead {
+      max-width: 740px;
+      margin: 24px 0 0;
+      color: #303035;
+      font-size: clamp(20px, 2.5vw, 30px);
+      line-height: 1.22;
+      font-weight: 620;
+    }
+
+    .updated {
+      margin: 18px 0 0;
+      color: var(--muted);
+      font-size: 15px;
+      font-weight: 560;
+    }
+
+    .policy-list {
+      display: grid;
+      gap: 14px;
+    }
+
+    .policy-section {
+      padding: 26px;
+      border: 1px solid rgba(0, 0, 0, 0.06);
+      border-radius: 24px;
+      background: var(--panel);
+      box-shadow: var(--shadow);
+    }
+
+    .policy-section h2 {
+      margin: 0 0 10px;
+      color: var(--ink);
+      font-size: 24px;
+      line-height: 1.18;
+      font-weight: 740;
+      letter-spacing: 0;
+    }
+
+    .policy-section p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 16px;
+      line-height: 1.6;
+    }
+
+    .policy-section p + p {
+      margin-top: 12px;
+    }
+
+    @media (max-width: 720px) {
+      .nav {
+        width: min(100% - 28px, 1180px);
+      }
+
+      main {
+        width: min(100% - 28px, 1180px);
+      }
+
+      .nav {
+        align-items: flex-start;
+        min-height: 58px;
+        padding: 12px 0;
+        flex-direction: column;
+      }
+
+      .brand {
+        font-size: 16px;
+      }
+
+      .nav-links {
+        width: 100%;
+        justify-content: space-between;
+        gap: 4px;
+      }
+
+      .nav-link,
+      .language-toggle {
+        min-height: 34px;
+        padding: 0 9px;
+        flex: 1 1 auto;
+        font-size: 12px;
+      }
+
+      main {
+        padding-top: 52px;
+      }
+
+      .policy-section {
+        padding: 22px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <nav class="nav" aria-label="NuFile Privacy Policy">
+      <a class="brand" href="./" aria-label="NuFile home">
+        <img class="brand-mark" src="./assets/nufile-icon.png" alt="" aria-hidden="true">
+        <span>NuFile</span>
+      </a>
+      <div class="nav-links">
+        <a class="nav-link app-store-link" href="https://apps.apple.com/app/id6768900848" target="_blank" rel="noopener" data-i18n="navAppStore">App Store</a>
+        <a class="nav-link" href="./privacy.html" data-i18n="navPrivacy">Privacy Policy</a>
+        <a class="nav-link" href="./support.html" data-i18n="navSupport">Support</a>
+        <button class="language-toggle" type="button" data-language-toggle data-i18n="languageToggle" aria-label="Switch language">CN</button>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section class="doc-hero" aria-labelledby="privacy-title">
+      <h1 id="privacy-title" data-i18n="title">NuFile Privacy Policy</h1>
+      <p class="lead" data-i18n="lead">NuFile is designed for local document workflows. Your selected OFD/PDF files are processed on your device.</p>
+      <p class="updated" data-i18n="updated">Effective date: May 13, 2026</p>
+    </section>
+
+    <section class="policy-list" aria-label="Privacy policy details">
+      <article class="policy-section">
+        <h2 data-i18n="localTitle">Local document processing</h2>
+        <p data-i18n="localBody">NuFile opens, previews, converts, watermarks, and exports documents locally on your device. NuFile does not upload your OFD/PDF files to NuFile servers for processing.</p>
+      </article>
+      <article class="policy-section">
+        <h2 data-i18n="filesTitle">Files and folders you select</h2>
+        <p data-i18n="filesBody">NuFile accesses only the files you import and the output folders you choose. On platforms that require persistent access, NuFile may store a local security-scoped bookmark for your selected output folder.</p>
+      </article>
+      <article class="policy-section">
+        <h2 data-i18n="trackingTitle">No ads, analytics, or tracking</h2>
+        <p data-i18n="trackingBody">NuFile does not include third-party advertising SDKs, third-party analytics SDKs, or cross-app tracking technologies.</p>
+      </article>
+      <article class="policy-section">
+        <h2 data-i18n="purchaseTitle">Purchases</h2>
+        <p data-i18n="purchaseBody">NuFile Pro purchases are handled by Apple through the App Store. NuFile does not receive or store your payment card information.</p>
+      </article>
+      <article class="policy-section">
+        <h2 data-i18n="supportTitle">Support</h2>
+        <p data-i18n="supportBody">If you contact support, any information you choose to provide will be used only to respond to your request and improve the app.</p>
+      </article>
+      <article class="policy-section">
+        <h2 data-i18n="changesTitle">Changes</h2>
+        <p data-i18n="changesBody">This policy may be updated when NuFile changes. Material updates will be reflected on this page.</p>
+      </article>
+    </section>
+  </main>
+
+  <script>
+    const copy = {
+      en: {
+        navAppStore: "App Store",
+        navPrivacy: "Privacy Policy",
+        navSupport: "Support",
+        languageToggle: "CN",
+        title: "NuFile Privacy Policy",
+        lead: "NuFile is designed for local document workflows. Your selected OFD/PDF files are processed on your device.",
+        updated: "Effective date: May 13, 2026",
+        localTitle: "Local document processing",
+        localBody: "NuFile opens, previews, converts, watermarks, and exports documents locally on your device. NuFile does not upload your OFD/PDF files to NuFile servers for processing.",
+        filesTitle: "Files and folders you select",
+        filesBody: "NuFile accesses only the files you import and the output folders you choose. On platforms that require persistent access, NuFile may store a local security-scoped bookmark for your selected output folder.",
+        trackingTitle: "No ads, analytics, or tracking",
+        trackingBody: "NuFile does not include third-party advertising SDKs, third-party analytics SDKs, or cross-app tracking technologies.",
+        purchaseTitle: "Purchases",
+        purchaseBody: "NuFile Pro purchases are handled by Apple through the App Store. NuFile does not receive or store your payment card information.",
+        supportTitle: "Support",
+        supportBody: "If you contact support, any information you choose to provide will be used only to respond to your request and improve the app.",
+        changesTitle: "Changes",
+        changesBody: "This policy may be updated when NuFile changes. Material updates will be reflected on this page."
+      },
+      zh: {
+        navAppStore: "App Store",
+        navPrivacy: "隐私政策",
+        navSupport: "支持",
+        languageToggle: "EN",
+        title: "NuFile 隐私政策",
+        lead: "NuFile 专注本地文档处理。你选择的 OFD/PDF 文件会在设备上处理。",
+        updated: "生效日期：2026 年 5 月 13 日",
+        localTitle: "本地文档处理",
+        localBody: "NuFile 会在设备本地打开、预览、转换、加水印并导出文档，不会把你的 OFD/PDF 文件上传到 NuFile 服务器处理。",
+        filesTitle: "你选择的文件与文件夹",
+        filesBody: "NuFile 只访问你导入的文件和你选择的输出文件夹。若平台需要持久访问，NuFile 可能会在本地保存该输出文件夹的安全书签。",
+        trackingTitle: "没有广告、分析和追踪",
+        trackingBody: "NuFile 不含第三方广告 SDK、第三方分析 SDK，也不会跨 App 追踪。",
+        purchaseTitle: "购买",
+        purchaseBody: "NuFile Pro 由 Apple 通过 App Store 完成购买。NuFile 不会接收或保存你的支付卡信息。",
+        supportTitle: "支持",
+        supportBody: "如果你联系支持，你提供的信息只会用于回复问题和改进应用。",
+        changesTitle: "政策更新",
+        changesBody: "随着 NuFile 后续更新，本政策也可能调整，重要更新会体现在本页面。"
+      }
+    };
+
+    const setLanguage = (language) => {
+      document.documentElement.lang = language === "zh" ? "zh-CN" : "en";
+      document.querySelectorAll("[data-i18n]").forEach((element) => {
+        const key = element.dataset.i18n;
+        element.textContent = copy[language][key] || copy.en[key] || "";
+      });
+      localStorage.setItem("nufeed-language", language);
+    };
+
+    const toggle = document.querySelector("[data-language-toggle]");
+    const savedLanguage = localStorage.getItem("nufeed-language") || "en";
+    setLanguage(savedLanguage === "zh" ? "zh" : "en");
+    toggle.addEventListener("click", () => {
+      const nextLanguage = document.documentElement.lang === "zh-CN" ? "en" : "zh";
+      setLanguage(nextLanguage);
+    });
+  </script>
+</body>
+</html>

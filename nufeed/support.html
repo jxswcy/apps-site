@@ -1,0 +1,483 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>NuFeed Support</title>
+  <meta name="description" content="Support information for NuFeed on iPhone, iPad, and Mac.">
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #f5f5f7;
+      --ink: #050505;
+      --text: #1d1d1f;
+      --muted: #6e6e73;
+      --line: rgba(0, 0, 0, 0.09);
+      --panel: rgba(255, 255, 255, 0.86);
+      --blue: #0071e3;
+      --orange: #f46b2f;
+      --shadow: 0 24px 70px rgba(0, 0, 0, 0.1);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      overflow-x: hidden;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 48% -12%, rgba(255, 255, 255, 0.95), rgba(245, 245, 247, 0.76) 36%, transparent 64%),
+        linear-gradient(180deg, #fbfbfd 0%, var(--bg) 58%, #ffffff 100%);
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Segoe UI", sans-serif;
+      line-height: 1.5;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+      background: rgba(251, 251, 253, 0.74);
+      backdrop-filter: saturate(180%) blur(24px);
+    }
+
+    .nav {
+      width: min(1180px, calc(100% - 40px));
+      min-height: 64px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 22px;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--ink);
+      font-size: 17px;
+      font-weight: 700;
+      letter-spacing: 0;
+      white-space: nowrap;
+    }
+
+    .brand-mark {
+      width: 30px;
+      height: 30px;
+      display: block;
+      border-radius: 8px;
+      object-fit: cover;
+      box-shadow: 0 10px 22px rgba(255, 94, 20, 0.24);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .nav-link,
+    .language-toggle {
+      min-height: 40px;
+      padding: 0 14px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 999px;
+      color: #38383d;
+      font-family: inherit;
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 0;
+      white-space: nowrap;
+      transition: transform 180ms ease, background 180ms ease;
+    }
+
+    .language-toggle {
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      background: rgba(255, 255, 255, 0.62);
+      cursor: pointer;
+    }
+
+    .nav-link:hover,
+    .language-toggle:hover {
+      background: rgba(0, 0, 0, 0.05);
+      transform: translateY(-1px);
+    }
+
+    .app-store-link {
+      background: var(--blue);
+      color: #ffffff;
+      box-shadow: 0 12px 26px rgba(0, 113, 227, 0.22);
+    }
+
+    .app-store-link:hover {
+      background: #0066cc;
+      color: #ffffff;
+    }
+
+    main {
+      width: min(1180px, calc(100% - 40px));
+      margin: 0 auto;
+      padding: 82px 0 92px;
+    }
+
+    .doc-hero {
+      max-width: 760px;
+      margin-bottom: 34px;
+    }
+
+    h1 {
+      margin: 0;
+      color: var(--ink);
+      font-size: clamp(48px, 7vw, 86px);
+      line-height: 0.98;
+      font-weight: 750;
+      letter-spacing: 0;
+    }
+
+    .doc-lead {
+      max-width: 700px;
+      margin: 22px 0 0;
+      color: #303035;
+      font-size: clamp(20px, 2.4vw, 28px);
+      line-height: 1.2;
+      font-weight: 600;
+      letter-spacing: 0;
+    }
+
+    .doc-layout {
+      display: grid;
+      grid-template-columns: 280px minmax(0, 1fr);
+      align-items: start;
+      gap: 18px;
+    }
+
+    .side-panel,
+    .doc-card {
+      border: 1px solid rgba(0, 0, 0, 0.06);
+      background: var(--panel);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(24px);
+    }
+
+    .side-panel {
+      position: sticky;
+      top: 88px;
+      padding: 22px;
+      border-radius: 28px;
+    }
+
+    .side-panel h2,
+    .doc-card h2 {
+      margin: 0;
+      color: var(--ink);
+      font-size: 22px;
+      line-height: 1.18;
+      font-weight: 730;
+      letter-spacing: 0;
+    }
+
+    .side-panel p {
+      margin: 12px 0 0;
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.55;
+      font-weight: 460;
+    }
+
+    .mini-list {
+      display: grid;
+      gap: 8px;
+      margin-top: 18px;
+    }
+
+    .mini-list a {
+      min-height: 38px;
+      padding: 0 12px;
+      display: inline-flex;
+      align-items: center;
+      border-radius: 999px;
+      background: rgba(0, 0, 0, 0.045);
+      color: #303035;
+      font-size: 14px;
+      font-weight: 650;
+    }
+
+    .doc-stack {
+      display: grid;
+      gap: 18px;
+    }
+
+    .doc-card {
+      padding: 28px;
+      border-radius: 30px;
+    }
+
+    .doc-card p {
+      margin: 12px 0 0;
+      color: var(--muted);
+      font-size: 17px;
+      line-height: 1.65;
+      font-weight: 450;
+    }
+
+    .doc-card ul {
+      margin: 18px 0 0;
+      padding: 0;
+      display: grid;
+      gap: 10px;
+      list-style: none;
+    }
+
+    .doc-card li {
+      position: relative;
+      padding-left: 22px;
+      color: var(--muted);
+      font-size: 17px;
+      line-height: 1.58;
+      font-weight: 450;
+    }
+
+    .doc-card li::before {
+      content: "";
+      position: absolute;
+      top: 0.72em;
+      left: 2px;
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: var(--blue);
+      box-shadow: 0 0 0 4px rgba(0, 113, 227, 0.12);
+    }
+
+    .contact-line {
+      display: inline-flex;
+      margin-top: 18px;
+      padding: 11px 14px;
+      border-radius: 16px;
+      background: rgba(244, 107, 47, 0.1);
+      color: #a64719;
+      font-size: 15px;
+      font-weight: 650;
+    }
+
+    @media (max-width: 820px) {
+      main {
+        padding-top: 58px;
+      }
+
+      .doc-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .side-panel {
+        position: static;
+      }
+
+      .mini-list {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 720px) {
+      .nav,
+      main {
+        width: min(100% - 28px, 1180px);
+      }
+
+      .nav {
+        min-height: 58px;
+      }
+
+      .brand {
+        font-size: 16px;
+      }
+
+      .nav-links {
+        gap: 4px;
+      }
+
+      .nav-link,
+      .language-toggle {
+        min-height: 34px;
+        padding: 0 9px;
+        font-size: 12px;
+      }
+
+      .doc-card {
+        padding: 22px;
+        border-radius: 24px;
+      }
+
+      .mini-list {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 430px) {
+      .nav {
+        align-items: flex-start;
+        flex-direction: column;
+        padding: 12px 0;
+      }
+
+      .nav-links {
+        width: 100%;
+        justify-content: space-between;
+      }
+
+      .nav-link,
+      .language-toggle {
+        flex: 1 1 auto;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <nav class="nav" aria-label="NuFeed">
+      <a class="brand" href="./" aria-label="NuFeed home">
+        <img class="brand-mark" src="./assets/nufeed-icon.png" alt="" aria-hidden="true">
+        <span data-i18n="brand">NuFeed</span>
+      </a>
+      <div class="nav-links">
+        <a class="nav-link app-store-link" href="https://apps.apple.com/app/id6762549046" target="_blank" rel="noopener" data-i18n="navAppStore">App Store</a>
+        <a class="nav-link" href="./privacy.html" data-i18n="navPrivacy">Privacy Policy</a>
+        <a class="nav-link" href="./support.html" data-i18n="navSupport">Support</a>
+        <button class="language-toggle" type="button" data-language-toggle data-i18n="languageToggle" aria-label="Switch language">CN</button>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section class="doc-hero" aria-labelledby="support-title">
+      <h1 id="support-title" data-i18n="title">NuFeed Support</h1>
+      <p class="doc-lead" data-i18n="lead">Help for subscriptions, Pro features, AI configuration, and iCloud sync across iPhone, iPad, and Mac.</p>
+    </section>
+
+    <div class="doc-layout">
+      <aside class="side-panel" aria-label="Support sections">
+        <h2 data-i18n="sideTitle">Quick help</h2>
+        <p data-i18n="sideBody">Most issues are easiest to solve with your device model, system version, NuFeed version, and a short description of what happened.</p>
+        <div class="mini-list">
+          <a href="#common" data-i18n="sideCommon">Common questions</a>
+          <a href="#ai" data-i18n="sideAi">AI setup</a>
+          <a href="#contact" data-i18n="sideContact">Contact</a>
+        </div>
+      </aside>
+
+      <div class="doc-stack">
+        <section class="doc-card" id="common">
+          <h2 data-i18n="commonTitle">Common questions</h2>
+          <ul>
+            <li data-i18n="q1">RSS reading works without a Pro purchase.</li>
+            <li data-i18n="q2">Web subscriptions, full article extraction, bilingual translation, and full-article summaries require NuFeed Pro.</li>
+            <li data-i18n="q3">iCloud sync uses your own iCloud Drive and does not rely on a NuFeed-operated server.</li>
+            <li data-i18n="q4">Purchases are processed by Apple through the App Store.</li>
+          </ul>
+        </section>
+
+        <section class="doc-card" id="ai">
+          <h2 data-i18n="aiTitle">AI configuration</h2>
+          <p data-i18n="aiBody">AI features require your own AI provider API key. NuFeed does not include built-in AI service credits, and requests are sent only to the provider you configure.</p>
+        </section>
+
+        <section class="doc-card" id="contact">
+          <h2 data-i18n="contactTitle">Contact</h2>
+          <p data-i18n="contactBody">If you need help, please contact the developer through the support channel listed on the App Store product page.</p>
+          <p data-i18n="contactDetails">When reporting an issue, include your device model, system version, NuFeed version, and the steps that led to the problem.</p>
+          <span class="contact-line" data-i18n="contactNote">Support requests are used only to reply and improve NuFeed.</span>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    const copy = {
+      en: {
+        brand: "NuFeed",
+        navAppStore: "App Store",
+        navPrivacy: "Privacy Policy",
+        navSupport: "Support",
+        languageToggle: "CN",
+        title: "NuFeed Support",
+        lead: "Help for subscriptions, Pro features, AI configuration, and iCloud sync across iPhone, iPad, and Mac.",
+        sideTitle: "Quick help",
+        sideBody: "Most issues are easiest to solve with your device model, system version, NuFeed version, and a short description of what happened.",
+        sideCommon: "Common questions",
+        sideAi: "AI setup",
+        sideContact: "Contact",
+        commonTitle: "Common questions",
+        q1: "RSS reading works without a Pro purchase.",
+        q2: "Web subscriptions, full article extraction, bilingual translation, and full-article summaries require NuFeed Pro.",
+        q3: "iCloud sync uses your own iCloud Drive and does not rely on a NuFeed-operated server.",
+        q4: "Purchases are processed by Apple through the App Store.",
+        aiTitle: "AI configuration",
+        aiBody: "AI features require your own AI provider API key. NuFeed does not include built-in AI service credits, and requests are sent only to the provider you configure.",
+        contactTitle: "Contact",
+        contactBody: "If you need help, please contact the developer through the support channel listed on the App Store product page.",
+        contactDetails: "When reporting an issue, include your device model, system version, NuFeed version, and the steps that led to the problem.",
+        contactNote: "Support requests are used only to reply and improve NuFeed."
+      },
+      zh: {
+        brand: "NuFeed",
+        navAppStore: "App Store",
+        navPrivacy: "隐私政策",
+        navSupport: "支持",
+        languageToggle: "EN",
+        title: "NuFeed 支持",
+        lead: "订阅、Pro 功能、AI 设置和 iCloud 同步相关问题，都可以从这里开始排查。",
+        sideTitle: "快速帮助",
+        sideBody: "反馈时最好附上设备型号、系统版本、NuFeed 版本，以及具体发生了什么。",
+        sideCommon: "常见问题",
+        sideAi: "AI 设置",
+        sideContact: "联系方式",
+        commonTitle: "常见问题",
+        q1: "基础 RSS 阅读不需要购买 Pro。",
+        q2: "网页订阅、全文提取、双语翻译和长文摘要属于 NuFeed Pro 功能。",
+        q3: "iCloud 同步使用你的 iCloud Drive，NuFeed 不自建同步服务器。",
+        q4: "购买和退款由 Apple 通过 App Store 处理。",
+        aiTitle: "AI 配置",
+        aiBody: "AI 功能需要填写你自己的服务商 API Key。NuFeed 不提供内置额度，也不会把请求发送到你未配置的服务。",
+        contactTitle: "联系支持",
+        contactBody: "需要帮助时，可以通过 App Store 页面里的支持入口联系开发者。",
+        contactDetails: "请尽量写清设备型号、系统版本、NuFeed 版本，以及复现步骤。",
+        contactNote: "你提供的信息只会用于回复问题和改进 NuFeed。"
+      }
+    };
+
+    const setLanguage = (language) => {
+      document.documentElement.lang = language === "zh" ? "zh-CN" : "en";
+      document.querySelectorAll("[data-i18n]").forEach((element) => {
+        const key = element.dataset.i18n;
+        element.textContent = copy[language][key] || copy.en[key] || "";
+      });
+      localStorage.setItem("nufeed-language", language);
+    };
+
+    const toggle = document.querySelector("[data-language-toggle]");
+    const savedLanguage = localStorage.getItem("nufeed-language") || "en";
+    setLanguage(savedLanguage === "zh" ? "zh" : "en");
+    toggle.addEventListener("click", () => {
+      const nextLanguage = document.documentElement.lang === "zh-CN" ? "en" : "zh";
+      setLanguage(nextLanguage);
+    });
+  </script>
+</body>
+</html>

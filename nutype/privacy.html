@@ -1,0 +1,392 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>NuType Privacy Policy</title>
+  <meta name="description" content="Privacy Policy for NuType voice input on Mac.">
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #f5f5f7;
+      --ink: #050505;
+      --text: #1d1d1f;
+      --muted: #6e6e73;
+      --panel: rgba(255, 255, 255, 0.9);
+      --accent: #1d1d1f;
+      --accent-dark: #050505;
+      --gold: #d9c58f;
+      --shadow: 0 30px 90px rgba(0, 0, 0, 0.11);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 50% -10%, rgba(255, 255, 255, 0.95), rgba(245, 245, 247, 0.72) 34%, transparent 62%),
+        linear-gradient(180deg, #fbfbfd 0%, var(--bg) 54%, #ffffff 100%);
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Segoe UI", sans-serif;
+      line-height: 1.5;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+      background: rgba(251, 251, 253, 0.74);
+      backdrop-filter: saturate(180%) blur(24px);
+    }
+
+    .nav {
+      width: min(1180px, calc(100% - 40px));
+      min-height: 64px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 22px;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--ink);
+      font-size: 17px;
+      font-weight: 740;
+      letter-spacing: 0;
+      white-space: nowrap;
+    }
+
+    .brand-mark {
+      width: 30px;
+      height: 30px;
+      border-radius: 8px;
+      display: block;
+      object-fit: cover;
+      box-shadow: 0 10px 22px rgba(29, 29, 31, 0.22);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .nav-link,
+    .language-toggle {
+      min-height: 40px;
+      padding: 0 14px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 999px;
+      color: #38383d;
+      font-family: inherit;
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 0;
+      white-space: nowrap;
+      transition: transform 180ms ease, background 180ms ease, color 180ms ease, box-shadow 180ms ease;
+    }
+
+    .language-toggle {
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      background: rgba(255, 255, 255, 0.62);
+      cursor: pointer;
+    }
+
+    .nav-link:hover,
+    .language-toggle:hover {
+      background: rgba(0, 0, 0, 0.05);
+      transform: translateY(-1px);
+    }
+
+    .app-store-link {
+      background: var(--accent);
+      color: #fff;
+      box-shadow: 0 12px 26px rgba(29, 29, 31, 0.2);
+    }
+
+    .app-store-link:hover {
+      background: var(--accent-dark);
+      color: #fff;
+    }
+
+    .nav-disabled {
+      cursor: default;
+    }
+
+    .nav-disabled:hover {
+      transform: none;
+    }
+
+    main {
+      width: min(1180px, calc(100% - 40px));
+      margin: 0 auto;
+      padding: 86px 0 96px;
+    }
+
+    .doc-hero {
+      padding-bottom: 34px;
+    }
+
+    h1 {
+      margin: 0;
+      color: var(--ink);
+      font-size: clamp(48px, 8vw, 92px);
+      line-height: 0.96;
+      font-weight: 760;
+      letter-spacing: 0;
+    }
+
+    .lead {
+      max-width: 760px;
+      margin: 24px 0 0;
+      color: #303035;
+      font-size: clamp(20px, 2.5vw, 30px);
+      line-height: 1.22;
+      font-weight: 620;
+    }
+
+    .updated {
+      margin: 18px 0 0;
+      color: var(--muted);
+      font-size: 15px;
+      font-weight: 560;
+    }
+
+    .policy-list {
+      display: grid;
+      gap: 14px;
+    }
+
+    .policy-section {
+      padding: 26px;
+      border: 1px solid rgba(0, 0, 0, 0.06);
+      border-radius: 24px;
+      background: var(--panel);
+      box-shadow: var(--shadow);
+    }
+
+    .policy-section h2 {
+      margin: 0 0 10px;
+      color: var(--ink);
+      font-size: 24px;
+      line-height: 1.18;
+      font-weight: 740;
+      letter-spacing: 0;
+    }
+
+    .policy-section p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 16px;
+      line-height: 1.6;
+    }
+
+    .policy-section p + p {
+      margin-top: 12px;
+    }
+
+    @media (max-width: 720px) {
+      .nav {
+        width: min(100% - 28px, 1180px);
+      }
+
+      main {
+        width: min(100% - 28px, 1180px);
+      }
+
+      .nav {
+        align-items: flex-start;
+        min-height: 58px;
+        padding: 12px 0;
+        flex-direction: column;
+      }
+
+      .brand {
+        font-size: 16px;
+      }
+
+      .nav-links {
+        width: 100%;
+        justify-content: space-between;
+        gap: 4px;
+      }
+
+      .nav-link,
+      .language-toggle {
+        min-height: 34px;
+        padding: 0 9px;
+        flex: 1 1 auto;
+        font-size: 12px;
+      }
+
+      main {
+        padding-top: 52px;
+      }
+
+      .policy-section {
+        padding: 22px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <nav class="nav" aria-label="NuType Privacy Policy">
+      <a class="brand" href="./" aria-label="NuType home">
+        <img class="brand-mark" src="./assets/nutype-icon.png" alt="" aria-hidden="true">
+        <span>NuType</span>
+      </a>
+      <div class="nav-links">
+        <span class="nav-link app-store-link nav-disabled" data-i18n="navAppStore" aria-disabled="true">Coming Soon</span>
+        <a class="nav-link" href="./privacy.html" data-i18n="navPrivacy">Privacy Policy</a>
+        <a class="nav-link" href="./support.html" data-i18n="navSupport">Support</a>
+        <button class="language-toggle" type="button" data-language-toggle data-i18n="languageToggle" aria-label="Switch language">CN</button>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section class="doc-hero" aria-labelledby="privacy-title">
+      <h1 id="privacy-title" data-i18n="title">NuType Privacy Policy</h1>
+      <p class="lead" data-i18n="lead">NuType is designed for local-first voice input. Dictation starts only when you trigger it, and your speech, text, and provider settings stay under your control.</p>
+      <p class="updated" data-i18n="updated">Effective date: May 14, 2026</p>
+    </section>
+
+    <section class="policy-list" aria-label="Privacy policy details">
+      <article class="policy-section">
+        <h2 data-i18n="recordingTitle">Audio recording</h2>
+        <p data-i18n="recordingBody">NuType uses the microphone only when you start dictation with your configured shortcut or control. It does not listen continuously in the background for general conversation.</p>
+      </article>
+      <article class="policy-section">
+        <h2 data-i18n="localTitle">Local speech and text data</h2>
+        <p data-i18n="localBody">Transcripts, cleanup history, dictionary entries, and app settings are designed to remain on your device unless you choose a feature or provider that sends data elsewhere.</p>
+      </article>
+      <article class="policy-section">
+        <h2 data-i18n="providerTitle">External providers you configure</h2>
+        <p data-i18n="providerBody">If you configure an external speech recognition or AI provider, audio or text required for that feature may be sent directly from your device to that provider. The provider's privacy policy and terms apply to that processing.</p>
+      </article>
+      <article class="policy-section">
+        <h2 data-i18n="keysTitle">API keys and credentials</h2>
+        <p data-i18n="keysBody">Provider credentials are stored locally using the security mechanisms available on macOS, such as Keychain. NuType does not operate a server that collects your API keys.</p>
+      </article>
+      <article class="policy-section">
+        <h2 data-i18n="icloudTitle">iCloud and sync</h2>
+        <p data-i18n="icloudBody">If sync is enabled, NuType may use your private iCloud account for non-sensitive app data such as dictionary terms, preferences, and recent history. API keys are not intended to be synced through iCloud.</p>
+      </article>
+      <article class="policy-section">
+        <h2 data-i18n="permissionsTitle">Permissions</h2>
+        <p data-i18n="permissionsBody">NuType may request microphone, speech recognition, accessibility, input monitoring, or related macOS permissions so it can transcribe speech and insert cleaned text into the current app.</p>
+      </article>
+      <article class="policy-section">
+        <h2 data-i18n="trackingTitle">No ads, analytics, or tracking</h2>
+        <p data-i18n="trackingBody">NuType does not include third-party advertising SDKs, third-party analytics SDKs, or cross-app tracking technologies.</p>
+      </article>
+      <article class="policy-section">
+        <h2 data-i18n="supportTitle">Support</h2>
+        <p data-i18n="supportBody">If you contact support, any information you choose to provide will be used only to respond to your request and improve the app.</p>
+      </article>
+      <article class="policy-section">
+        <h2 data-i18n="changesTitle">Changes</h2>
+        <p data-i18n="changesBody">This policy may be updated when NuType changes. Material updates will be reflected on this page.</p>
+      </article>
+    </section>
+  </main>
+
+  <script>
+    const copy = {
+      en: {
+        navAppStore: "Coming Soon",
+        navPrivacy: "Privacy Policy",
+        navSupport: "Support",
+        languageToggle: "CN",
+        title: "NuType Privacy Policy",
+        lead: "NuType is designed for local-first voice input. Dictation starts only when you trigger it, and your speech, text, and provider settings stay under your control.",
+        updated: "Effective date: May 14, 2026",
+        recordingTitle: "Audio recording",
+        recordingBody: "NuType uses the microphone only when you start dictation with your configured shortcut or control. It does not listen continuously in the background for general conversation.",
+        localTitle: "Local speech and text data",
+        localBody: "Transcripts, cleanup history, dictionary entries, and app settings are designed to remain on your device unless you choose a feature or provider that sends data elsewhere.",
+        providerTitle: "External providers you configure",
+        providerBody: "If you configure an external speech recognition or AI provider, audio or text required for that feature may be sent directly from your device to that provider. The provider's privacy policy and terms apply to that processing.",
+        keysTitle: "API keys and credentials",
+        keysBody: "Provider credentials are stored locally using the security mechanisms available on macOS, such as Keychain. NuType does not operate a server that collects your API keys.",
+        icloudTitle: "iCloud and sync",
+        icloudBody: "If sync is enabled, NuType may use your private iCloud account for non-sensitive app data such as dictionary terms, preferences, and recent history. API keys are not intended to be synced through iCloud.",
+        permissionsTitle: "Permissions",
+        permissionsBody: "NuType may request microphone, speech recognition, accessibility, input monitoring, or related macOS permissions so it can transcribe speech and insert cleaned text into the current app.",
+        trackingTitle: "No ads, analytics, or tracking",
+        trackingBody: "NuType does not include third-party advertising SDKs, third-party analytics SDKs, or cross-app tracking technologies.",
+        supportTitle: "Support",
+        supportBody: "If you contact support, any information you choose to provide will be used only to respond to your request and improve the app.",
+        changesTitle: "Changes",
+        changesBody: "This policy may be updated when NuType changes. Material updates will be reflected on this page."
+      },
+      zh: {
+        navAppStore: "即将推出",
+        navPrivacy: "隐私政策",
+        navSupport: "支持",
+        languageToggle: "EN",
+        title: "NuType 隐私政策",
+        lead: "NuType 采用本地优先设计。只有你触发时才开始听写，你的语音、文字和服务配置都由你掌控。",
+        updated: "生效日期：2026 年 5 月 14 日",
+        recordingTitle: "音频录制",
+        recordingBody: "NuType 只会在你按下配置好的快捷键或控件开始听写时使用麦克风，不会在后台持续监听日常对话。",
+        localTitle: "本地语音与文字数据",
+        localBody: "转写文本、整理历史、词典条目和 App 设置默认保留在你的设备上；只有你启用相关功能或配置外部服务时，才可能发送必要数据。",
+        providerTitle: "你配置的外部服务",
+        providerBody: "如果你配置外部语音识别或 AI 服务，相关功能所需的音频或文本可能会直接从你的设备发送给对应服务商。该服务商的隐私政策和服务条款同样适用。",
+        keysTitle: "API 密钥和凭据",
+        keysBody: "服务凭据会尽量使用 macOS 提供的安全机制保存在本地，例如 Keychain。NuType 不运营收集 API 密钥的服务器。",
+        icloudTitle: "iCloud 与同步",
+        icloudBody: "如果开启同步，NuType 可能会通过你的私人 iCloud 同步词典、偏好设置和近期历史等非敏感数据。API 密钥不应通过 iCloud 同步。",
+        permissionsTitle: "权限",
+        permissionsBody: "NuType 可能会请求麦克风、语音识别、辅助功能、输入监控等 macOS 权限，用于转写语音并把整理后的文字插入当前 App。",
+        trackingTitle: "没有广告、分析和追踪",
+        trackingBody: "NuType 不含第三方广告 SDK、第三方分析 SDK，也不会跨 App 追踪。",
+        supportTitle: "支持",
+        supportBody: "如果你联系支持，你提供的信息只会用于回复问题和改进应用。",
+        changesTitle: "政策更新",
+        changesBody: "随着 NuType 后续更新，本政策也可能调整，重要更新会体现在本页面。"
+      }
+    };
+
+    const setLanguage = (language) => {
+      document.documentElement.lang = language === "zh" ? "zh-CN" : "en";
+      document.querySelectorAll("[data-i18n]").forEach((element) => {
+        const key = element.dataset.i18n;
+        element.textContent = copy[language][key] || copy.en[key] || "";
+      });
+      localStorage.setItem("nufeed-language", language);
+    };
+
+    const toggle = document.querySelector("[data-language-toggle]");
+    const savedLanguage = localStorage.getItem("nufeed-language") || "en";
+    setLanguage(savedLanguage === "zh" ? "zh" : "en");
+    toggle.addEventListener("click", () => {
+      const nextLanguage = document.documentElement.lang === "zh-CN" ? "en" : "zh";
+      setLanguage(nextLanguage);
+    });
+  </script>
+</body>
+</html>
