@@ -507,6 +507,8 @@ a.app-card:hover { transform: translateY(-3px); box-shadow: var(--elev-raised); 
   .hero-panel { min-height: auto; }
   .hero-panel::before { inset: 8% 0 0; }
   .showcase-image, .nufeed-page .showcase-image { width: min(100%, 780px); transform: none; }
+  .home-page .hero-panel .showcase-image { width: min(100%, 780px); }
+  .app-visual .showcase-image { width: min(100%, 720px); }
   .feature-strip { grid-template-columns: repeat(2, 1fr); }
   .feature, .feature + .feature { padding: var(--space-6); border-right: 0; border-bottom: 1px solid var(--border-soft); }
   .feature:nth-last-child(-n+1) { border-bottom: 0; }
