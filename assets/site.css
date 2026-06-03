@@ -184,6 +184,15 @@ main { display: block; }
   grid-template-columns: minmax(0, 760px);
   justify-content: start;
 }
+.text-only-hero .hero-copy { width: min(760px, 100%); }
+.text-only-hero .lead {
+  max-width: 720px;
+  min-height: 86px;
+}
+.text-only-hero .sublead {
+  max-width: 720px;
+  min-height: 92px;
+}
 .hero-copy { position: relative; z-index: 2; }
 .kicker {
   margin: 0 0 var(--space-4);
@@ -705,6 +714,7 @@ a.app-card:hover { transform: translateY(-3px); box-shadow: var(--elev-raised); 
   h1, .app-hero h1 { font-size: clamp(52px, 17vw, 76px); }
   .lead { font-size: clamp(23px, 7vw, 34px); }
   .sublead { font-size: 17px; }
+  .text-only-hero .lead, .text-only-hero .sublead { min-height: 0; }
   .app-card, .app-card.primary { min-height: auto; border-radius: 24px; }
   .secondary-apps { grid-template-columns: 1fr; }
   .text-card { min-height: auto; }
