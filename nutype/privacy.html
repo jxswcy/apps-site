@@ -1,21 +1,145 @@
 <!doctype html>
-<html lang="en">
+<html lang="zh-Hans">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
   <title>NuType Privacy Policy</title>
-  <meta name="description" content="NuType is designed for local-first voice input. Dictation starts only when you trigger it, and your speech, text, and provider settings stay under your control.">
-  <link rel="stylesheet" href="/assets/site.css?v=20260605-apple-unified">
+  <style>
+    :root {
+      color-scheme: light dark;
+      --accent: #2387c8;
+      --text: #1f2328;
+      --muted: #667085;
+      --border: #d0d7de;
+      --surface: #f6f8fa;
+      --bg: #ffffff;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --text: #f0f3f6;
+        --muted: #9aa4b2;
+        --border: #30363d;
+        --surface: #161b22;
+        --bg: #0d1117;
+      }
+    }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font: 16px/1.62 -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    main {
+      max-width: 820px;
+      margin: 0 auto;
+      padding: 56px 24px 72px;
+    }
+    nav {
+      margin-bottom: 32px;
+      font-size: 14px;
+    }
+    a {
+      color: var(--accent);
+    }
+    h1 {
+      margin: 0 0 8px;
+      font-size: 38px;
+      line-height: 1.12;
+      letter-spacing: 0;
+    }
+    h2 {
+      margin: 34px 0 10px;
+      font-size: 22px;
+      line-height: 1.25;
+      letter-spacing: 0;
+    }
+    p {
+      margin: 0 0 14px;
+    }
+    ul {
+      margin: 0 0 18px 22px;
+      padding: 0;
+    }
+    li {
+      margin: 6px 0;
+    }
+    .meta {
+      margin-bottom: 28px;
+      color: var(--muted);
+    }
+  </style>
 </head>
-<body class="doc-page nutype-page">
-  <header class="site-header"><nav class="nav" aria-label="NuType"><a class="brand" href="/nutype/" aria-label="NuType home"><img class="brand-mark" src="/nutype/assets/nutype-icon.png" alt="" aria-hidden="true"><span data-i18n="brand">NuType</span></a><div class="nav-links"><span class="nav-link app-store-link nav-disabled" data-i18n="navAppStore" aria-disabled="true">Coming Soon</span><a class="nav-link" href="/nutype/privacy.html" data-i18n="navPrivacy">Privacy Policy</a><a class="nav-link" href="/nutype/support.html" data-i18n="navSupport">Support</a><button class="language-toggle" type="button" data-language-toggle data-i18n="languageToggle" aria-label="Switch language">CN</button></div></nav></header>
+<body>
   <main>
-    <section class="doc-hero container" aria-labelledby="doc-title"><img class="doc-icon" src="/nutype/assets/nutype-icon.png" alt="" aria-hidden="true"><h1 id="doc-title" class="doc-title"><span class="doc-title-app" data-i18n="titleApp">NuType</span><span class="doc-title-kind" data-i18n="titleKind">Privacy Policy</span></h1><p class="doc-lead" data-i18n="lead">NuType is designed for local-first voice input. Dictation starts only when you trigger it, and your speech, text, and provider settings stay under your control.</p></section>
-    <section class="doc-layout container"><article class="doc-card"><section class="doc-section" id="section-0"><h2 data-i18n="sectionTitle0">Audio recording</h2><p data-i18n="sectionBody0">NuType uses the microphone only when you start dictation with your configured shortcut or control. It does not listen continuously in the background for general conversation.</p></section><section class="doc-section" id="section-1"><h2 data-i18n="sectionTitle1">Local speech and text data</h2><p data-i18n="sectionBody1">Transcripts, cleanup history, dictionary entries, and app settings are designed to remain on your device unless you choose a feature or provider that sends data elsewhere.</p></section><section class="doc-section" id="section-2"><h2 data-i18n="sectionTitle2">External providers you configure</h2><p data-i18n="sectionBody2">If you configure an external speech recognition or AI provider, audio or text required for that feature may be sent directly from your device to that provider. The provider's privacy policy and terms apply.</p></section><section class="doc-section" id="section-3"><h2 data-i18n="sectionTitle3">Permissions</h2><p data-i18n="sectionBody3">NuType may request microphone, speech recognition, accessibility, input monitoring, or related macOS permissions so it can transcribe speech and insert cleaned text into the current app.</p></section><section class="doc-section" id="section-4"><h2 data-i18n="sectionTitle4">No ads, analytics, or tracking</h2><p data-i18n="sectionBody4">NuType does not include third-party advertising SDKs, third-party analytics SDKs, or cross-app tracking technologies.</p></section></article><aside class="doc-side"><h2 data-i18n="sideTitle">Privacy at a glance</h2><p data-i18n="sideBody">NuType records only when you trigger dictation and stores provider settings under your control.</p><ul class="doc-list"><li data-i18n="sideItem0">User-triggered recording only.</li><li data-i18n="sideItem1">Provider credentials stored locally.</li><li data-i18n="sideItem2">No ads, analytics, or cross-app tracking.</li></ul></aside></section>
+    <nav><a href="index.html">NuType</a> / Privacy Policy</nav>
+    <h1>NuType Privacy Policy</h1>
+    <p class="meta">Effective date: 2026-06-05. Last reviewed: 2026-06-11.</p>
+
+    <p>NuType is a macOS voice input tool. Its privacy principle is simple: user data stays under user control. The developer does not operate an audio, text, or AI proxy server and does not collect user audio, transcribed text, API keys, history, or personal dictionary content.</p>
+
+    <h2>Data We Do Not Collect</h2>
+    <p>The NuType developer does not intentionally collect, view, sell, or share:</p>
+    <ul>
+      <li>User-recorded audio.</li>
+      <li>Speech recognition text, cleaned text, local history, correction samples, personal dictionary entries, or quality analysis results.</li>
+      <li>AI or ASR API keys configured by the user.</li>
+      <li>Content inserted into other apps through NuType.</li>
+      <li>Advertising, cross-app tracking, or data broker data.</li>
+    </ul>
+    <p>NuType does not include advertising SDKs, analytics SDKs, third-party login SDKs, or crash reporting SDKs.</p>
+
+    <h2>Data Stored On Device</h2>
+    <p>NuType stores the minimum data needed to provide its core features on the user's Mac:</p>
+    <ul>
+      <li>Settings such as provider, base URL, model name, hotkey, language, history retention, and sync options.</li>
+      <li>Local history, including recognition text, cleaned text, timestamps, quality issues, and user corrections.</li>
+      <li>Personal dictionary entries and candidate terms.</li>
+      <li>Premium weekly usage records.</li>
+    </ul>
+    <p>API keys are stored only in the macOS Keychain. They are not written to settings files, local history, exported snapshots, or iCloud sync data.</p>
+
+    <h2>Microphone and Speech Recognition</h2>
+    <p>NuType needs microphone permission to record speech. If the user selects Apple Speech, NuType requests Apple's system speech recognition permission. The user may also choose a local model or an external ASR provider they configure themselves.</p>
+    <p>If the user selects a local model, audio and text are processed locally on the user's device. If the user selects an external ASR or AI provider, NuType sends only the data required for that request directly from the user's device to the provider URL configured by the user, using the user's own API key. The developer does not proxy, store, or inspect those requests.</p>
+    <p>External providers process data according to their own terms and privacy policies. Users should review provider data retention, training, logging, and compliance terms before configuring an external service.</p>
+
+    <h2>iCloud Sync</h2>
+    <p>NuType's optional iCloud sync can synchronize non-sensitive data selected by the user across devices signed in to the same Apple ID. This can include dictionary entries, non-sensitive settings, recent history, and correction samples. API keys are not included in iCloud sync.</p>
+    <p>iCloud data is handled by Apple's iCloud services. The NuType developer cannot access the user's private iCloud data. Users can turn off iCloud sync in NuType settings or manage related data through macOS iCloud settings.</p>
+
+    <h2>In-App Purchase</h2>
+    <p>NuType Pro uses Apple StoreKit and App Store In-App Purchase. Purchases and payments are processed by Apple. NuType reads StoreKit purchase state only to unlock Pro features. The developer does not receive or store payment card information in the app.</p>
+
+    <h2>App Store Privacy Disclosure</h2>
+    <p>NuType does not track users for advertising, does not sell user data to data brokers, and does not combine app data with third-party data for advertising or advertising measurement.</p>
+    <p>If App Store Connect requires disclosure for optional external ASR or AI requests, NuType uses the following basis:</p>
+    <ul>
+      <li>Audio Data: used for App Functionality, not for Tracking.</li>
+      <li>Other User Content: used for App Functionality, not for Tracking.</li>
+      <li>Linked to User: the developer does not link this data to user identity. If a user-configured external provider links requests to the user's provider account, that relationship is controlled by the provider.</li>
+    </ul>
+
+    <h2>User Controls and Deletion</h2>
+    <p>Users can control or delete NuType data through the app and macOS:</p>
+    <ul>
+      <li>Turn off local history or change the retention policy.</li>
+      <li>Delete local history.</li>
+      <li>Turn off iCloud sync.</li>
+      <li>Edit or delete personal dictionary entries.</li>
+      <li>Clear or replace API keys.</li>
+      <li>Use "Clear local data and API keys" to delete local history, dictionary entries, Keychain API keys, local Premium usage records, and the iCloud sync snapshot, and to reset non-sensitive settings with iCloud sync turned off. Apple StoreKit purchase records are not affected.</li>
+      <li>Revoke microphone, speech recognition, accessibility, and automation permissions in macOS System Settings.</li>
+    </ul>
+    <p>NuType currently has no account system, so there is no developer-hosted account deletion flow.</p>
+
+    <h2>Children's Privacy</h2>
+    <p>NuType is intended for general productivity use and is not directed to children under 13. The developer does not knowingly collect personal information from children.</p>
+
+    <h2>Policy Updates</h2>
+    <p>If NuType adds accounts, a developer-owned cloud service, advertising, analytics SDKs, crash reporting SDKs, third-party login, cross-device API key sync, or any other feature that changes the data boundary, this privacy policy and App Store privacy disclosure must be updated before release.</p>
+
+    <h2>Contact</h2>
+    <p>For support and privacy questions, use the public support page: <a href="support.html">NuType Support</a>.</p>
   </main>
-  <footer class="footer"><div class="container"><span>© 2026 Nu Apps</span><span>nuapp.site</span></div></footer>
-  <script>window.NU_DEFAULT_LANGUAGE="en";window.NU_TRANSLATIONS={"en":{"brand":"NuType","navAppStore":"Coming Soon","navPrivacy":"Privacy Policy","navSupport":"Support","languageToggle":"CN","footerPrivacy":"Privacy","footerSupport":"Support","appStoreAction":"App Store","comingSoonAction":"Coming Soon","supportAction":"Support","privacyAction":"Privacy","overviewAction":"Overview","title":"NuType Privacy Policy","titleApp":"NuType","titleKind":"Privacy Policy","lead":"NuType is designed for local-first voice input. Dictation starts only when you trigger it, and your speech, text, and provider settings stay under your control.","sideTitle":"Privacy at a glance","sideBody":"NuType records only when you trigger dictation and stores provider settings under your control.","sideItem0":"User-triggered recording only.","sideItem1":"Provider credentials stored locally.","sideItem2":"No ads, analytics, or cross-app tracking.","sectionTitle0":"Audio recording","sectionBody0":"NuType uses the microphone only when you start dictation with your configured shortcut or control. It does not listen continuously in the background for general conversation.","sectionTitle1":"Local speech and text data","sectionBody1":"Transcripts, cleanup history, dictionary entries, and app settings are designed to remain on your device unless you choose a feature or provider that sends data elsewhere.","sectionTitle2":"External providers you configure","sectionBody2":"If you configure an external speech recognition or AI provider, audio or text required for that feature may be sent directly from your device to that provider. The provider's privacy policy and terms apply.","sectionTitle3":"Permissions","sectionBody3":"NuType may request microphone, speech recognition, accessibility, input monitoring, or related macOS permissions so it can transcribe speech and insert cleaned text into the current app.","sectionTitle4":"No ads, analytics, or tracking","sectionBody4":"NuType does not include third-party advertising SDKs, third-party analytics SDKs, or cross-app tracking technologies."},"zh":{"brand":"NuType","navAppStore":"即将推出","navPrivacy":"隐私政策","navSupport":"支持","languageToggle":"EN","footerPrivacy":"隐私","footerSupport":"支持","appStoreAction":"App Store","comingSoonAction":"即将推出","supportAction":"支持","privacyAction":"隐私政策","overviewAction":"概览","title":"NuType 隐私政策","titleApp":"NuType","titleKind":"隐私政策","lead":"NuType 面向本地优先的语音输入设计。只有你触发听写时才会开始录音，语音、文本和服务配置都由你掌控。","sideTitle":"隐私概览","sideBody":"NuType 只在你触发听写时录音，服务配置也由你自己管理。","sideItem0":"只在用户触发时录音。","sideItem1":"服务密钥保存在本地。","sideItem2":"没有广告、分析 SDK 或跨 App 追踪。","sectionTitle0":"音频录制","sectionBody0":"NuType 只会在你通过快捷键或控件开始听写时使用麦克风，不会在后台持续监听日常对话。","sectionTitle1":"本地语音和文本数据","sectionBody1":"转写结果、整理历史、词典条目和应用设置默认保留在你的设备上，除非你主动选择会把数据发送出去的功能或服务商。","sectionTitle2":"你配置的外部服务","sectionBody2":"如果你配置了外部语音识别或 AI 服务，实现该功能所需的音频或文本可能会从你的设备直接发送给该服务商。相关处理遵循该服务商自己的隐私政策和条款。","sectionTitle3":"权限","sectionBody3":"NuType 可能会请求麦克风、语音识别、辅助功能、输入监控等 macOS 权限，用于转写语音并把整理后的文字插入当前 App。","sectionTitle4":"没有广告、分析或追踪","sectionBody4":"NuType 不包含第三方广告 SDK、第三方分析 SDK 或跨 App 追踪技术。"}};</script>
-  <script src="/assets/site.js?v=20260605-apple-unified" defer></script>
 </body>
 </html>

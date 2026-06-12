@@ -1,30 +1,98 @@
 <!doctype html>
-<html lang="en">
+<html lang="zh-Hans">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
-  <title>NuType</title>
-  <meta name="description" content="NuType is a lightweight voice input app for Mac that turns natural speech into clean text.">
-  <link rel="stylesheet" href="/assets/site.css?v=20260605-apple-unified">
+  <title>NuType Support and Privacy</title>
+  <style>
+    :root {
+      color-scheme: light dark;
+      --accent: #2387c8;
+      --text: #1f2328;
+      --muted: #667085;
+      --border: #d0d7de;
+      --surface: #f6f8fa;
+      --bg: #ffffff;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --text: #f0f3f6;
+        --muted: #9aa4b2;
+        --border: #30363d;
+        --surface: #161b22;
+        --bg: #0d1117;
+      }
+    }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font: 16px/1.6 -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    main {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 64px 24px;
+    }
+    h1 {
+      margin: 0 0 12px;
+      font-size: 40px;
+      line-height: 1.1;
+      letter-spacing: 0;
+    }
+    p {
+      margin: 0 0 18px;
+    }
+    .lead {
+      color: var(--muted);
+      font-size: 18px;
+    }
+    .links {
+      display: grid;
+      gap: 12px;
+      margin-top: 32px;
+    }
+    a.card {
+      display: block;
+      padding: 18px 20px;
+      color: inherit;
+      text-decoration: none;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      background: var(--surface);
+    }
+    a.card strong {
+      display: block;
+      margin-bottom: 4px;
+      color: var(--accent);
+    }
+    footer {
+      margin-top: 48px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+  </style>
 </head>
-<body class="product-page nutype-page">
-  <header class="site-header"><nav class="nav" aria-label="NuType"><a class="brand" href="/nutype/" aria-label="NuType home"><img class="brand-mark" src="/nutype/assets/nutype-icon.png" alt="" aria-hidden="true"><span data-i18n="brand">NuType</span></a><div class="nav-links"><span class="nav-link app-store-link nav-disabled" data-i18n="navAppStore" aria-disabled="true">Coming Soon</span><a class="nav-link" href="/nutype/privacy.html" data-i18n="navPrivacy">Privacy Policy</a><a class="nav-link" href="/nutype/support.html" data-i18n="navSupport">Support</a><button class="language-toggle" type="button" data-language-toggle data-i18n="languageToggle" aria-label="Switch language">CN</button></div></nav></header>
+<body>
   <main>
-    <section class="product-hero container" aria-labelledby="title">
-      <img class="product-icon" src="/nutype/assets/nutype-icon.png" alt="" aria-hidden="true">
-      <h1 id="title">NuType</h1>
-      <p class="lead" data-i18n="lead">Speak naturally. Insert clean text anywhere on Mac.</p>
-      <p class="sublead" data-i18n="sublead">Press your shortcut, dictate, and NuType turns speech into cleaned text with filler words removed, natural punctuation, and direct insertion into the current input field.</p>
-      <div class="hero-actions"><span class="hero-cta secondary-link disabled" data-i18n="comingSoonAction">Coming Soon</span></div>
+    <h1>NuType</h1>
+    <p class="lead">A macOS voice input tool that turns speech into clean text while keeping user data under user control.</p>
+    <p>Use the pages below for App Store review, privacy disclosure, and user support.</p>
+
+    <section class="links" aria-label="NuType public pages">
+      <a class="card" href="privacy.html">
+        <strong>Privacy Policy</strong>
+        Read how NuType handles audio, text, API keys, iCloud sync, local models, external AI providers, and in-app purchases.
+      </a>
+      <a class="card" href="support.html">
+        <strong>Support</strong>
+        Get help with permissions, provider setup, local oMLX ASR, purchase restore, data control, and App Store review questions.
+      </a>
     </section>
-    <section class="product-section" aria-labelledby="features-title"><div class="container">
-      <h2 class="section-heading" id="features-title" data-i18n="featuresTitle">A quieter way to type without typing.</h2>
-      <div class="feature-grid"><article class="feature-card"><svg class="feature-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v9"/><path d="M8 5v7a4 4 0 0 0 8 0V5"/><path d="M5 12c0 4 3 7 7 7s7-3 7-7"/><path d="M12 19v3"/></svg><h3 data-i18n="feature0Title">Shortcut dictation</h3><p data-i18n="feature0Body">Hold your shortcut, speak naturally, and release to send cleaned text into the app you are already using.</p></article><article class="feature-card"><svg class="feature-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8Z"/><path d="M19 15l.9 2.6 2.6.9-2.6.9L19 23l-.9-2.6-2.6-.9 2.6-.9Z"/></svg><h3 data-i18n="feature1Title">Cleaned text</h3><p data-i18n="feature1Body">Remove filler words, smooth phrasing, and add natural punctuation before text is inserted.</p></article><article class="feature-card"><svg class="feature-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 3l14 8-6 2-2 6Z"/><path d="M12 13l5 5"/></svg><h3 data-i18n="feature2Title">Insert anywhere</h3><p data-i18n="feature2Body">NuType is built for current-input insertion, so notes, chats, documents, and search fields stay in flow.</p></article><article class="feature-card"><svg class="feature-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 8a4 4 0 1 0 0 8 4 4 0 0 0 0-8Z"/><path d="M4 12h2"/><path d="M18 12h2"/><path d="M12 4v2"/><path d="M12 18v2"/><path d="M6.3 6.3l1.4 1.4"/><path d="M16.3 16.3l1.4 1.4"/></svg><h3 data-i18n="feature3Title">Flexible providers</h3><p data-i18n="feature3Body">Use local or user-configured speech and AI providers, with keys stored locally on your Mac.</p></article><article class="feature-card"><svg class="feature-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l7 3v5c0 4.6-3 8.4-7 10-4-1.6-7-5.4-7-10V6z"/><path d="M9 12l2 2 4-5"/></svg><h3 data-i18n="feature4Title">Local-first privacy</h3><p data-i18n="feature4Body">Dictation starts only when you trigger it. History, dictionary, and provider settings stay under your control.</p></article></div>
-    </div></section>
+
+    <footer>
+      NuType 1.0 for macOS. Last updated: 2026-06-11.
+    </footer>
   </main>
-  <footer class="footer"><div class="container"><span>© 2026 Nu Apps</span><span>nuapp.site</span></div></footer>
-  <script>window.NU_DEFAULT_LANGUAGE="en";window.NU_TRANSLATIONS={"en":{"brand":"NuType","navAppStore":"Coming Soon","navPrivacy":"Privacy Policy","navSupport":"Support","languageToggle":"CN","footerPrivacy":"Privacy","footerSupport":"Support","appStoreAction":"App Store","comingSoonAction":"Coming Soon","supportAction":"Support","privacyAction":"Privacy","overviewAction":"Overview","lead":"Speak naturally. Insert clean text anywhere on Mac.","sublead":"Press your shortcut, dictate, and NuType turns speech into cleaned text with filler words removed, natural punctuation, and direct insertion into the current input field.","featuresTitle":"A quieter way to type without typing.","feature0Title":"Shortcut dictation","feature0Body":"Hold your shortcut, speak naturally, and release to send cleaned text into the app you are already using.","feature1Title":"Cleaned text","feature1Body":"Remove filler words, smooth phrasing, and add natural punctuation before text is inserted.","feature2Title":"Insert anywhere","feature2Body":"NuType is built for current-input insertion, so notes, chats, documents, and search fields stay in flow.","feature3Title":"Flexible providers","feature3Body":"Use local or user-configured speech and AI providers, with keys stored locally on your Mac.","feature4Title":"Local-first privacy","feature4Body":"Dictation starts only when you trigger it. History, dictionary, and provider settings stay under your control."},"zh":{"brand":"NuType","navAppStore":"即将推出","navPrivacy":"隐私政策","navSupport":"支持","languageToggle":"EN","footerPrivacy":"隐私","footerSupport":"支持","appStoreAction":"App Store","comingSoonAction":"即将推出","supportAction":"支持","privacyAction":"隐私政策","overviewAction":"概览","lead":"自然说话，在 Mac 任意输入位置插入干净文字。","sublead":"按住快捷键开始说话，松开后 NuType 会去掉口头禅、补上自然标点，并把整理后的文字插入当前输入框。","featuresTitle":"少打字，也能写得更顺。","feature0Title":"快捷键听写","feature0Body":"按住快捷键说话，松开后把整理好的文字插入正在使用的 App。","feature1Title":"自动整理","feature1Body":"插入前去掉口头禅，顺一顺表达，并补上自然标点。","feature2Title":"随处插入","feature2Body":"围绕当前输入位置设计，笔记、聊天、文档和搜索框都能顺手使用。","feature3Title":"服务可选","feature3Body":"可以使用本地能力，也可以接入你配置的语音和 AI 服务；密钥保存在 Mac 本地。","feature4Title":"本地优先","feature4Body":"只有你触发时才开始听写。历史、词典和服务配置都由你掌控。"}};</script>
-  <script src="/assets/site.js?v=20260605-apple-unified" defer></script>
 </body>
 </html>
