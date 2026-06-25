@@ -5,17 +5,152 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
   <title>NuTTS Privacy Policy</title>
-  <meta name="description" content="NuTTS is designed as a local document-to-speech tool. Your imported documents, generated audio files, and provider settings stay on your device unless you choose to use a configured speech provider.">
+  <meta name="description" content="NuTTS processes imported documents, generated audio, iCloud sync data, and user-configured speech or text model requests only to provide document-to-speech features.">
   <link rel="stylesheet" href="/assets/site.css?v=20260605-apple-unified">
 </head>
 <body class="doc-page nutts-page">
-  <header class="site-header"><nav class="nav" aria-label="NuTTS"><a class="brand" href="/nutts/" aria-label="NuTTS home"><img class="brand-mark" src="/nutts/assets/nutts-icon.png" alt="" aria-hidden="true"><span data-i18n="brand">NuTTS</span></a><div class="nav-links"><a class="nav-link app-store-link" href="https://apps.apple.com/app/id6774444468" target="_blank" rel="noopener" data-app-store-link data-app-store-id="6774444468" data-app-store-slug="nutts" data-i18n="navAppStore">App Store</a><a class="nav-link" href="/nutts/privacy.html" data-i18n="navPrivacy">Privacy Policy</a><a class="nav-link" href="/nutts/support.html" data-i18n="navSupport">Support</a><button class="language-toggle" type="button" data-language-toggle data-i18n="languageToggle" aria-label="Switch language">CN</button></div></nav></header>
+  <header class="site-header">
+    <nav class="nav" aria-label="NuTTS">
+      <a class="brand" href="/nutts/" aria-label="NuTTS home"><img class="brand-mark" src="/nutts/assets/nutts-icon.png" alt="" aria-hidden="true"><span data-i18n="brand">NuTTS</span></a>
+      <div class="nav-links">
+        <a class="nav-link app-store-link" href="https://apps.apple.com/app/id6774444468" target="_blank" rel="noopener" data-app-store-link data-app-store-id="6774444468" data-app-store-slug="nutts" data-i18n="navAppStore">App Store</a>
+        <a class="nav-link" href="/nutts/privacy.html" data-i18n="navPrivacy">Privacy Policy</a>
+        <a class="nav-link" href="/nutts/support.html" data-i18n="navSupport">Support</a>
+        <button class="language-toggle" type="button" data-language-toggle data-i18n="languageToggle" aria-label="Switch language">CN</button>
+      </div>
+    </nav>
+  </header>
   <main>
-    <section class="doc-hero container" aria-labelledby="doc-title"><img class="doc-icon" src="/nutts/assets/nutts-icon.png" alt="" aria-hidden="true"><h1 id="doc-title" class="doc-title"><span class="doc-title-app" data-i18n="titleApp">NuTTS</span><span class="doc-title-kind" data-i18n="titleKind">Privacy Policy</span></h1><p class="doc-lead" data-i18n="lead">NuTTS is designed as a local document-to-speech tool. Your imported documents, generated audio files, and provider settings stay on your device unless you choose to use a configured speech provider.</p></section>
-    <section class="doc-layout container"><article class="doc-card"><section class="doc-section" id="section-0"><h2 data-i18n="sectionTitle0">Documents and generated audio</h2><p data-i18n="sectionBody0">NuTTS stores imported document text, document metadata, synthesis status, and generated audio files locally on your device so you can manage and replay them inside the app.</p></section><section class="doc-section" id="section-1"><h2 data-i18n="sectionTitle1">API keys</h2><p data-i18n="sectionBody1">If you configure Alibaba Cloud Model Studio or a compatible Qwen-TTS endpoint, your API key is stored in the system Keychain. NuTTS does not hard-code or operate a shared API key.</p></section><section class="doc-section" id="section-2"><h2 data-i18n="sectionTitle2">Speech synthesis requests</h2><p data-i18n="sectionBody2">When you generate audio, the text needed for synthesis, selected model, voice, and instruction may be sent from your device to the provider you configured. That provider's privacy policy and terms apply to its processing.</p></section><section class="doc-section" id="section-3"><h2 data-i18n="sectionTitle3">File access and playback</h2><p data-i18n="sectionBody3">NuTTS uses system document import permissions to read the files you choose. It may use local storage and audio playback capabilities to download, save, play, export, and continue playback for generated audio.</p></section><section class="doc-section" id="section-4"><h2 data-i18n="sectionTitle4">Analytics, ads, and tracking</h2><p data-i18n="sectionBody4">NuTTS does not include third-party advertising SDKs, third-party analytics SDKs, or cross-app tracking technologies. NuTTS does not sell personal data.</p></section><section class="doc-section" id="section-5"><h2 data-i18n="sectionTitle5">Support and changes</h2><p data-i18n="sectionBody5">If you contact support at jxswcy@gmail.com, the information you choose to provide is used only to respond to your request and improve the app. This policy may be updated as NuTTS changes.</p></section></article><aside class="doc-side"><h2 data-i18n="sideTitle">Privacy at a glance</h2><p data-i18n="sideBody">NuTTS keeps the document library and generated audio on device, while synthesis uses the provider you configure.</p><ul class="doc-list"><li data-i18n="sideItem0">Documents and audio are stored locally.</li><li data-i18n="sideItem1">API keys are stored in Keychain.</li><li data-i18n="sideItem2">Synthesis text is sent only when you generate audio.</li><li data-i18n="sideItem3">No ads, analytics, or cross-app tracking.</li></ul></aside></section>
+    <section class="doc-hero container" aria-labelledby="doc-title">
+      <img class="doc-icon" src="/nutts/assets/nutts-icon.png" alt="" aria-hidden="true">
+      <h1 id="doc-title" class="doc-title"><span class="doc-title-app" data-i18n="titleApp">NuTTS</span><span class="doc-title-kind" data-i18n="titleKind">Privacy Policy</span></h1>
+      <p class="doc-lead" data-i18n="lead">NuTTS turns your imported documents into playable audio on iPhone, iPad, and Mac. This policy explains what data is processed, where it is stored, and when configured speech or text model services are used.</p>
+    </section>
+    <section class="doc-layout container">
+      <article class="doc-card">
+        <section class="doc-section" id="section-1">
+          <h2 data-i18n="sectionTitle1">Documents and generated audio</h2>
+          <p data-i18n="sectionBody1">NuTTS stores imported or created text, document titles, folder membership, extracted PDF, DOCX, Markdown, or TXT content, paragraph timing markers, synthesis status, generated audio files, playback progress, playback queue, and export records so you can manage and replay them in the app.</p>
+        </section>
+        <section class="doc-section" id="section-2">
+          <h2 data-i18n="sectionTitle2">API keys and settings</h2>
+          <p data-i18n="sectionBody2">If you configure Alibaba Cloud Model Studio or an online custom compatible endpoint, your API key is stored in the system Keychain on the current device. API keys are not hard-coded by NuTTS, are not stored in the SwiftData document library, and are not synced through iCloud.</p>
+        </section>
+        <section class="doc-section" id="section-3">
+          <h2 data-i18n="sectionTitle3">Speech and text model requests</h2>
+          <p data-i18n="sectionBody3">When you generate audio or use text-model assistance, NuTTS sends only the needed document text, model, voice, scene instructions, and related request fields to the service endpoint you configured. The default speech service is Alibaba Cloud Model Studio, and you may choose an online custom Qwen-TTS compatible speech endpoint. Text-model assistance can use Alibaba Cloud Model Studio or your OpenAI Chat Completions compatible HTTPS endpoint for PDF paragraph recovery, connection tests, or pronunciation-mark assistance that you explicitly enable. NuTTS does not operate its own relay server for this content. The default Qwen-TTS synthesis path does not invoke AI homophone-replacement preprocessing and does not add built-in pronunciation prompts by default.</p>
+        </section>
+        <section class="doc-section" id="section-4">
+          <h2 data-i18n="sectionTitle4">iCloud sync</h2>
+          <p data-i18n="sectionBody4">If you enable iCloud, devices signed in to the same Apple ID may sync documents, text, audio summaries, audio data, paragraph timing markers, synthesis task status, and non-sensitive settings. API keys are not synced. Local import source paths stay on the current device and are not uploaded by NuTTS explicit CloudKit document snapshots; old remote source-path values are not written back into local documents. Turning off NuTTS iCloud sync does not automatically delete data already synced to Apple iCloud.</p>
+        </section>
+        <section class="doc-section" id="section-5">
+          <h2 data-i18n="sectionTitle5">Diagnostics, ads, analytics, and tracking</h2>
+          <p data-i18n="sectionBody5">NuTTS may keep local diagnostic details such as generation duration, error type, request status, provider, model, request id, and response byte count. Default diagnostics and errors do not include document text, audio, API keys, or full third-party HTTP response bodies. NuTTS does not include third-party advertising SDKs, third-party analytics SDKs, IDFA, ATT prompts, SKAdNetwork configuration, or cross-app tracking technologies.</p>
+        </section>
+        <section class="doc-section" id="section-6">
+          <h2 data-i18n="sectionTitle6">Deletion, exports, and built-in demo</h2>
+          <p data-i18n="sectionBody6">Deleting a document in NuTTS also clears related local audio, segment cache, and synthesis tasks. Uninstalling the app removes data in the local app container, but it may not remove copies already synced to iCloud. Exported audio files are saved where you choose and must be managed in Finder or Files. NuTTS includes a self-written demo text and local demo audio for first launch and App Review; it does not come from third-party articles and does not trigger network requests.</p>
+        </section>
+        <section class="doc-section" id="section-7">
+          <h2 data-i18n="sectionTitle7">Support</h2>
+          <p data-i18n="sectionBody7">If you contact support at jxswcy@gmail.com, the information you choose to provide is used only to respond to your request and improve NuTTS.</p>
+        </section>
+      </article>
+      <aside class="doc-side">
+        <h2 data-i18n="sideTitle">Privacy at a glance</h2>
+        <p data-i18n="sideBody">NuTTS keeps your library on device by default, uses your configured provider only when needed, and does not include ads, analytics, or tracking.</p>
+        <ul class="doc-list">
+          <li data-i18n="sideItem0">Documents and generated audio are stored locally unless iCloud sync is enabled.</li>
+          <li data-i18n="sideItem1">API keys stay in device Keychain and do not sync through iCloud.</li>
+          <li data-i18n="sideItem2">Speech and text requests are sent only to endpoints you configure.</li>
+          <li data-i18n="sideItem3">No ads, third-party analytics, IDFA, ATT, or cross-app tracking.</li>
+        </ul>
+      </aside>
+    </section>
   </main>
   <footer class="footer"><div class="container"><span>© 2026 Nu Apps</span><span>nuapp.site</span></div></footer>
-  <script>window.NU_DEFAULT_LANGUAGE="en";window.NU_TRANSLATIONS={"en":{"brand":"NuTTS","navAppStore":"App Store","navPrivacy":"Privacy Policy","navSupport":"Support","languageToggle":"CN","footerPrivacy":"Privacy","footerSupport":"Support","appStoreAction":"App Store","comingSoonAction":"Coming Soon","supportAction":"Support","privacyAction":"Privacy","overviewAction":"Overview","title":"NuTTS Privacy Policy","titleApp":"NuTTS","titleKind":"Privacy Policy","lead":"NuTTS is designed as a local document-to-speech tool. Your imported documents, generated audio files, and provider settings stay on your device unless you choose to use a configured speech provider.","sideTitle":"Privacy at a glance","sideBody":"NuTTS keeps the document library and generated audio on device, while synthesis uses the provider you configure.","sideItem0":"Documents and audio are stored locally.","sideItem1":"API keys are stored in Keychain.","sideItem2":"Synthesis text is sent only when you generate audio.","sideItem3":"No ads, analytics, or cross-app tracking.","sectionTitle0":"Documents and generated audio","sectionBody0":"NuTTS stores imported document text, document metadata, synthesis status, and generated audio files locally on your device so you can manage and replay them inside the app.","sectionTitle1":"API keys","sectionBody1":"If you configure Alibaba Cloud Model Studio or a compatible Qwen-TTS endpoint, your API key is stored in the system Keychain. NuTTS does not hard-code or operate a shared API key.","sectionTitle2":"Speech synthesis requests","sectionBody2":"When you generate audio, the text needed for synthesis, selected model, voice, and instruction may be sent from your device to the provider you configured. That provider's privacy policy and terms apply to its processing.","sectionTitle3":"File access and playback","sectionBody3":"NuTTS uses system document import permissions to read the files you choose. It may use local storage and audio playback capabilities to download, save, play, export, and continue playback for generated audio.","sectionTitle4":"Analytics, ads, and tracking","sectionBody4":"NuTTS does not include third-party advertising SDKs, third-party analytics SDKs, or cross-app tracking technologies. NuTTS does not sell personal data.","sectionTitle5":"Support and changes","sectionBody5":"If you contact support at jxswcy@gmail.com, the information you choose to provide is used only to respond to your request and improve the app. This policy may be updated as NuTTS changes."},"zh":{"brand":"NuTTS","navAppStore":"App Store","navPrivacy":"隐私政策","navSupport":"支持","languageToggle":"EN","footerPrivacy":"隐私","footerSupport":"支持","appStoreAction":"App Store","comingSoonAction":"即将推出","supportAction":"支持","privacyAction":"隐私政策","overviewAction":"概览","title":"NuTTS 隐私政策","titleApp":"NuTTS","titleKind":"隐私政策","lead":"NuTTS 是本地优先的文档转语音工具。导入的文档、生成的音频和服务配置默认保存在你的设备上；只有你主动生成语音时，才会使用你配置的语音服务。","sideTitle":"隐私概览","sideBody":"NuTTS 在设备本地管理文档库和生成音频，语音合成则使用你自己配置的服务。","sideItem0":"文档和音频保存在本地。","sideItem1":"API Key 保存在 Keychain。","sideItem2":"只有生成音频时才会发送待合成文本。","sideItem3":"没有广告、分析 SDK 或跨 App 追踪。","sectionTitle0":"文档和生成音频","sectionBody0":"NuTTS 会在你的设备上保存导入的文档正文、文档信息、合成状态和生成后的音频文件，方便你在 App 内管理和回放。","sectionTitle1":"API Key","sectionBody1":"如果你配置阿里百炼或兼容 Qwen-TTS 的服务端点，API Key 会保存在系统 Keychain 中。NuTTS 不会在源码中内置共享 Key，也不运营统一的合成账号。","sectionTitle2":"语音合成请求","sectionBody2":"当你生成音频时，合成所需的文本、选择的模型、音色和播报指令可能会从你的设备发送给你配置的服务商。该服务商对数据的处理遵循其自己的隐私政策和条款。","sectionTitle3":"文件访问和播放","sectionBody3":"NuTTS 通过系统文档导入权限读取你选择的文件，并使用本地存储和音频播放能力来下载、保存、播放、导出和后台播放生成的音频。","sectionTitle4":"分析、广告和追踪","sectionBody4":"NuTTS 不包含第三方广告 SDK、第三方分析 SDK 或跨 App 追踪技术，也不会出售个人数据。","sectionTitle5":"支持和政策更新","sectionBody5":"如果你通过 jxswcy@gmail.com 联系支持，你主动提供的信息只会用于回复问题和改进 App。随着 NuTTS 功能变化，本政策可能会更新。"}};</script>
+  <script>
+    window.NU_DEFAULT_LANGUAGE = "en";
+    window.NU_TRANSLATIONS = {
+      "en": {
+        "brand": "NuTTS",
+        "navAppStore": "App Store",
+        "navPrivacy": "Privacy Policy",
+        "navSupport": "Support",
+        "languageToggle": "CN",
+        "footerPrivacy": "Privacy",
+        "footerSupport": "Support",
+        "appStoreAction": "App Store",
+        "comingSoonAction": "Coming Soon",
+        "supportAction": "Support",
+        "privacyAction": "Privacy",
+        "overviewAction": "Overview",
+        "title": "NuTTS Privacy Policy",
+        "titleApp": "NuTTS",
+        "titleKind": "Privacy Policy",
+        "lead": "NuTTS turns your imported documents into playable audio on iPhone, iPad, and Mac. This policy explains what data is processed, where it is stored, and when configured speech or text model services are used.",
+        "sideTitle": "Privacy at a glance",
+        "sideBody": "NuTTS keeps your library on device by default, uses your configured provider only when needed, and does not include ads, analytics, or tracking.",
+        "sideItem0": "Documents and generated audio are stored locally unless iCloud sync is enabled.",
+        "sideItem1": "API keys stay in device Keychain and do not sync through iCloud.",
+        "sideItem2": "Speech and text requests are sent only to endpoints you configure.",
+        "sideItem3": "No ads, third-party analytics, IDFA, ATT, or cross-app tracking.",
+        "sectionTitle1": "Documents and generated audio",
+        "sectionBody1": "NuTTS stores imported or created text, document titles, folder membership, extracted PDF, DOCX, Markdown, or TXT content, paragraph timing markers, synthesis status, generated audio files, playback progress, playback queue, and export records so you can manage and replay them in the app.",
+        "sectionTitle2": "API keys and settings",
+        "sectionBody2": "If you configure Alibaba Cloud Model Studio or an online custom compatible endpoint, your API key is stored in the system Keychain on the current device. API keys are not hard-coded by NuTTS, are not stored in the SwiftData document library, and are not synced through iCloud.",
+        "sectionTitle3": "Speech and text model requests",
+        "sectionBody3": "When you generate audio or use text-model assistance, NuTTS sends only the needed document text, model, voice, scene instructions, and related request fields to the service endpoint you configured. The default speech service is Alibaba Cloud Model Studio, and you may choose an online custom Qwen-TTS compatible speech endpoint. Text-model assistance can use Alibaba Cloud Model Studio or your OpenAI Chat Completions compatible HTTPS endpoint for PDF paragraph recovery, connection tests, or pronunciation-mark assistance that you explicitly enable. NuTTS does not operate its own relay server for this content. The default Qwen-TTS synthesis path does not invoke AI homophone-replacement preprocessing and does not add built-in pronunciation prompts by default.",
+        "sectionTitle4": "iCloud sync",
+        "sectionBody4": "If you enable iCloud, devices signed in to the same Apple ID may sync documents, text, audio summaries, audio data, paragraph timing markers, synthesis task status, and non-sensitive settings. API keys are not synced. Local import source paths stay on the current device and are not uploaded by NuTTS explicit CloudKit document snapshots; old remote source-path values are not written back into local documents. Turning off NuTTS iCloud sync does not automatically delete data already synced to Apple iCloud.",
+        "sectionTitle5": "Diagnostics, ads, analytics, and tracking",
+        "sectionBody5": "NuTTS may keep local diagnostic details such as generation duration, error type, request status, provider, model, request id, and response byte count. Default diagnostics and errors do not include document text, audio, API keys, or full third-party HTTP response bodies. NuTTS does not include third-party advertising SDKs, third-party analytics SDKs, IDFA, ATT prompts, SKAdNetwork configuration, or cross-app tracking technologies.",
+        "sectionTitle6": "Deletion, exports, and built-in demo",
+        "sectionBody6": "Deleting a document in NuTTS also clears related local audio, segment cache, and synthesis tasks. Uninstalling the app removes data in the local app container, but it may not remove copies already synced to iCloud. Exported audio files are saved where you choose and must be managed in Finder or Files. NuTTS includes a self-written demo text and local demo audio for first launch and App Review; it does not come from third-party articles and does not trigger network requests.",
+        "sectionTitle7": "Support",
+        "sectionBody7": "If you contact support at jxswcy@gmail.com, the information you choose to provide is used only to respond to your request and improve NuTTS."
+      },
+      "zh": {
+        "brand": "NuTTS",
+        "navAppStore": "App Store",
+        "navPrivacy": "隐私政策",
+        "navSupport": "支持",
+        "languageToggle": "EN",
+        "footerPrivacy": "隐私",
+        "footerSupport": "支持",
+        "appStoreAction": "App Store",
+        "comingSoonAction": "即将推出",
+        "supportAction": "支持",
+        "privacyAction": "隐私政策",
+        "overviewAction": "概览",
+        "title": "NuTTS 隐私政策",
+        "titleApp": "NuTTS",
+        "titleKind": "隐私政策",
+        "lead": "NuTTS 会把你导入的文档转换为可播放音频，支持 iPhone、iPad 和 Mac。本政策说明 NuTTS 会处理哪些数据、数据保存在哪里，以及何时使用你配置的语音或文本模型服务。",
+        "sideTitle": "隐私概览",
+        "sideBody": "NuTTS 默认在设备本地保存资料库，只在需要时使用你配置的服务端点，不包含广告、分析 SDK 或追踪。",
+        "sideItem0": "除非开启 iCloud，同步前文档和生成音频都保存在本地。",
+        "sideItem1": "API Key 保存在当前设备 Keychain，不通过 iCloud 同步。",
+        "sideItem2": "语音和文本请求只发送到你配置的端点。",
+        "sideItem3": "没有广告、第三方分析、IDFA、ATT 或跨 App 追踪。",
+        "sectionTitle1": "文档和生成音频",
+        "sectionBody1": "NuTTS 会保存你导入或创建的文本、文档标题、文件夹归属、从 PDF、DOCX、Markdown 或 TXT 中提取的正文、文段时间标记、合成状态、生成后的音频文件、播放进度、播放队列和导出记录，用于在 App 内管理和回放。",
+        "sectionTitle2": "API Key 和设置",
+        "sectionBody2": "如果你配置阿里云百炼或在线自定义兼容端点，API Key 会保存在当前设备的系统 Keychain 中。NuTTS 不在源码中内置共享 Key，不把 API Key 写入 SwiftData 文档库，也不通过 iCloud 同步 API Key。",
+        "sectionTitle3": "语音和文本模型请求",
+        "sectionBody3": "当你生成音频或使用文本模型辅助能力时，NuTTS 只会把所需的文档正文、模型、音色、场景指令和相关请求字段发送到你配置的服务端点。默认语音服务为阿里云百炼，你也可以选择在线自定义 Qwen-TTS 兼容语音端点。文本模型辅助能力可使用阿里云百炼或你配置的 OpenAI Chat Completions 兼容 HTTPS endpoint，用于 PDF 段落恢复、连接测试，或你明确开启读音辅助后的发音标记处理。NuTTS 不运营自有服务器来中转这些内容。默认 Qwen-TTS 合成路径不调用 AI 同音字替换预处理，也不默认附加内置读音提示。",
+        "sectionTitle4": "iCloud 同步",
+        "sectionBody4": "如果你开启 iCloud，同一 Apple ID 下的设备可能同步文档、正文、音频摘要、音频数据、文段时间标记、合成任务状态和非敏感设置。API Key 不会同步。本地导入来源路径只保存在当前设备，NuTTS 的显式 CloudKit 文档快照不会上传该路径；历史远端记录中如存在来源路径，当前版本也不会写回本地文档。关闭 NuTTS 的 iCloud 同步开关不会自动删除已经同步到 Apple iCloud 的数据。",
+        "sectionTitle5": "诊断、广告、分析和追踪",
+        "sectionBody5": "NuTTS 可能在本地保留生成耗时、错误类型、请求状态、provider、model、request id 和响应字节数等诊断信息。默认诊断和错误对象不包含文档正文、音频、API Key 或第三方 HTTP 完整响应 body。NuTTS 不包含第三方广告 SDK、第三方分析 SDK、IDFA、ATT 弹窗、SKAdNetwork 配置或跨 App 追踪技术。",
+        "sectionTitle6": "删除、导出和内置示例",
+        "sectionBody6": "在 NuTTS 内删除文档会同时清理关联的本地音频、分段缓存和合成任务。卸载 App 会删除本机 App 容器中的数据，但可能不会删除已同步到 iCloud 的副本。导出的音频文件保存在你选择的位置，需要你在 Finder 或 Files 中管理。NuTTS 包含一段自写演示文本和本地演示音频，用于首次启动和 App Review 测试；该示例不来自第三方文章，也不会触发网络请求。",
+        "sectionTitle7": "支持",
+        "sectionBody7": "如果你通过 jxswcy@gmail.com 联系支持，你主动提供的信息只会用于回复请求和改进 NuTTS。"
+      }
+    };
+  </script>
   <script src="/assets/site.js?v=20260605-apple-unified" defer></script>
 </body>
 </html>
