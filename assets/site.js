@@ -3,6 +3,7 @@
   const key = 'nuapp-language';
   const fallback = window.NU_DEFAULT_LANGUAGE || 'en';
   const getInitialLanguage = () => localStorage.getItem(key) || fallback;
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
   const appStoreLanguageDefaults = {
     zh: 'cn',
     ja: 'jp',
@@ -82,6 +83,60 @@
     localStorage.setItem(key, language);
   }
 
+  function setupHeaderMotion() {
+    const header = document.querySelector('.site-header');
+    if (!header) return;
+
+    const update = () => {
+      header.classList.toggle('is-scrolled', window.scrollY > 6);
+    };
+
+    update();
+    window.addEventListener('scroll', update, { passive: true });
+  }
+
+  function setupRevealMotion() {
+    if (reducedMotion.matches || !('IntersectionObserver' in window)) return;
+
+    const items = Array.from(document.querySelectorAll([
+      '.section-heading',
+      '.feature-card',
+      '.app-tile',
+      '.doc-card',
+      '.doc-side',
+      '.doc-section'
+    ].join(',')));
+
+    if (!items.length) return;
+
+    items.forEach((item, index) => {
+      item.classList.add('reveal-item');
+      item.style.setProperty('--reveal-index', String(index % 6));
+
+      const rect = item.getBoundingClientRect();
+      if (rect.top < window.innerHeight * 0.92) {
+        item.classList.add('is-visible');
+      }
+    });
+
+    document.documentElement.classList.add('motion-ready');
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add('is-visible');
+        observer.unobserve(entry.target);
+      });
+    }, {
+      threshold: 0.12,
+      rootMargin: '0px 0px -8% 0px',
+    });
+
+    items.forEach((item) => {
+      if (!item.classList.contains('is-visible')) observer.observe(item);
+    });
+  }
+
   document.addEventListener('click', (event) => {
     const toggle = event.target.closest('[data-language-toggle]');
     if (!toggle) return;
@@ -90,4 +145,6 @@
   });
 
   applyLanguage(getInitialLanguage());
+  setupHeaderMotion();
+  setupRevealMotion();
 })();
